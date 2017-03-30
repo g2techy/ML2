@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G2.ML.Web", "G2.ML.Web\G2.ML.Web.csproj", "{55EE063E-D3D9-4EB1-8E14-AC8E4F8C72B4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G2.ML.Web", "ML.Web\G2.ML.Web.csproj", "{55EE063E-D3D9-4EB1-8E14-AC8E4F8C72B4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G2.DAL", "G2.DAL\G2.DAL.csproj", "{5279FA26-F2D2-4389-9358-26F04F2A8B35}"
 EndProject
