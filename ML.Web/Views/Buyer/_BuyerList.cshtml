@@ -1,0 +1,101 @@
+﻿@model  G2.ML.Web.Models.BuyerSeachResultVM
+
+@helper RenderPager(int recordCount, int startIndex, int pageSize)
+{
+if (recordCount <= pageSize)
+{
+	return;
+}
+	<div class="panel-heading" style="text-align: right;">
+		@if (startIndex > pageSize)
+		{
+			int _prvIndex = startIndex - pageSize;
+			if (_prvIndex < 1)
+			{
+				_prvIndex = 1;
+			}
+			<button type="button" data-pager="1" data-si="@_prvIndex" data-ps="@pageSize" class="btn btn-info btn-xs">
+				<
+			</button>
+		}
+		@if (startIndex < recordCount)
+		{
+			int _nxtIndex = startIndex + pageSize;
+			if (recordCount < _nxtIndex)
+			{
+				_nxtIndex = recordCount - pageSize;
+				return;
+			}
+			<button type="button" data-pager="1" data-si="@_nxtIndex" data-ps="@pageSize" class="btn btn-info btn-xs">
+				>
+			</button>
+		}
+	</div>
+}
+@if (Model.BuyerList != null && Model.BuyerList.Count > 0)
+{
+	<div class="panel panel-info">
+		@RenderPager(Model.RecordCount, Model.StartIndex, Model.PageSize)
+		<div class="panel-body">
+			<table class="table table-bordred table-striped">
+				<thead>
+					<tr>
+						<th>
+							Buyer Code
+						</th>
+						<th>
+							First Name
+						</th>
+						<th>
+							Last Name
+						</th>
+						<th>
+							Buyer Types
+						</th>
+						<th>
+						</th>
+						<th>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var _item in Model.BuyerList)
+					{
+						<tr>
+							<td>
+								@_item.BuyerCode
+							</td>
+							<td>
+								@_item.FirstName
+							</td>
+							<td>
+								@_item.LastName
+							</td>
+							<td>
+								@string.Join("", _item.SelectedBuyerTypes)
+							</td>
+							<td>
+								<button type="button" id="btnUpdate" data-title="Edit" data-edit="1" data-buyerID="@_item.BuyerID" class="btn btn-success btn-xs">
+									Edit
+								</button>
+							</td>
+							<td>
+								<button type="button" data-title="Are you sure you want to delete it?" data-toggle="confirmation" data-del="1" data-buyerID="@_item.BuyerID" class="btn btn-danger btn-xs">
+									X
+								</button>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+}
+else if (ViewBag.IsDefaultModel == null || !ViewBag.IsDefaultModel)
+{
+	<div class="panel panel-info">
+		<div class="panel-body">
+			<div class="empty-result">No records found.</div>
+		</div>
+	</div>
+}

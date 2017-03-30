@@ -1,0 +1,114 @@
+﻿@model G2.ML.Web.Models.SalesReportVM
+@{
+    ViewBag.Title = "Index";
+}
+@section scripts {
+    @Scripts.Render("~/Scripts/jquery.fileDownload.js")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnSearch").click(function () {
+                SearchSales();
+            });
+            $("#btnDownload").click(function () {
+                ExportSales();
+            });
+            $('#StartDate,#EndDate,#DueDays').val('');
+        });
+		function SearchSales() {
+            if (!$('#frmSalesReport').valid()) {
+                return false;
+            }
+            var _data = $('#frmSalesReport').serialize();
+            $.ajax({
+                type: 'POST',
+                url: "/Report/Sales",
+                data: _data,
+                dataType: "text",
+                success: function (result) {
+                    $('#divSalesList').html(result);
+                },
+                error: function (data) {
+                    alert(data);
+                }
+            });
+        }
+        function ExportSales() {
+            if (!$('#frmSalesReport').valid()) {
+                return false;
+            }
+            var _data = $('#frmSalesReport').serialize();
+            $.ajax({
+                type: 'POST',
+                url: "/Report/ExportSales",
+                data: _data,
+                dataType: "json",
+                success: function (result) {
+                    OpenDownloadWin("/Report/DownloadSalesReport");
+                },
+                error: function (data) {
+                    alert(data);
+                }
+            });
+        }
+        function OpenDownloadWin(reportLink) {
+            $.fileDownload(reportLink, {
+                preparingMessageHtml: "We are preparing your report, please wait...",
+                failMessageHtml: "There was a problem generating your report, please try again."
+            });
+            return false;
+        }
+    </script>
+}
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            Search sales details</h3>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Sales", "Report", FormMethod.Post, new { @class = "form-horizontal", @id = "frmSalesReport" }))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.StartDate, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control input-sm date-picker", @placeholder = "Start Date:", @id = "StartDate" })
+                </div>
+                @Html.LabelFor(model => model.EndDate, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.EndDate, new { @class = "form-control input-sm date-picker", @placeholder = "End Date:", @id = "EndDate" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.SallerID, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.SallerID, Model.SallerList, string.Empty, new { @class = "form-control input-sm" })
+                </div>
+                @Html.LabelFor(model => model.BuyerID, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.BuyerID, Model.BuyerList, string.Empty, new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            
+            <div class="form-group">
+                @Html.LabelFor(model => model.Status, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.Status, Model.StatusList, string.Empty, new { @class = "form-control input-sm" })
+                </div>
+                @Html.LabelFor(model => model.DueDays, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.DueDays, new { @class = "form-control input-sm", @placeholder = "Due Days:", @id = "DueDays" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12" style="text-align:center;">
+                    <button id="btnSearch" type="button" class="btn btn-primary">
+                        Search</button>
+                    <button id="btnDownload" type="button" class="btn btn-primary">
+                        Download</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div id="divSalesList">
+    @Html.Partial("_DataList", new System.Data.DataTable())
+</div>

@@ -1,0 +1,32 @@
+﻿@model G2.ML.Web.Models.SalePaymentVM
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            Payment Details</h3>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Payment", "Sale", FormMethod.Post, new { @class = "form-inline", @id = "frmPayment" }))
+        {
+            @Html.HiddenFor(m => m.Payment.SaleID)
+            <div class="form-group input-group-sm">
+                @Html.TextBoxFor(m => m.Payment.PayDate, new { @class = "form-control date-picker", @id = "PayDate", @placeholder = "Pay Date:" })
+            </div>
+            <div class="form-group input-group-sm">
+                @Html.TextBoxFor(m => m.Payment.PayAmount, new { @class = "form-control", @id = "PayAmount", @placeholder = "Pay Amount:" })
+            </div>
+            <div class="form-group input-group-sm">
+                @Html.TextBoxFor(m => m.Payment.CourierFrom, new { @class = "form-control", @id = "CourierFrom", @placeholder = "Courier From:" })
+            </div>
+
+            <div class="form-group input-group-sm">
+                @Html.TextBoxFor(m => m.Payment.CourierTo, new { @class = "form-control", @id = "CourierTo", @placeholder = "Courier To:" })
+            </div>
+            <button type="button" id="btnAddPayment" class="btn btn-success btn-xs">
+                Add</button>
+        }
+        <div id="divPayGrid">
+            @Html.Partial("_PaymentGrid",Model)
+        </div>        
+    </div>
+</div>

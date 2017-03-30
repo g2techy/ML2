@@ -1,0 +1,50 @@
+﻿@model G2.ML.Web.Models.SalePaymentVM
+@{
+    float _payAmount = 0;
+}
+@if (Model.PaymentList != null && Model.PaymentList.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Pay Date
+                </th>
+                <th>
+                    Pay Amount
+                </th>
+                <th>
+                    Courier From
+                </th>
+                <th>
+                    Courier To
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var _item in Model.PaymentList)
+            {
+                <tr>
+                    <td>@_item.PayDate.ToString("dd-MM-yyyy")
+                    </td>
+                    <td>@string.Format("{0:n2}", _item.PayAmount)
+                    </td>
+                    <td>@_item.CourierFrom
+                    </td>
+                    <td>@_item.CourierTo
+                    </td>
+                    <td>
+                        <button type="button" data-del="1" data-payID="@_item.PayID" class="btn btn-danger btn-xs">
+                            X</button>
+                    </td>
+                </tr>
+                _payAmount += _item.PayAmount;
+            }
+        </tbody>
+    </table>
+}
+<script type="text/javascript">
+    var _totalPayAmount = parseFloat('@_payAmount');
+</script>

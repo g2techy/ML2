@@ -1,0 +1,41 @@
+﻿
+@{
+	ViewBag.Title = "Dashboard";
+}
+@section scripts {
+	@Scripts.Render("~/bundles/charts")
+	<script>
+		$(document).ready(function () {
+			DashboardInit();
+		});
+	</script>
+}
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#sale" data-toggle="tab" data-fn="loadSaleTab">Sale</a></li>
+			<li><a href="#payments" data-toggle="tab" data-fn="loadPaymentsTab">Payments</a></li>
+			<li><a href="#brokerage" data-toggle="tab" data-fn="loadBrokerageTab">Brokerage</a></li>
+			<li><a href="#sample" data-toggle="tab" data-fn="loadSampleTab1">Sample</a></li>
+		</ul>
+		<div class="tab-content">
+			<div id="sale" class="tab-pane fade in active">
+				<div id="divSaleChart" data-chart="1" data-loaded="0" data-ch-idx="1" data-ch-opt="_saleChartOptions"></div>
+			</div>
+			<div id="payments" class="tab-pane fade">
+				<h3>Payments</h3>
+				<p>Some content in menu 1.</p>
+			</div>
+			<div id="brokerage" class="tab-pane fade">
+				<h3>Brokerage</h3>
+				<p>Some content in menu 2.</p>
+				<div id="divBrokerageChart" data-chart="1" data-loaded="0" data-ch-idx="2" data-ch-opt="_brokChartOptions"></div>
+			</div>
+			<div id="sample" class="tab-pane fade">
+				<h3>Sample</h3>
+				<p>Some content in menu 2.</p>
+			</div>
+		</div>
+	</div>
+</div>

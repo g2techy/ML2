@@ -3,3 +3,21 @@
 ################################################################################
 
 /G2.DAL/bin/Debug
+/G2.DAL/obj/Debug
+/G2.Frameworks/bin/Debug
+/G2.Frameworks/obj/Debug
+/G2.Frameworks.MVC/bin/Debug
+/G2.Frameworks.MVC/obj/Debug
+/G2.ML.BusinessObjects/bin/Debug
+/G2.ML.BusinessObjects/obj/Debug
+/G2.ML.BusinessServices/bin/Debug
+/G2.ML.BusinessServices/obj/Debug
+/ML.BusinessObjects/bin/Debug/netstandard1.4
+/ML.BusinessObjects/obj
+/ML.BusinessObjects - Copy/bin/Debug/netstandard1.4
+/ML.BusinessObjects - Copy/obj
+/ML.BusinessObjects - Copy
+/ML.BusinessServices1
+/ML.Web/bin
+/ML.Web/logs
+/ML.Web/obj/Debug

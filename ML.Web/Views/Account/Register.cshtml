@@ -1,0 +1,83 @@
+﻿@model G2.ML.Web.Models.RegisterVM
+@{
+    ViewBag.Title = "Register";
+}
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+        });
+    </script>
+}
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            Register new user</h3>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserName, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control  input-sm", @placeholder = "User Name:", @id = "UserName" })
+                    @Html.ValidationMessageFor(model => model.UserName)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.PasswordFor(model => model.Password, new { @class = "form-control  input-sm", @placeholder = "Password:", @id = "Password" })
+                    @Html.ValidationMessageFor(model => model.Password)
+                </div>
+                @Html.LabelFor(model => model.ConfirmPassword, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control  input-sm", @placeholder = "Confirm Password:", @id = "ConfirmPassword" })
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.FirstName, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control  input-sm", @placeholder = "First Name:", @id = "FirstName" })
+                    @Html.ValidationMessageFor(model => model.FirstName)
+                </div>
+                @Html.LabelFor(model => model.LastName, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.LastName, new { @class = "form-control  input-sm", @placeholder = "Last Name:", @id = "LastName" })
+                    @Html.ValidationMessageFor(model => model.LastName)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CompanyName, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.CompanyName, new { @class = "form-control  input-sm", @placeholder = "Company Name:", @id = "CompanyName" })
+                </div>
+                @Html.LabelFor(model => model.CompanyAddress, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextAreaFor(model => model.CompanyAddress, new { @class = "form-control  input-sm", @placeholder = "Company Address:", @id = "CompanyAddress" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PhoneNo, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.PhoneNo, new { @class = "form-control  input-sm", @placeholder = "Phono No:", @id = "PhonoNo" })
+                    @Html.ValidationMessageFor(model => model.PhoneNo)
+                </div>
+                @Html.LabelFor(model => model.MobileNo, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.MobileNo, new { @class = "form-control  input-sm", @placeholder = "Mobile No:", @id = "MobileNo" })
+                    @Html.ValidationMessageFor(model => model.MobileNo)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button id="btnRegister" type="submit" class="btn btn-primary">
+                        Register</button>
+                </div>
+            </div>        
+        }
+    </div>
+</div>

@@ -1,0 +1,63 @@
+﻿@model G2.ML.Web.Models.SaleSearchVM
+@{
+	ViewBag.Title = "Index";
+	ViewBag.IsDefaultModel = true;
+}
+@section scripts {   
+    <script type="text/javascript">
+		var _salesSearchUrl = "@Url.Action("Index","Sale")";
+		var _salesUpdateUrl = "@Url.Action("Update","Sale")";
+		var _salesListUrl = "@Url.Action("SalesList", "Sale")";
+		var _salesDeleteUrl = "@Url.Action("Delete", "Sale")";
+		var _salesAddUrl = "@Url.Action("Add", "Sale")";
+        $(document).ready(function () {
+			SaleSearchInit();    
+        });
+    </script>
+}
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            Search sales details</h3>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Index", "Sale", FormMethod.Post, new { @class = "form-horizontal", @id = "frmSaleRearch" }))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.StartDate, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control input-sm date-picker", @placeholder = "Start Date:", @id = "StartDate" })
+                </div>
+                @Html.LabelFor(model => model.EndDate, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.EndDate, new { @class = "form-control input-sm date-picker", @placeholder = "End Date:", @id = "EndDate" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.SallerID, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.SallerID, Model.SallerList, string.Empty, new { @class = "form-control input-sm" })
+                </div>
+                @Html.LabelFor(model => model.BuyerID, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.BuyerID, Model.BuyerList, string.Empty, new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.RefNo, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.RefNo, new { @class = "form-control input-sm", @placeholder = "Ref No:", @id = "RefNo" })
+                </div>
+                <div class="col-md-offset-2 col-md-4">
+                    <button id="btnSearch" type="button" class="btn btn-primary">
+                        Search</button>
+                    <button id="btnAdd" type="button" class="btn btn-secondary">
+                        Add</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div id="divSalesList">
+    @Html.Partial("_SalesList", new G2.ML.Web.Models.SaleSearchResultVM(0))
+</div>
