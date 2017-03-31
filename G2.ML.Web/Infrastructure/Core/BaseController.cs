@@ -65,5 +65,10 @@ namespace G2.ML.Web.Infrastructure.Core
             }
             base.Initialize(requestContext);
         }
-    }
+
+		protected ActionResult JsonCamelCase(object data, JsonRequestBehavior jsonRequestBehavior)
+		{
+			return new JsonCamelCaseResult(data, jsonRequestBehavior);
+		}
+	}
 }

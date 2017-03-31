@@ -745,3 +745,29 @@ tr.pager td {
 	font-weight:600;
 	text-align:center;
 }
+div[data-chart] {
+	text-align:center;	
+}
+.status-circle {
+	margin-top:5px;
+	width: 16px;
+	height: 16px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+}
+.status-closed {
+	background-color: darkgreen;
+}
+.status-paid {
+	background-color:green;
+}
+.status-partial-paid {
+	background-color: lightgreen;
+}
+.status-over-due {
+	background-color: red;
+}
+.status-new {
+	background-color: orange;
+}

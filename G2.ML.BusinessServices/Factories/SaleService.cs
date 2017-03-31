@@ -215,7 +215,8 @@ namespace G2.ML.BusinessServices.Factories
 							DueDays = int.Parse(_dr["DueDays"].ToString()),
 							TotalBrokerage = _dr["TotalBrokerage"].ToString(),
 							Status = _dr["Status"].ToString(),
-							RefNo = _dr["RefNo"].ToString()
+							RefNo = _dr["RefNo"].ToString(),
+							DueDate = DateTime.Parse(_dr["DueDate"].ToString()),
 						};
 
 						if (_dr["TotalPayAmount"] != System.DBNull.Value)

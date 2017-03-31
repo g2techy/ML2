@@ -3,12 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BO = G2.ML.BusinessObjects;
+using BS = G2.ML.BusinessServices;
 
 namespace G2.ML.Web.Controllers
 {
 	public class DashboardController : Infrastructure.Core.BaseController
 	{
-		// GET: Dashboard
+
+		#region DI settings
+
+		private readonly BS.Contracts.IDashboardService _dashboardService;
+		public DashboardController(BS.Contracts.IDashboardService dashboardService)
+		{
+			_dashboardService = dashboardService;
+		}
+
+		#endregion
+
 		public ActionResult Index()
 		{
 			return View();
@@ -29,37 +41,52 @@ namespace G2.ML.Web.Controllers
 					_jsonData = new object();
 					break;
 			}
-			return Json(_jsonData, JsonRequestBehavior.AllowGet);
+			return JsonCamelCase(_jsonData, JsonRequestBehavior.AllowGet);
+		}
+		
+		public ActionResult DuePayments(int? st, int? ps)
+		{
+			int _stIndex = 0;
+			int _pageSize = 0;
+			if (st.HasValue)
+			{
+				_stIndex = st.Value;
+			}
+			if (ps.HasValue)
+			{
+				_pageSize = ps.Value;
+			}
+			if (_stIndex <= 0)
+			{
+				_stIndex = 1;
+			}
+			if (_pageSize <= 0)
+			{
+				_pageSize = Infrastructure.Constants.Default.PageSize;
+			}
+
+			var _ssBO = Infrastructure.BOVMMapper.Map<Models.SaleSearchVM, BO.SaleSearchBO>(new Models.SaleSearchVM()
+			{
+				ClientID = Infrastructure.Web.SessionManager.CurrentLoggedInUser.ClientID,
+				StartIndex = _stIndex,
+				PageSize = _pageSize
+			});
+			var _ssrBO = _dashboardService.GetDuePayments(_ssBO);
+			Models.SaleSearchResultVM _model = Infrastructure.BOVMMapper.Map<BO.SaleSearchResultBO, Models.SaleSearchResultVM>(_ssrBO);
+
+			_model.StartIndex = _stIndex;
+			_model.PageSize = _pageSize;
+
+			return PartialView("_DuePayments", _model);
 		}
 
 		private object Last12MonthsSaleChartData()
 		{
-			return new
-			{
-				categories = new List<string>() { "Apr-16", "May-16", "Jun-16", "Jul-16", "Aug-16", "Sep-16", "Oct-16", "Nov-16", "Dec-16", "Jan-17", "Feb-17", "Mar-17" },
-				series = new List<ChartSeries>()
-				{
-					new ChartSeries(){ name="Monthly Sale Amout", data = new List<object>{ 67908, 25800.00, 152683.00, 102563, 85000, 95682.00, 67908, 25800.00, 152683.00, 102563, 85000, 95682.00 } }
-				}
-			};
+			return _dashboardService.GetSaleChartData(Infrastructure.Web.SessionManager.CurrentLoggedInUser.ClientID);
 		}
 		private object Last12MonthsBrokerageChartData()
 		{
-			return new
-			{
-				categories = new List<string>() { "Apr-16", "May-16", "Jun-16", "Jul-16", "Aug-16", "Sep-16", "Oct-16", "Nov-16", "Dec-16", "Jan-17", "Feb-17", "Mar-17" },
-				series = new List<ChartSeries>()
-				{
-					new ChartSeries(){ name="Brokerage (Self)", data = new List<object>{ 32500, 25800.00, 28060.00, 65250, 41000, 18080, 22008, 25800.00, 52683.00, 10263, 16000, 95682.00 } },
-					new ChartSeries(){ name="Brokerage (Others)", data = new List<object>{ 18500, 12008.00, 5800.00, 0, 6050, 18080, 14000, 9800, 8080, 19263, 20020, 1050.80 } }
-				}
-			};
-		}
-
-		private class ChartSeries
-		{
-			public string name { get; set; }
-			public List<object> data { get; set; }
+			return _dashboardService.GetBrokerageChartData(Infrastructure.Web.SessionManager.CurrentLoggedInUser.ClientID);
 		}
 
 	}

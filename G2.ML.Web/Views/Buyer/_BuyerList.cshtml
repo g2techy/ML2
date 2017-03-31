@@ -21,14 +21,18 @@ if (recordCount <= pageSize)
 		@if (startIndex < recordCount)
 		{
 			int _nxtIndex = startIndex + pageSize;
+			bool _renderNextBtn = true;
 			if (recordCount < _nxtIndex)
 			{
 				_nxtIndex = recordCount - pageSize;
-				return;
+				_renderNextBtn = false;
 			}
-			<button type="button" data-pager="1" data-si="@_nxtIndex" data-ps="@pageSize" class="btn btn-info btn-xs">
-				>
-			</button>
+			if (_renderNextBtn)
+			{
+				<button type="button" data-pager="1" data-si="@_nxtIndex" data-ps="@pageSize" class="btn btn-info btn-xs">
+					>
+				</button>
+			}
 		}
 	</div>
 }

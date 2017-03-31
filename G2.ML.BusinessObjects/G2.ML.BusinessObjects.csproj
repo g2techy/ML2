@@ -45,6 +45,7 @@
     <Compile Include="BuyerBO.cs" />
     <Compile Include="BuyerSearchBO.cs" />
     <Compile Include="BuyerTypeBO.cs" />
+    <Compile Include="ChartDataBO.cs" />
     <Compile Include="PagerBO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportBO.cs" />

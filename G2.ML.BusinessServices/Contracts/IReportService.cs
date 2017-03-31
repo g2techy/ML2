@@ -7,7 +7,7 @@ using System.Data;
 
 namespace G2.ML.BusinessServices.Contracts
 {
-    public interface IReportService
+    public interface IReportService : IService
     {
         List<BO.SaleStatusBO> GetSaleStatusList();
         DataTable GetSalesReport(BO.SalesReportBO bo);

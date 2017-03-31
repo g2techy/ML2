@@ -22,7 +22,8 @@ namespace G2.ML.BusinessObjects
         public DateTime PayDate { get; set; }
         public string Status { get; set; }
         public string RefNo { get; set; }
-    }
+		public DateTime DueDate { get; set; }
+	}
 
     public class SaleSearchBO : PagerBO
     {

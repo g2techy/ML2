@@ -36,6 +36,7 @@ namespace G2.ML.Web.App_Start
 			container.RegisterType<BS.Contracts.IBuyerService, BS.Factories.BuyerService>();
 			container.RegisterType<BS.Contracts.IReportService, BS.Factories.ReportService>();
 			container.RegisterType<BS.Contracts.ISaleService, BS.Factories.SaleService>();
+			container.RegisterType<BS.Contracts.IDashboardService, BS.Factories.DashboardService>();
 		}
 
 		public static void RegisterControllerDependencies(IUnityContainer container)
@@ -44,6 +45,7 @@ namespace G2.ML.Web.App_Start
 																				 new ResolvedParameter<BS.Contracts.ISaleService>()));
 			container.RegisterType<Web.Controllers.BuyerController>(new InjectionConstructor(new ResolvedParameter<BS.Contracts.IBuyerService>()));
 			container.RegisterType<Web.Controllers.SaleController>(new InjectionConstructor(new ResolvedParameter<BS.Contracts.ISaleService>()));
+			container.RegisterType<Web.Controllers.DashboardController>(new InjectionConstructor(new ResolvedParameter<BS.Contracts.IDashboardService>()));
 		}
 	}
 }

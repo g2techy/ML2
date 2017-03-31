@@ -183,6 +183,7 @@
     <Compile Include="Infrastructure\Core\BaseController.cs" />
     <Compile Include="Infrastructure\Core\BaseVM.cs" />
     <Compile Include="Infrastructure\Core\ExportResult.cs" />
+    <Compile Include="Infrastructure\Core\JsonCamelCaseResult.cs" />
     <Compile Include="Infrastructure\Filters\AuthenticationAttribute.cs" />
     <Compile Include="Infrastructure\Utilities\BOVMMapper.cs" />
     <Compile Include="Infrastructure\Utilities\EmailNotification.cs" />
@@ -300,6 +301,7 @@
     <Content Include="Scripts\highcharts.exporting.min.js" />
     <Content Include="Scripts\highcharts.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="App_Code\HelperMethods.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\app.buyer.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -310,8 +312,6 @@
     <Content Include="Scripts\jquery.multiselect.js" />
     <Content Include="Scripts\jquery.tmpl.js" />
     <Content Include="Scripts\jquery.tmpl.min.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -358,6 +358,7 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Shared\_ajaxError.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Dashboard\_DuePayments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

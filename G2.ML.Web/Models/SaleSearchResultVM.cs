@@ -39,6 +39,7 @@ namespace G2.ML.Web.Models
         public DateTime PayDate { get; set; }
         public string Status { get; set; }
         public string RefNo { get; set; }
-    }
+		public DateTime DueDate { get; set; }
+	}
     
 }

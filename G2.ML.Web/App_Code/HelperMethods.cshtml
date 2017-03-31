@@ -1,0 +1,33 @@
+﻿@using G2.ML.Web.Infrastructure.Web
+
+@helper FormatDateTime(DateTime date)
+{
+if (date.Year != 1900)
+{
+		@date.ToString("dd-MM-yyyy")
+}
+}
+@helper FormatDateTime(DateTime date, string format)
+{
+if (date.Year != 1900)
+{
+		@date.ToString(format)
+}
+}
+
+@helper FormatBoolean(bool isTrue)
+{
+	@(isTrue ? "Yes" : "No")
+}
+
+@helper StatusCSSClass(string status, DateTime dueDate)
+{
+	if (dueDate < DateTime.Today && !(status == "Paid" || status=="Closed"))
+	{
+		<text>status-over-due</text>;
+	}
+	else
+	{
+		<text>status-@status.Replace(" ", "-").ToLower() </text>;
+	}
+}

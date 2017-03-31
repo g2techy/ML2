@@ -107,10 +107,38 @@
 			series: []
 		};
 
+		function RebindJS() {
+			$("[data-pager]").click(function () {
+				NavPageDuePayments($(this).attr("data-si"), $(this).attr("data-ps"));
+			});
+			$("[data-edit][data-saleID]").click(function () {
+				var _saleID = $(this).attr("data-saleID");
+				window.location = "/Sale/Update/?saleID=" + _saleID;
+			});
+			$('[data-toggle="popover"]').popover({
+				trigger: 'hover',
+				placement: 'left',
+				html: true,
+				content: function () {
+					return $(this).parent().find("div").html();
+				}
+			});
+		}
+
 		function loadSaleTab() {
 			loadCharts("#sale div[data-chart]");
 		}
 		function loadPaymentsTab() {
+			$("#payments").find("div[data-list]").each(function () {
+				var _elem = $(this);
+				var _isLoaded = _elem.data("loaded");
+				if (_isLoaded == "0") {
+					var _fn = $(this).data("fn");
+					if (typeof _fn != 'undefined' && typeof eval(_fn) === "function") {
+						eval(_fn);
+					}
+				}
+			});			
 		}
 		function loadBrokerageTab() {
 			loadCharts("#brokerage div[data-chart]");
@@ -129,10 +157,28 @@
 						_chartOptions.xAxis.categories = data.categories
 						Highcharts.chart(_chartElem.attr("id"), _chartOptions);
 						_chartElem.data("loaded", "1");
+					}).fail(function () {
+						_chartElem.html("Error occured while loading chart...");	
 					});
 				}
 			});
 		}
+		function NavPageDuePayments(stIndex, pageSize) {
+			$.ajax({
+				type: 'GET',
+				url: "/Dashboard/DuePayments/?st=" + stIndex + "&ps=" + pageSize,
+				dataType: "text",
+				success: function (result) {
+					$('#divDuePayments').html(result);
+					$('#divDuePayments').data("loaded", "1");
+					RebindJS();
+				},
+				error: function (data) {
+					alert(data);
+				}
+			});
+		}
+		RebindJS();
 		$("a[data-fn]").first().click();
 	});
 }

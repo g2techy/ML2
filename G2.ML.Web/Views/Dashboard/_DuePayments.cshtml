@@ -2,40 +2,42 @@
 
 @helper RenderPager(int recordCount, int startIndex, int pageSize)
 {
-if (recordCount <= pageSize)
-{
-	return;
-}
-	<div class="panel-heading" style="text-align: right;">
-		@if (startIndex > pageSize)
-		{
-			int _prvIndex = startIndex - pageSize;
-			if (_prvIndex < 1)
+	<div class="panel-heading">
+		<div style="display:inline-block;">
+			Due payments or payments will be due in comming 7 days
+		</div>
+		<div style="display:inline-block;text-align: right;">
+			@if (startIndex > pageSize)
 			{
-				_prvIndex = 1;
-			}
-			<button type="button" data-pager="1" data-si="@_prvIndex" data-ps="@pageSize" class="btn btn-info btn-xs">
-				<
-			</button>
-		}
-		@if (startIndex < recordCount)
-		{
-			int _nxtIndex = startIndex + pageSize;
-			bool _renderNextBtn = true;
-			if (recordCount < _nxtIndex)
-			{
-				_nxtIndex = recordCount - pageSize;
-				_renderNextBtn = false;
-			}
-			if (_renderNextBtn)
-			{
-				<button type="button" data-pager="1" data-si="@_nxtIndex" data-ps="@pageSize" class="btn btn-info btn-xs">
-					>
+				int _prvIndex = startIndex - pageSize;
+				if (_prvIndex < 1)
+				{
+					_prvIndex = 1;
+				}
+				<button type="button" data-pager="1" data-si="@_prvIndex" data-ps="@pageSize" class="btn btn-info btn-xs">
+					<
 				</button>
 			}
-		}
+			@if (startIndex < recordCount)
+			{
+				int _nxtIndex = startIndex + pageSize;
+				bool _renderNextBtn = true;
+				if (recordCount < _nxtIndex)
+				{
+					_nxtIndex = recordCount - pageSize;
+					_renderNextBtn = false;
+				}
+				if (_renderNextBtn)
+				{
+					<button type="button" data-pager="1" data-si="@_nxtIndex" data-ps="@pageSize" class="btn btn-info btn-xs">
+						>
+					</button>
+				}
+			}
+		</div>
 	</div>
 }
+
 @if (Model.SalesList != null && Model.SalesList.Count > 0)
 {
 	<div class="panel panel-info">
@@ -44,6 +46,7 @@ if (recordCount <= pageSize)
 			<table class="table table-bordred table-striped">
 				<thead>
 					<tr>
+						<th></th>
 						<th>
 							Ref No
 						</th>
@@ -71,8 +74,9 @@ if (recordCount <= pageSize)
 						<th>
 							Net Sale Amount
 						</th>
-						<th></th>
-						<th></th>
+						<th>
+							Due Date
+						</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -80,6 +84,9 @@ if (recordCount <= pageSize)
 					@foreach (var _item in Model.SalesList)
 					{
 						<tr>
+							<td>
+								<div class="status-circle @HelperMethods.StatusCSSClass(_item.Status,_item.DueDate)"></div>
+							</td>
 							<td>
 								<a href="javascript:void(0);" data-edit="1" data-saleID="@_item.SaleID">@_item.RefNo</a>
 							</td>
@@ -108,7 +115,7 @@ if (recordCount <= pageSize)
 								@string.Format("{0:n2}", _item.NetSaleAmount)
 							</td>
 							<td>
-								<div class="status-circle @HelperMethods.StatusCSSClass(_item.Status,_item.DueDate)"></div>
+								@_item.DueDate.ToString("dd-MM-yyyy")
 							</td>
 							<td>
 								<a href="#" data-toggle="popover">...</a>
@@ -120,11 +127,6 @@ if (recordCount <= pageSize)
 									<b>Status:</b> @_item.Status
 								</div>
 							</td>
-							<td>
-								<button type="button" data-title="Are you sure you want to delete it?" data-toggle="confirmation" data-del="1" data-saleID="@_item.SaleID" class="btn btn-danger btn-xs">
-									X
-								</button>
-							</td>
 						</tr>
 					}
 				</tbody>
@@ -132,7 +134,7 @@ if (recordCount <= pageSize)
 		</div>
 	</div>
 }
-else if(ViewBag.IsDefaultModel == null || !ViewBag.IsDefaultModel)
+else if (ViewBag.IsDefaultModel == null || !ViewBag.IsDefaultModel)
 {
 	<div class="panel panel-info">
 		<div class="panel-body">

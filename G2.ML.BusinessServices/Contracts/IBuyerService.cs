@@ -6,8 +6,8 @@ using BO = G2.ML.BusinessObjects;
 
 namespace G2.ML.BusinessServices.Contracts
 {
-    public interface IBuyerService
-    {
+    public interface IBuyerService : IService
+	{
         List<BO.BuyerTypeBO> GetBuyerTypeList();
         int Add(BO.BuyerBO buyer);
         int Delete(int clientID, int buyerID);
