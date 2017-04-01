@@ -184,6 +184,7 @@
     <Compile Include="Infrastructure\Core\BaseVM.cs" />
     <Compile Include="Infrastructure\Core\ExportResult.cs" />
     <Compile Include="Infrastructure\Core\JsonCamelCaseResult.cs" />
+    <Compile Include="Infrastructure\Filters\AdminAuthAttribute.cs" />
     <Compile Include="Infrastructure\Filters\AuthenticationAttribute.cs" />
     <Compile Include="Infrastructure\Utilities\BOVMMapper.cs" />
     <Compile Include="Infrastructure\Utilities\EmailNotification.cs" />
@@ -359,6 +360,7 @@
     <Content Include="Views\Shared\_ajaxError.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Dashboard\_DuePayments.cshtml" />
+    <Content Include="Views\Shared\_HeaderMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

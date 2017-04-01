@@ -11,6 +11,7 @@ namespace G2.ML.BusinessServices.Contracts
 	{
 		BO.ChartDataBO GetSaleChartData(int clientID);
 		BO.ChartDataBO GetBrokerageChartData(int clientID);
+		BO.ChartDataBO GetBrokerageBistributionChartData(int clientID);
 		BO.SaleSearchResultBO GetDuePayments(BO.SaleSearchBO saleSearch);
 	}
 }

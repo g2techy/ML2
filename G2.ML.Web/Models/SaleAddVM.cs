@@ -32,13 +32,15 @@ namespace G2.ML.Web.Models
         [Display(Name = "Total Weight")]
         [Required]
         [DataType(DataType.Currency)]
-        public float TotalWeight { get; set; }
+		[RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "Invalid weight")]
+		public float TotalWeight { get; set; }
 
         [Display(Name = "Rejection (%)")]
         [Required]
         [DataType(DataType.Currency)]
         [Range(minimum:0,maximum:99)]
-        public float RejectionWeight { get; set; }
+		[RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "Invalid rejection percentage")]
+		public float RejectionWeight { get; set; }
 
         [Display(Name = "Selection Weight")]
         public float SelectionWeight { get; set; }
@@ -46,7 +48,8 @@ namespace G2.ML.Web.Models
         [Display(Name = "Unit Price")]
         [Required]
         [DataType(DataType.Currency)]
-        public float UnitPrice { get; set; }
+		[RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "Invalid price")]
+		public float UnitPrice { get; set; }
 
         [Display(Name = "Net Sale Amount")]
         public float NetSaleAmount { get; set; }

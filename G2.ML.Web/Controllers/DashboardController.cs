@@ -28,22 +28,41 @@ namespace G2.ML.Web.Controllers
 
 		public ActionResult ChartData(int chartType)
 		{
-			var _chartList = (Infrastructure.Constants.Dashboard.ChartList)chartType;
 			object _jsonData = null;
-			switch (_chartList) {
-				case Infrastructure.Constants.Dashboard.ChartList.Last12MonthSales:
-					_jsonData = Last12MonthsSaleChartData();
-					break;
-				case Infrastructure.Constants.Dashboard.ChartList.Last12MonthBrokerage:
-					_jsonData = Last12MonthsBrokerageChartData();
-					break;
-				default:
-					_jsonData = new object();
-					break;
+			try
+			{
+				var _chartList = (Infrastructure.Constants.Dashboard.ChartList)chartType;
+				switch (_chartList)
+				{
+					case Infrastructure.Constants.Dashboard.ChartList.Last12MonthSales:
+						_jsonData = Last12MonthsSaleChartData();
+						break;
+					case Infrastructure.Constants.Dashboard.ChartList.Last12MonthBrokerage:
+						_jsonData = Last12MonthsBrokerageChartData();
+						break;
+					case Infrastructure.Constants.Dashboard.ChartList.BrokerageDistribution:
+						_jsonData = BrokerageDistributionChartData();
+						break;
+					default:
+						break;
+				}
+				if (_jsonData == null)
+				{
+					_jsonData = new
+					{
+						ErrorCode = 1,
+						ErrorMessage = "Chart data not available."
+					};
+				}
 			}
+			catch (Exception ex)
+			{
+				base.LogException(ex);
+			}
+
 			return JsonCamelCase(_jsonData, JsonRequestBehavior.AllowGet);
 		}
-		
+
 		public ActionResult DuePayments(int? st, int? ps)
 		{
 			int _stIndex = 0;
@@ -88,6 +107,31 @@ namespace G2.ML.Web.Controllers
 		{
 			return _dashboardService.GetBrokerageChartData(Infrastructure.Web.SessionManager.CurrentLoggedInUser.ClientID);
 		}
-
+		private object BrokerageDistributionChartData()
+		{
+			return _dashboardService.GetBrokerageBistributionChartData(Infrastructure.Web.SessionManager.CurrentLoggedInUser.ClientID);
+			/*
+			return new BO.ChartDataBO()
+			{
+				Series = new List<BO.ChartSeriesBO>()
+				{
+					new BO.ChartSeriesBO()
+					{
+						Name = "Brokerage",
+						Data = new List<object>()
+						{
+							new { Name = "Manish Lakhani (Self)", Y = 1258290.55 },
+							new { Name = "G2 Chaudhari (G2)", Y = 150689 },
+							new { Name = "Ramesh Patel (RP)", Y = 48260 },
+							new { Name = "LR Patel (LR)", Y = 268930 },
+							new { Name = "Bharat Gori", Y = 189536 },
+							new { Name = "Rajesh Shah", Y = 25780 }
+						}
+							
+					}
+				}
+			};
+			*/
+		}
 	}
 }

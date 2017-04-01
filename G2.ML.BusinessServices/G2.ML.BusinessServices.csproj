@@ -63,6 +63,10 @@
       <Project>{5279fa26-f2d2-4389-9358-26f04f2a8b35}</Project>
       <Name>G2.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\G2.Frameworks\G2.Frameworks.csproj">
+      <Project>{d11798cb-4706-435a-8417-ed87a551d3f4}</Project>
+      <Name>G2.Frameworks</Name>
+    </ProjectReference>
     <ProjectReference Include="..\G2.ML.BusinessObjects\G2.ML.BusinessObjects.csproj">
       <Project>{deec2d3d-e21c-44ca-b04c-68fb5a2d046b}</Project>
       <Name>G2.ML.BusinessObjects</Name>

@@ -31,16 +31,7 @@
 					<section id="login">
 						@Html.Partial("_LoginPartial")
 					</section>
-					<nav>
-						<ul id="menu">
-							<li>@Html.ActionLink("Home", "Index", "Home")</li>
-							<li>@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
-							<li>@Html.ActionLink("Buyer", "Index", "Buyer")</li>
-							<li>@Html.ActionLink("Sale", "Index", "Sale")</li>
-							<li>@Html.ActionLink("About", "About", "Home")</li>
-							<li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-						</ul>
-					</nav>
+					@Html.Partial("_HeaderMenu")
 				</div>
 			</div>
 		</section>

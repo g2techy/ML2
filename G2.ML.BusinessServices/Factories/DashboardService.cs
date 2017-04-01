@@ -99,6 +99,49 @@ namespace G2.ML.BusinessServices.Factories
 			return _chartData;
 		}
 
+		public BO.ChartDataBO GetBrokerageBistributionChartData(int clientID)
+		{
+			BO.ChartDataBO _chartData = null;
+
+			try
+			{
+				DatabaseAccess.OpenConnection();
+				using (DataSet _ds = DatabaseAccess.ExecuteProcedure("P_Sale_BrokDistributionChartData", new List<DAL.DatabaseParameter>()
+				{
+					new DAL.DatabaseParameter("@ClientID",DAL.ParameterDirection.In,DAL.DataType.Int, clientID)
+				}))
+				{
+					if (_ds != null && _ds.Tables.Count > 0 && _ds.Tables[0].Rows.Count > 0)
+					{
+						_chartData = new BO.ChartDataBO();
+						var _series = new BO.ChartSeriesBO()
+						{
+							Name = "Brokerage",
+							Data = new List<object>()
+						};
+						foreach (DataRow _dr in _ds.Tables[0].Rows)
+						{
+							_series.Data.Add(new
+							{
+								Name = Convert.ToString(_dr["BrokerName"]),
+								Y = _dr["BrokerageAmt"]
+							});
+						}
+						_chartData.Series.Add(_series);
+					}
+				}
+			}
+			catch
+			{
+				throw;
+			}
+			finally
+			{
+				DatabaseAccess.CloseConnection();
+			}
+
+			return _chartData;
+		}
 		public BO.SaleSearchResultBO GetDuePayments(BO.SaleSearchBO saleSearch)
 		{
 			BO.SaleSearchResultBO _returnVal = null;

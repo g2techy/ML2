@@ -13,7 +13,7 @@
 				type: 'column'
 			},
 			title: {
-				text: 'Sales for last 12 months'
+				text: ''
 			},
 			xAxis: {
 				categories: []
@@ -33,7 +33,7 @@
 			},
 			legend: {
 				align: 'right',
-				x: -30,
+				x: 0,
 				verticalAlign: 'top',
 				y: 25,
 				floating: true,
@@ -44,7 +44,7 @@
 			},
 			tooltip: {
 				headerFormat: '<b>{point.x}</b><br/>',
-				pointFormat: '{series.name}: {point.y}'
+				pointFormat: '{series.name}: {point.y:,.2f}'
 			},
 			plotOptions: {
 				column: {
@@ -62,7 +62,7 @@
 				type: 'column'
 			},
 			title: {
-				text: 'Brokerage for last 12 months'
+				text: ''
 			},
 			xAxis: {
 				categories: []
@@ -82,7 +82,7 @@
 			},
 			legend: {
 				align: 'right',
-				x: -30,
+				x: 0,
 				verticalAlign: 'top',
 				y: 25,
 				floating: true,
@@ -93,7 +93,7 @@
 			},
 			tooltip: {
 				headerFormat: '<b>{point.x}</b><br/>',
-				pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+				pointFormat: '{series.name}: {point.y:,.2f}<br/>Total: {point.stackTotal:,.2f}'
 			},
 			plotOptions: {
 				column: {
@@ -101,6 +101,37 @@
 					dataLabels: {
 						enabled: true,
 						color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+					}
+				}
+			},
+			series: []
+		};
+
+		var _brokPieChartOptions = {
+			chart: {
+				plotBackgroundColor: null,
+				plotBorderWidth: null,
+				plotShadow: false,
+				type: 'pie'
+			},
+			title: {
+				text: ''
+			},
+			tooltip: {
+				pointFormat: '{series.name}: <b>{point.y:,.2f}</b>'
+			},
+			plotOptions: {
+				pie: {
+					allowPointSelect: true,
+					cursor: 'pointer',
+					dataLabels: {
+						enabled: true,
+						//format: '<b>{point.name}</b>: {point.percentage:.2f} % - {point.y:,.2f}',
+						format: '<b>{point.name}</b>: {point.percentage:.2f} %',
+						style: {
+							color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+						},
+						connectorColor: 'silver'
 					}
 				}
 			},
@@ -138,7 +169,7 @@
 						eval(_fn);
 					}
 				}
-			});			
+			});
 		}
 		function loadBrokerageTab() {
 			loadCharts("#brokerage div[data-chart]");
@@ -153,12 +184,20 @@
 					var _chIdx = _chartElem.data("ch-idx");
 					var _chartOptions = eval(_chartElem.data("ch-opt"));
 					$.getJSON("/Dashboard/ChartData/?chartType=" + _chIdx, function (data) {
-						_chartOptions.series = data.series;
-						_chartOptions.xAxis.categories = data.categories
-						Highcharts.chart(_chartElem.attr("id"), _chartOptions);
+						if (data["errorCode"] && data.errorCode == "1") {
+							_chartElem.html("Info : " + data.errorMessage);
+						} else {
+							if (_chartOptions["series"] && data["series"]) {
+								_chartOptions.series = data.series;
+							}
+							if (_chartOptions["xAxis"] && data["categories"]) {
+								_chartOptions.xAxis.categories = data.categories
+							}
+							Highcharts.chart(_chartElem.attr("id"), _chartOptions);
+						}
 						_chartElem.data("loaded", "1");
 					}).fail(function () {
-						_chartElem.html("Error occured while loading chart...");	
+						_chartElem.html("Error occured while loading chart...");
 					});
 				}
 			});

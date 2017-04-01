@@ -20,8 +20,8 @@ namespace G2.ML.BusinessServices.Factories
 				var _ourParams = DatabaseAccess.ExecuteProcedureDML("P_Account_AddUser", new List<DAL.DatabaseParameter>()
 				{
 					new DAL.DatabaseParameter("@UserID",DAL.ParameterDirection.Out, DAL.DataType.Int),
-					new DAL.DatabaseParameter("@UserName",DAL.ParameterDirection.In,DAL.DataType.String, bo.UserName, 20),
-					new DAL.DatabaseParameter("@Password",DAL.ParameterDirection.In,DAL.DataType.String, bo.Password, 20),
+					new DAL.DatabaseParameter("@UserName",DAL.ParameterDirection.In,DAL.DataType.String, bo.UserName, 100),
+					new DAL.DatabaseParameter("@Password",DAL.ParameterDirection.In,DAL.DataType.String, Encrypt(bo.Password), 200),
 					new DAL.DatabaseParameter("@FirstName",DAL.ParameterDirection.In,DAL.DataType.String, bo.FirstName, 100),
 					new DAL.DatabaseParameter("@LastName",DAL.ParameterDirection.In,DAL.DataType.String, bo.LastName, 100),
 					new DAL.DatabaseParameter("@CompanyName",DAL.ParameterDirection.In,DAL.DataType.String, bo.CompanyName, 200),
@@ -55,7 +55,7 @@ namespace G2.ML.BusinessServices.Factories
 				using (DataSet _ds = DatabaseAccess.ExecuteProcedure("P_Account_VerifyLoginCreds", new List<DAL.DatabaseParameter>()
 				{
 					new DAL.DatabaseParameter("@UserName",DAL.ParameterDirection.In, DAL.DataType.String, loginBO.UserName),
-					new DAL.DatabaseParameter("@Password",DAL.ParameterDirection.In, DAL.DataType.String, loginBO.Password)
+					new DAL.DatabaseParameter("@Password",DAL.ParameterDirection.In, DAL.DataType.String, Encrypt(loginBO.Password))
 				}))
 				{
 					if (_ds != null && _ds.Tables.Count > 0)
@@ -94,8 +94,8 @@ namespace G2.ML.BusinessServices.Factories
 				var _ourParams = DatabaseAccess.ExecuteProcedureDML("P_Account_ChangePwd", new List<DAL.DatabaseParameter>()
 				{
 					new DAL.DatabaseParameter("@UserID", DAL.ParameterDirection.In, DAL.DataType.Int, changePwd.UserID),
-					new DAL.DatabaseParameter("@OldPassword", DAL.ParameterDirection.In, DAL.DataType.String, changePwd.OldPassword, 100),
-					new DAL.DatabaseParameter("@NewPassword", DAL.ParameterDirection.In, DAL.DataType.String, changePwd.NewPassword, 100)
+					new DAL.DatabaseParameter("@OldPassword", DAL.ParameterDirection.In, DAL.DataType.String, Encrypt(changePwd.OldPassword), 200),
+					new DAL.DatabaseParameter("@NewPassword", DAL.ParameterDirection.In, DAL.DataType.String, Encrypt(changePwd.NewPassword), 200)
 				});
 				DatabaseAccess.CommitTransaction();
 				_ourParams = null;
@@ -114,6 +114,16 @@ namespace G2.ML.BusinessServices.Factories
 		}
 
 		#endregion
+
+		private string Encrypt(string password)
+		{
+			return Frameworks.Core.Encryption.Encrypt(password);
+		}
+		private string Decrypt(string password)
+		{
+			return Frameworks.Core.Encryption.Decrypt(password);
+		}
+
 	}
 }
 

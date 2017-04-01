@@ -32,7 +32,8 @@ namespace G2.ML.Web.Models
         
         [DataType(DataType.Currency)]
         [Required]
-        public float PayAmount { get; set; }
+		[RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "Invalid amount")]
+		public float PayAmount { get; set; }
 
         [Required]
         public string CourierFrom { get; set; }

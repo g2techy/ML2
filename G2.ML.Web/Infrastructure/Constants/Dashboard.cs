@@ -10,7 +10,8 @@ namespace G2.ML.Web.Infrastructure.Constants
 		public enum ChartList
 		{
 			Last12MonthSales = 1,
-			Last12MonthBrokerage
+			Last12MonthBrokerage,
+			BrokerageDistribution
 		}
 	}
 }

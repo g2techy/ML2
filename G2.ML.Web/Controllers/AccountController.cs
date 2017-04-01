@@ -45,9 +45,9 @@ namespace G2.ML.Web.Controllers
 						return Redirect(Infrastructure.Web.Common.DashboardUrl);
 					}
 				}
-				catch
+				catch(Exception ex)
 				{
-					ModelState.AddModelError("", "The user name or password provided is incorrect.");
+					base.LogException(ex);
 				}
 			}
 			else
@@ -66,6 +66,7 @@ namespace G2.ML.Web.Controllers
 			return RedirectToAction("Index", "Home");
 		}
 
+		[Infrastructure.Filters.AdminAuth]
 		public ActionResult Register()
 		{
 			return View();
@@ -73,6 +74,7 @@ namespace G2.ML.Web.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
+		[Infrastructure.Filters.AdminAuth]
 		public ActionResult Register(Models.RegisterVM model)
 		{
 			if (ModelState.IsValid)

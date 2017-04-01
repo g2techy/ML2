@@ -4,7 +4,9 @@
 {
 	<div class="panel-heading">
 		<div style="display:inline-block;">
-			Due payments or payments will be due in comming 7 days
+			<h3 class="panel-title">
+				Due payments or payments will be due in comming 7 days
+			</h3>
 		</div>
 		<div style="display:inline-block;text-align: right;">
 			@if (startIndex > pageSize)
@@ -38,9 +40,9 @@
 	</div>
 }
 
-@if (Model.SalesList != null && Model.SalesList.Count > 0)
-{
-	<div class="panel panel-info">
+<div class="panel panel-info" style="margin-top:5px;">
+	@if (Model.SalesList != null && Model.SalesList.Count > 0)
+	{
 		@RenderPager(Model.RecordCount, Model.StartIndex, Model.PageSize)
 		<div class="panel-body">
 			<table class="table table-bordred table-striped">
@@ -132,13 +134,16 @@
 				</tbody>
 			</table>
 		</div>
-	</div>
-}
-else if (ViewBag.IsDefaultModel == null || !ViewBag.IsDefaultModel)
-{
-	<div class="panel panel-info">
+	}
+	else
+	{
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				Due payments or payments will be due in comming 7 days
+			</h3>
+		</div>
 		<div class="panel-body">
 			<div class="empty-result">No records found.</div>
 		</div>
-	</div>
-}
+	}
+</div>

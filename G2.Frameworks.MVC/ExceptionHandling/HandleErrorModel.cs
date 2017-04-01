@@ -26,8 +26,20 @@ namespace G2.Frameworks.MVC.ExceptionHandling
             }
             ErrorID = _baseEx.ErrorID;
             ErrorNumber = _baseEx.ErrorNumber;
-            ErrorMessage = MVC.ExceptionHandling.ErrorHandlerAttribute.ShowActualError ? _baseEx.Message : string.Empty;
-            ErrorTrace = (_baseEx.InnerException != null && MVC.ExceptionHandling.ErrorHandlerAttribute.ShowActualError) ? _baseEx.InnerException.StackTrace : string.Empty;
+            ErrorMessage = _baseEx.Message;
+			if (MVC.ExceptionHandling.ErrorHandlerAttribute.ShowActualError)
+			{
+				Exception _innerEx = _baseEx;
+				while (_innerEx.InnerException != null)
+				{
+					_innerEx = _innerEx.InnerException;
+				}
+				ErrorTrace = _innerEx.StackTrace;
+			}
+			else
+			{
+				ErrorTrace = string.Empty;
+			}
         }
 
         public HandleErrorModel(string errorID, string errorNumber) : this(errorID, errorNumber, string.Empty)
@@ -48,6 +60,7 @@ namespace G2.Frameworks.MVC.ExceptionHandling
             ErrorID = errorID;
             ErrorNumber = errorNumber;
             ErrorMessage = errorMessage;
+			ErrorTrace = string.Empty;
         }
     }
 }

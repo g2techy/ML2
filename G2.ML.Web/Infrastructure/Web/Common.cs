@@ -12,7 +12,13 @@ namespace G2.ML.Web.Infrastructure.Web
         public const string LoginPageUrl = "~/Account/Login";
 		public const string DashboardUrl = "~/Dashboard/Index";
 
-		public static bool IsDebuggingEnabled { get; internal set; }
+		public static bool IsDebuggingEnabled
+		{
+			get
+			{
+				return HttpContext.Current.IsDebuggingEnabled;
+			}
+		}
 
 		public static void RedirectToLoginPage()
         {

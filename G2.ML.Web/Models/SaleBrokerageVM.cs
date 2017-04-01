@@ -17,7 +17,8 @@ namespace G2.ML.Web.Models
         [DataType(DataType.Currency)]
         [Required]
         [Range(typeof(float),"0.01","100.00")]
-        public float Brokerage { get; set; }
+		[RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "Invalid brokerage")]
+		public float Brokerage { get; set; }
 
         public SelectList BrokerList { get; set; }
 

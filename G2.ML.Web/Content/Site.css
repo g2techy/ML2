@@ -746,7 +746,7 @@ tr.pager td {
 	text-align:center;
 }
 div[data-chart] {
-	text-align:center;	
+	text-align:center;
 }
 .status-circle {
 	margin-top:5px;
@@ -770,4 +770,72 @@ div[data-chart] {
 }
 .status-new {
 	background-color: orange;
+}
+/*====== Header Menu=======*/
+.navbar-default {
+	margin-bottom: 0px;
+	background-color: transparent;
+	border-width:0px;
+}
+.navbar-nav > li > a {
+	padding: 0px 10px 0px 10px;
+}
+.navbar-collapse, .navbar {
+	height: unset;
+	min-height:unset;
+}
+.navbar-collapse {
+	padding:0px;
+}
+.last-menu-item {
+	padding-right: 0px;
+}
+/*============== Validation... =================*/
+.field-validation-error {
+	color: #ffffff;
+	display: inline-block;
+	*display: inline;
+	padding: 2px 5px 2px 5px;
+	vertical-align: middle;
+	*zoom: 1;
+	border: 2px;
+	border-radius: 3px;
+	font-size: 10px;
+	background-color: #b94a48;
+}
+
+.field-validation-valid {
+	display: none;
+}
+
+.input-validation-error {
+	color: #b94a48;
+	border-color: #b94a48;
+}
+
+	.input-validation-error:focus {
+		border-color: #953b39;
+		-webkit-box-shadow: 0 0 6px #d59392;
+		-moz-box-shadow: 0 0 6px #d59392;
+		box-shadow: 0 0 6px #d59392;
+	}
+
+.validation-summary-errors {
+	color: #ffffff;
+	display: block;
+	border: 2px;
+	border-radius: 3px;
+	font-size: 12px;
+	background-color: #b94a48;
+	padding: 2px 5px 1px 5px;
+	margin-bottom: 2px;
+}
+
+	.validation-summary-errors > ul {
+		margin: 2px;
+		padding-left: 10px;
+	}
+
+.validation-summary-valid {
+	display: none;
 }
