@@ -17,7 +17,8 @@ namespace G2.ML.BusinessObjects
         public float TotalWeight { get; set; }
         public float RejectionWeight { get; set; }
         public float UnitPrice { get; set; }
-        public int Status { get; set; }
+		public float LessPer { get; set; }
+		public int Status { get; set; }
     }
 
     public class Buyer

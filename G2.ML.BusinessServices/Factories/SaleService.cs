@@ -28,7 +28,8 @@ namespace G2.ML.BusinessServices.Factories
 					new DAL.DatabaseParameter("@Buyer",DAL.ParameterDirection.In,DAL.DataType.Int, saleAdd.BuyerID),
 					new DAL.DatabaseParameter("@TotalWeight",DAL.ParameterDirection.In,DAL.DataType.Decimal, saleAdd.TotalWeight),
 					new DAL.DatabaseParameter("@RejectionWeight",DAL.ParameterDirection.In,DAL.DataType.Decimal, saleAdd.RejectionWeight),
-					new DAL.DatabaseParameter("@UnitPrice",DAL.ParameterDirection.In,DAL.DataType.Decimal, saleAdd.UnitPrice)
+					new DAL.DatabaseParameter("@UnitPrice",DAL.ParameterDirection.In,DAL.DataType.Decimal, saleAdd.UnitPrice),
+					new DAL.DatabaseParameter("@LessPer",DAL.ParameterDirection.In,DAL.DataType.Decimal, saleAdd.LessPer)
 				});
 				DatabaseAccess.CommitTransaction();
 				_ID = Convert.ToInt32(_ourParams["@SaleID"]);
@@ -91,13 +92,14 @@ namespace G2.ML.BusinessServices.Factories
 						var _row = _ds.Tables[0].Rows[0];
 						_saleAdd = new BO.SaleAddBO()
 						{
-							SaleDate = Convert.ToString(_row["SaleDate"]),
+							SaleDate = Convert.ToDateTime(_row["SaleDate"]).ToString("yyyy-MM-dd"),
 							SallerID = Convert.ToInt32(_row["SallerID"]),
 							BuyerID = Convert.ToInt32(_row["BuyerID"]),
 							DueDays = Convert.ToInt32(_row["DueDays"]),
 							TotalWeight = float.Parse(_row["Weight"].ToString()),
 							RejectionWeight = float.Parse(_row["RejectionWt"].ToString()),
 							UnitPrice = float.Parse(_row["UnitPrice"].ToString()),
+							LessPer = float.Parse(_row["LessPer"].ToString()),
 							Status = Convert.ToInt32(_row["Status"])
 						};
 					}
@@ -211,6 +213,7 @@ namespace G2.ML.BusinessServices.Factories
 							RejectionWt = float.Parse(_dr["RejectionWt"].ToString()),
 							SelectionWt = float.Parse(_dr["SelectionWt"].ToString()),
 							UnitPrice = float.Parse(_dr["UnitPrice"].ToString()),
+							LessPer = float.Parse(_dr["LessPer"].ToString()),
 							NetSaleAmount = float.Parse(_dr["NetSaleAmount"].ToString()),
 							DueDays = int.Parse(_dr["DueDays"].ToString()),
 							TotalBrokerage = _dr["TotalBrokerage"].ToString(),
@@ -268,7 +271,10 @@ namespace G2.ML.BusinessServices.Factories
 								BrokerID = Convert.ToInt32(_row["BrokerID"]),
 								BrokerName = Convert.ToString(_row["BrokerName"]),
 								Brokerage = float.Parse(_row["Brokerage"].ToString()),
-								BrokerageAmount = float.Parse(_row["BrokerageAmount"].ToString())
+								BrokerageAmount = float.Parse(_row["BrokerageAmount"].ToString()),
+								IsPaid = (Convert.ToInt32(_row["IsPaid"]) == 1),
+								PayDate = Convert.ToDateTime(_row["PayDate"]),
+								PayComments = Convert.ToString(_row["PayComments"])
 							});
 						}
 					}
@@ -314,6 +320,34 @@ namespace G2.ML.BusinessServices.Factories
 			}
 			return _ID;
 
+		}
+
+		public int UpdateBrokeragePayment(BO.SaleBrokerageBO brokerage)
+		{
+			int _ID;
+			try
+			{
+				DatabaseAccess.OpenConnection(true);
+				var _ourParams = DatabaseAccess.ExecuteProcedureDML("P_Sale_BrokeragePayment", new List<DAL.DatabaseParameter>()
+				{
+					new DAL.DatabaseParameter("@BDID",DAL.ParameterDirection.In, DAL.DataType.Int,brokerage.BDID),
+					new DAL.DatabaseParameter("@PayDate",DAL.ParameterDirection.In,DAL.DataType.Date, brokerage.PayDate),
+					new DAL.DatabaseParameter("@PayComments",DAL.ParameterDirection.In,DAL.DataType.String, brokerage.PayComments, 1000)
+				});
+				DatabaseAccess.CommitTransaction();
+				_ID = brokerage.BDID;
+				_ourParams = null;
+			}
+			catch
+			{
+				DatabaseAccess.RollbackTransaction();
+				throw;
+			}
+			finally
+			{
+				DatabaseAccess.CloseConnection();
+			}
+			return _ID;
 		}
 
 		public int DeleteBrokerage(int BDID)

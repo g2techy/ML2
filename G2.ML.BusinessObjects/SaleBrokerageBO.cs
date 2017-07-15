@@ -13,5 +13,8 @@ namespace G2.ML.BusinessObjects
         public string BrokerName { get; set; }
         public float Brokerage { get; set; }
         public float BrokerageAmount { get; set; }
-    }
+		public bool IsPaid { get; set; }
+		public DateTime PayDate { get; set; }
+		public string PayComments { get; set; }
+	}
 }

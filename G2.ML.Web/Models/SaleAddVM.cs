@@ -27,7 +27,8 @@ namespace G2.ML.Web.Models
 
         [Display(Name = "Due Days")]
         [Required]
-        public int DueDays { get; set; }
+		[RegularExpression(@"^\d+$", ErrorMessage = "Invalid due days")]
+		public int DueDays { get; set; }
 
         [Display(Name = "Total Weight")]
         [Required]
@@ -35,10 +36,9 @@ namespace G2.ML.Web.Models
 		[RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "Invalid weight")]
 		public float TotalWeight { get; set; }
 
-        [Display(Name = "Rejection (%)")]
+        [Display(Name = "Rejection Weight")]
         [Required]
         [DataType(DataType.Currency)]
-        [Range(minimum:0,maximum:99)]
 		[RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "Invalid rejection percentage")]
 		public float RejectionWeight { get; set; }
 
@@ -53,8 +53,15 @@ namespace G2.ML.Web.Models
 
         [Display(Name = "Net Sale Amount")]
         public float NetSaleAmount { get; set; }
+				
+		[Display(Name = "Less (%)")]
+		[Required]
+		[DataType(DataType.Currency)]
+		[Range(minimum: 0, maximum: 10)]
+		[RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "Invalid less percentage")]
+		public float LessPer { get; set; }
 
-        public SelectList BuyerList { get; set; }
+		public SelectList BuyerList { get; set; }
         public SelectList SallerList { get; set; }
 
         public int Status { get; set; }

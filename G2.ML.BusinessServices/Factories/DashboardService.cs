@@ -179,6 +179,7 @@ namespace G2.ML.BusinessServices.Factories
 								RejectionWt = float.Parse(_dr["RejectionWt"].ToString()),
 								SelectionWt = float.Parse(_dr["SelectionWt"].ToString()),
 								UnitPrice = float.Parse(_dr["UnitPrice"].ToString()),
+								LessPer = float.Parse(_dr["LessPer"].ToString()),
 								NetSaleAmount = float.Parse(_dr["NetSaleAmount"].ToString()),
 								DueDays = int.Parse(_dr["DueDays"].ToString()),
 								TotalBrokerage = _dr["TotalBrokerage"].ToString(),

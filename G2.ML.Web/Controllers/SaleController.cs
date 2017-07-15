@@ -256,6 +256,26 @@ namespace G2.ML.Web.Controllers
 			return PartialView("_BrokerageGrid", _model);
 		}
 
+		[HttpPost]
+		public ActionResult BrokPayment(Models.SaleBrokPaymentVM model)
+		{
+			if (ModelState.IsValid)
+			{
+				var _bdID = _saleService.UpdateBrokeragePayment(Infrastructure.BOVMMapper.Map<Models.SaleBrokerage, BO.SaleBrokerageBO>(new Models.SaleBrokerage()
+				{
+					BDID = model.BDID,
+					SaleID = model.SaleID,
+					PayDate = DateTime.Parse(model.BrokPayDate),
+					PayComments = model.BrokPayComments
+				}));
+				if (_bdID > 0)
+				{
+					return BrokerageGrid(model.SaleID);
+				}
+			}
+			return Json(new { ErrorCode = 1 });
+		}
+
 		public ActionResult DeleteBrokerage(int BDID)
 		{
 			int _saleID = _saleService.DeleteBrokerage(BDID);

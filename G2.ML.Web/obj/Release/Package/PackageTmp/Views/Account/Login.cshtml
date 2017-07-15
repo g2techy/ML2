@@ -1,0 +1,41 @@
+﻿@model G2.ML.Web.Models.LoginVM
+@{
+	ViewBag.Title = "Log in";
+}
+<div class="col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				Login
+			</h3>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-12">
+					@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post,
+					new { @class = "form-horizontal", @id = "frmLogin" }))
+					{
+						@Html.AntiForgeryToken()
+						@Html.ValidationSummary(true)
+
+						<div class="form-group">
+							<div class="col-md-12">
+								@Html.TextBoxFor(model => model.UserName, new { @class = "form-control input-sm", @placeholder = "User Name:", @id = "UserName" })
+								@Html.ValidationMessageFor(model => model.UserName)
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-12">
+								@Html.PasswordFor(model => model.Password, new { @class = "form-control input-sm", @placeholder = "Password:", @id = "Password" })
+								@Html.ValidationMessageFor(model => model.Password)
+							</div>
+						</div>
+						<div class="form-group text-center">
+							<input type="submit" value="Log in" class="btn btn-primary btn-xs" />
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

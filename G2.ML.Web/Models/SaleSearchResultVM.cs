@@ -40,6 +40,7 @@ namespace G2.ML.Web.Models
         public string Status { get; set; }
         public string RefNo { get; set; }
 		public DateTime DueDate { get; set; }
+		public float LessPer { get; set; }
 	}
     
 }

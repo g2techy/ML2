@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>@ViewBag.Title - My ASP.NET MVC Application</title>
+	<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+	<meta name="viewport" content="width=device-width" />
+	@Styles.Render("~/Content/css")
+	@Styles.Render("~/Content/themes/base/css")
+	@Scripts.Render("~/bundles/modernizr")
+	<style type="text/css">
+		.noTitleStuff .ui-dialog-titlebar {
+			display: none
+		}
+
+		.site-title {
+			font-size: 1em
+		}
+	</style>
+</head>
+<body>
+	<header></header>
+	<div id="body">
+		@*@RenderSection("featured", required: false)*@
+		<section class="featured">
+			<div class="container content-wrapper">
+				<div class="float-left">
+					<p class="site-title">DBIS .:. Diamond Broker Inventory System</p>
+				</div>
+				<div class="float-right">
+					<section id="login">
+						@Html.Partial("_LoginPartial")
+					</section>
+					@Html.Partial("_HeaderMenu")
+				</div>
+			</div>
+		</section>
+		<section class="container main-content content-wrapper clear-fix">
+			<div class="row">
+				<div class="col-md-12 padoff-lr">
+					@Html.Partial("_ajaxError")
+					@RenderBody()
+				</div>
+			</div>
+		</section>
+	</div>
+	<div id="divAjaxDialog" style="display: none">
+		<img src="~/Images/icon_loading_gray.gif" />
+	</div>
+	<div style="margin-top:30px;"></div>
+	<footer>
+		<div class="container footer-container">
+			<p>&copy; @DateTime.Now.Year - Diamond BIS</p>
+		</div>
+	</footer>
+
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/jqueryui")
+	@Scripts.Render("~/bundles/jqueryval")
+	@Scripts.Render("~/bundles/bootstrap")
+	@Scripts.Render("~/bundles/app")
+	<script type="text/javascript">
+		InitLayout();
+	</script>
+	@RenderSection("scripts", required: false)
+</body>
+</html>

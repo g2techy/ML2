@@ -16,7 +16,8 @@ namespace G2.ML.BusinessServices.Contracts
 
         List<BO.SaleBrokerageBO> GetBrokerageList(int clientID, int saleID);
         int AddBrokerage(BO.SaleBrokerageBO brokerage);
-        int DeleteBrokerage(int BDID);
+		int UpdateBrokeragePayment(BO.SaleBrokerageBO brokerage);
+		int DeleteBrokerage(int BDID);
 
         List<BO.SalePaymentBO> GetPaymentList(int clientID, int saleID);
         int AddPayment(BO.SalePaymentBO payment);

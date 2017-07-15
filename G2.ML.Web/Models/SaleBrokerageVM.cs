@@ -22,11 +22,14 @@ namespace G2.ML.Web.Models
 
         public SelectList BrokerList { get; set; }
 
-        public List<SaleBrokerage> BrokerageList { get; set; }
+		public SaleBrokPaymentVM BrokeragePayment { get; set; }
+
+		public List<SaleBrokerage> BrokerageList { get; set; }
 
         public SaleBrokerageVM()
         {
             BrokerageList = new List<SaleBrokerage>();
+			BrokeragePayment = new SaleBrokPaymentVM();
         }
     }
 
@@ -38,5 +41,23 @@ namespace G2.ML.Web.Models
 		public string BrokerName { get; set; }
         public float Brokerage { get; set; }
         public float BrokerageAmount { get; set; }
-    }
+		public bool IsPaid { get; set; }
+		public DateTime PayDate { get; set; }
+		public string PayComments { get; set; }
+	}
+
+	public class SaleBrokPaymentVM : Infrastructure.Core.BaseVM
+	{
+		public int BDID { get; set; }
+		public int SaleID { get; set; }
+
+		[Required]
+		[DataType(DataType.Text)]
+		public string BrokPayDate { get; set; }
+
+		[Required]
+		[MaxLength(1000)]
+		[DataType(DataType.MultilineText)]
+		public string BrokPayComments { get; set; }
+	}
 }

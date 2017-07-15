@@ -1,0 +1,67 @@
+﻿
+@{
+	ViewBag.Title = "Dashboard";
+}
+@section scripts {
+	@Scripts.Render("~/bundles/charts")
+	<script>
+		$(document).ready(function () {
+			DashboardInit();
+		});
+	</script>
+}
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#sale" data-toggle="tab" data-fn="loadSaleTab">Sale</a></li>
+			<li><a href="#payments" data-toggle="tab" data-fn="loadPaymentsTab">Payments</a></li>
+			<li><a href="#brokerage" data-toggle="tab" data-fn="loadBrokerageTab">Brokerage</a></li>
+		</ul>
+		<div class="tab-content">
+			<div id="sale" class="tab-pane fade in active">
+				<div class="panel panel-info" style="margin-top:5px;">
+					<div class="panel-heading" style="text-align: center;">
+						<h3 class="panel-title">
+							Sales for last 12 months
+						</h3>
+					</div>
+					<div class="panel-body">
+						<div id="divSaleChart" data-chart="1" data-loaded="0" data-ch-idx="1" data-ch-opt="_saleChartOptions">
+							Chart is loading...
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="payments" class="tab-pane fade">
+				<div id="divDuePayments" data-list="1" data-loaded="0" data-fn="NavPageDuePayments(1, @G2.ML.Web.Infrastructure.Constants.Default.PageSize)"></div>
+			</div>
+			<div id="brokerage" class="tab-pane fade">
+				<div class="panel panel-info" style="margin-top:5px;">
+					<div class="panel-heading" style="text-align: center;">
+						<h3 class="panel-title">
+							Brokerage for last 12 months
+						</h3>
+					</div>
+					<div class="panel-body">
+						<div id="divBrokerageChart" data-chart="1" data-loaded="0" data-ch-idx="2" data-ch-opt="_brokChartOptions">
+							Chart is loading...
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-info">
+					<div class="panel-heading" style="text-align: center;">
+						<h3 class="panel-title">
+							Brokerage distribution for last 12 months
+						</h3>
+					</div>
+					<div class="panel-body">
+						<div id="divBrokPieChart" data-chart="1" data-loaded="0" data-ch-idx="3" data-ch-opt="_brokPieChartOptions">
+							Chart is loading...
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
