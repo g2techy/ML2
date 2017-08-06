@@ -11,7 +11,9 @@ namespace G2.ML.Web.Infrastructure.Constants
 		{
 			Last12MonthSales = 1,
 			Last12MonthBrokerage,
-			BrokerageDistribution
+			BrokerageDistribution,
+			Last12InterestPaid,
+			Last24LoanData
 		}
 	}
 }

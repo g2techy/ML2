@@ -1,0 +1,78 @@
+﻿@model List<G2.ML.Web.Models.LoanCalcInterestVM>
+
+@{
+	float _totalIntPaid = 0;
+	float _totalCalcInt = 0;
+	float _intToBePaid = 0;
+	if (Model != null && Model.Count > 0) {
+		_totalIntPaid = Model[0].TotalIntPaid;
+		_totalCalcInt = Model.Sum(m => m.CalcIntAmount);
+		_intToBePaid = _totalCalcInt - _totalIntPaid;
+	}
+}
+<div class="panel panel-info">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			Interest calculation: 
+			<em style="font-weight:bold;"> Outstanding (@string.Format("{0:n2}", _intToBePaid)) = Calculated (@string.Format("{0:n2}", _totalCalcInt)) - Paid (@string.Format("{0:n2}", _totalIntPaid)) </em>
+		</h3>
+	</div>
+	@if (Model != null && Model.Count > 0)
+	{
+		<table class="table">
+			<thead>
+				<tr>
+					<th>
+						Pay Date
+					</th>
+					<th class="amt">
+						Pay Amount
+					</th>
+					<th class="amt">
+						Daily Int Rate
+					</th>
+					<th class="amt">
+						Int For Days
+					</th>
+					<th class="amt">
+						Int On Amount
+					</th>
+					<th class="amt">
+						Calculated Interest
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var _item in Model)
+				{
+					<tr>
+						<td>
+							@if (_item.PayDate.HasValue)
+							{
+								<text>@_item.PayDate.Value.ToString("dd-MM-yyyy")</text>
+							}
+						</td>
+						<td class="amt">
+							@if (_item.PayAmount.HasValue)
+							{
+								<text>@string.Format("{0:n2}", _item.PayAmount.Value)</text>
+							}
+						</td>
+						<td class="amt">
+							@string.Format("{0:n4}", _item.DailyRate)
+						</td>
+						<td class="amt">
+							@_item.IntForDays
+						</td>
+						<td class="amt">
+							@string.Format("{0:n2}", _item.IntOnAmount)
+						</td>
+						<td class="amt">
+							@string.Format("{0:n2}", _item.CalcIntAmount)
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+</div>

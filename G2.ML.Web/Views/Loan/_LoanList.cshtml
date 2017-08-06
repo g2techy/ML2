@@ -1,0 +1,125 @@
+﻿@model G2.ML.Web.Models.LoanSearchResultVM
+
+@helper RenderPager(int recordCount, int startIndex, int pageSize)
+{
+if (recordCount <= pageSize)
+{
+	return;
+}
+	<div class="panel-heading" style="text-align: right;">
+		@if (startIndex > pageSize)
+		{
+			int _prvIndex = startIndex - pageSize;
+			if (_prvIndex < 1)
+			{
+				_prvIndex = 1;
+			}
+			<button type="button" data-pager="1" data-si="@_prvIndex" data-ps="@pageSize" class="btn btn-info btn-xs">
+				<
+			</button>
+		}
+		@if (startIndex < recordCount)
+		{
+			int _nxtIndex = startIndex + pageSize;
+			bool _renderNextBtn = true;
+			if (recordCount < _nxtIndex)
+			{
+				_nxtIndex = recordCount - pageSize;
+				_renderNextBtn = false;
+			}
+			if (_renderNextBtn)
+			{
+				<button type="button" data-pager="1" data-si="@_nxtIndex" data-ps="@pageSize" class="btn btn-info btn-xs">
+					>
+				</button>
+			}
+		}
+	</div>
+}
+@if (Model.LoanList != null && Model.LoanList.Count > 0)
+{
+	<div class="panel panel-info">
+		@RenderPager(Model.RecordCount, Model.StartIndex, Model.PageSize)
+		<div class="panel-body">
+			<table class="table table-bordred table-striped">
+				<thead>
+					<tr>
+						<th>
+							Ref No
+						</th>
+						<th>
+							Start Date
+						</th>
+						<th>
+							End Date
+						</th>
+						<th>
+							Borrower
+						</th>
+						<th class="amt">
+							Principal Amount
+						</th>
+						<th class="amt">
+							Interest Rate (%)
+						</th>
+						<th class="amt">
+							Total Payment
+						</th>
+						<th>
+							Payment Date
+						</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var _item in Model.LoanList)
+					{
+						<tr>
+							<td>
+								<a href="javascript:void(0);" data-edit="1" data-loanID="@_item.LoanID">@_item.RefNo</a>
+							</td>
+							<td>
+								@HelperMethods.FormatDateTime(_item.StartDate)
+							</td>
+							<td>
+								@HelperMethods.FormatDateTime(_item.EndDate)
+							</td>
+							<td>
+								@_item.Borrower
+							</td>
+							<td class="amt">
+								@string.Format("{0:n2}", _item.PrincipalAmount)
+							</td>
+							<td class="amt">
+								@string.Format("{0:n2}", _item.MonthlyInterest)
+							</td>
+							<td class="amt">
+								@string.Format("{0:n2}", _item.TotalPayAmount)
+							</td>
+							<td>
+								@HelperMethods.FormatDateTime(_item.PayDate)
+							</td>
+							<td>
+								<div class="status-circle @HelperMethods.StatusCSSClass(_item.StatusName,_item.EndDate)" title="@_item.StatusName"></div>
+							</td>
+							<td>
+								<button type="button" data-title="Are you sure you want to delete it?" data-toggle="confirmation" data-del="1" data-loanID="@_item.LoanID" class="btn btn-danger btn-xs">
+									X
+								</button>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+}
+else if(ViewBag.IsDefaultModel == null || !ViewBag.IsDefaultModel)
+{
+	<div class="panel panel-info">
+		<div class="panel-body">
+			<div class="empty-result">No records found.</div>
+		</div>
+	</div>
+}

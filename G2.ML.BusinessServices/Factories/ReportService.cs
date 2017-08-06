@@ -154,21 +154,55 @@ namespace G2.ML.BusinessServices.Factories
 			return _returnVal;
 		}
 
-		#endregion
-
-		private string GetDateIntoString(string date)
+		public DataTable GetLoanReport(BO.LoanReportBO bo)
 		{
-			string _returnVal = string.Empty;
-			DateTime _dt;
-			if (DateTime.TryParse(date, out _dt))
+			DataTable _returnVal = null;
+
+			try
 			{
-				if (_dt.Year != 0001)
+				DatabaseAccess.OpenConnection();
+				var _paramList = new List<DAL.DatabaseParameter>()
 				{
-					_returnVal = _dt.ToString("yyyy-MM-dd");
+					new DAL.DatabaseParameter("@ClientID",DAL.ParameterDirection.In, DAL.DataType.Int, bo.ClientID)
+				};
+				string _stDate = GetDateIntoString(bo.StartDate);
+				if (!string.IsNullOrEmpty(bo.StartDate))
+				{
+					_paramList.Add(new DAL.DatabaseParameter("@StartDate", DAL.ParameterDirection.In, DAL.DataType.String, _stDate));
+				}
+				string _endDate = GetDateIntoString(bo.EndDate);
+				if (!string.IsNullOrEmpty(bo.EndDate))
+				{
+					_paramList.Add(new DAL.DatabaseParameter("@EndDate", DAL.ParameterDirection.In, DAL.DataType.String, _endDate));
+				}
+				if (bo.BorrowerID.HasValue)
+				{
+					_paramList.Add(new DAL.DatabaseParameter("@BorrowerID", DAL.ParameterDirection.In, DAL.DataType.Int, bo.BorrowerID));
+				}
+				if (bo.Status.HasValue)
+				{
+					_paramList.Add(new DAL.DatabaseParameter("@Status", DAL.ParameterDirection.In, DAL.DataType.String, bo.Status));
+				}
+
+				DataSet _ds = DatabaseAccess.ExecuteProcedure("P_Report_GetLoanList", _paramList);
+				if (_ds != null && _ds.Tables.Count > 0)
+				{
+					_returnVal = _ds.Tables[0];
 				}
 			}
+			catch
+			{
+				throw;
+			}
+			finally
+			{
+				DatabaseAccess.CloseConnection();
+			}
+
 			return _returnVal;
 		}
+
+		#endregion
 
 	}
 }

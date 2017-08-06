@@ -37,6 +37,7 @@ namespace G2.ML.Web.App_Start
 			container.RegisterType<BS.Contracts.IReportService, BS.Factories.ReportService>();
 			container.RegisterType<BS.Contracts.ISaleService, BS.Factories.SaleService>();
 			container.RegisterType<BS.Contracts.IDashboardService, BS.Factories.DashboardService>();
+			container.RegisterType<BS.Contracts.ILoanService, BS.Factories.LoanService>();
 		}
 
 		public static void RegisterControllerDependencies(IUnityContainer container)

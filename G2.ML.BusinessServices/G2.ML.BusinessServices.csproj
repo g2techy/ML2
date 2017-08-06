@@ -48,11 +48,13 @@
     <Compile Include="Contracts\IAccountService.cs" />
     <Compile Include="Contracts\IBuyerService.cs" />
     <Compile Include="Contracts\IDashboardService.cs" />
+    <Compile Include="Contracts\ILoanService.cs" />
     <Compile Include="Contracts\IReportService.cs" />
     <Compile Include="Contracts\ISaleService.cs" />
     <Compile Include="Factories\AccountService.cs" />
     <Compile Include="Factories\BuyerService.cs" />
     <Compile Include="Factories\DashboardService.cs" />
+    <Compile Include="Factories\LoanService.cs" />
     <Compile Include="Factories\ReportService.cs" />
     <Compile Include="Factories\SaleService.cs" />
     <Compile Include="IService.cs" />

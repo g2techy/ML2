@@ -21,6 +21,7 @@ namespace G2.ML.BusinessObjects
 	{
 		public string Name { get; set; }
 		public List<object> Data { get; set; }
+		public string Stack { get; set; }
 		public ChartSeriesBO()
 		{
 			Data = new List<object>();

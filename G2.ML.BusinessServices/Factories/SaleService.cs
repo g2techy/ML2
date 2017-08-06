@@ -503,21 +503,7 @@ namespace G2.ML.BusinessServices.Factories
 			}
 			return _ID;
 		}
-
-		private string GetDateIntoString(string date)
-		{
-			string _returnVal = string.Empty;
-			DateTime _dt;
-			if (DateTime.TryParse(date, out _dt))
-			{
-				if (_dt.Year != 0001)
-				{
-					_returnVal = _dt.ToString("yyyy-MM-dd");
-				}
-			}
-			return _returnVal;
-		}
-
+				
 		#endregion
 	}
 }

@@ -30,7 +30,6 @@ G:\G2\Projects\ML2\G2.ML.Web\bin\G2.ML.Web.dll
 G:\G2\Projects\ML2\G2.ML.Web\bin\G2.ML.Web.pdb
 G:\G2\Projects\ML2\G2.ML.Web\bin\Antlr3.Runtime.dll
 G:\G2\Projects\ML2\G2.ML.Web\bin\AutoMapper.dll
-G:\G2\Projects\ML2\G2.ML.Web\bin\ClosedXML.dll
 G:\G2\Projects\ML2\G2.ML.Web\bin\G2.Frameworks.dll
 G:\G2\Projects\ML2\G2.ML.Web\bin\G2.Frameworks.MVC.dll
 G:\G2\Projects\ML2\G2.ML.Web\bin\G2.ML.BusinessObjects.dll
@@ -67,7 +66,6 @@ G:\G2\Projects\ML2\G2.ML.Web\bin\G2.Frameworks.pdb
 G:\G2\Projects\ML2\G2.ML.Web\bin\G2.ML.BusinessObjects.pdb
 G:\G2\Projects\ML2\G2.ML.Web\bin\G2.ML.BusinessServices.pdb
 G:\G2\Projects\ML2\G2.ML.Web\bin\AutoMapper.xml
-G:\G2\Projects\ML2\G2.ML.Web\bin\ClosedXML.xml
 G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.Practices.ServiceLocation.pdb
 G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.Practices.ServiceLocation.xml
@@ -94,3 +92,5 @@ G:\G2\Projects\ML2\G2.ML.Web\bin\G2.DAL.pdb
 G:\G2\Projects\ML2\G2.ML.Web\obj\Debug\G2.ML.Web.csprojResolveAssemblyReference.cache
 G:\G2\Projects\ML2\G2.ML.Web\obj\Debug\G2.ML.Web.dll
 G:\G2\Projects\ML2\G2.ML.Web\obj\Debug\G2.ML.Web.pdb
+G:\G2\Projects\ML2\G2.ML.Web\bin\DocumentFormat.OpenXml.xml
+G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.VisualStudio.DebuggerVisualizers.dll

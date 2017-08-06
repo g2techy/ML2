@@ -43,6 +43,12 @@ namespace G2.ML.Web.Controllers
 					case Infrastructure.Constants.Dashboard.ChartList.BrokerageDistribution:
 						_jsonData = BrokerageDistributionChartData();
 						break;
+					case Infrastructure.Constants.Dashboard.ChartList.Last12InterestPaid:
+						_jsonData = Last12LoanInterestPaidChartData();
+						break;
+					case Infrastructure.Constants.Dashboard.ChartList.Last24LoanData:
+						_jsonData = Last24MonthsLoanChartData();
+						break;
 					default:
 						break;
 				}
@@ -110,28 +116,14 @@ namespace G2.ML.Web.Controllers
 		private object BrokerageDistributionChartData()
 		{
 			return _dashboardService.GetBrokerageBistributionChartData(Infrastructure.Web.SessionManager.CurrentLoggedInUser.ClientID);
-			/*
-			return new BO.ChartDataBO()
-			{
-				Series = new List<BO.ChartSeriesBO>()
-				{
-					new BO.ChartSeriesBO()
-					{
-						Name = "Brokerage",
-						Data = new List<object>()
-						{
-							new { Name = "Manish Lakhani (Self)", Y = 1258290.55 },
-							new { Name = "G2 Chaudhari (G2)", Y = 150689 },
-							new { Name = "Ramesh Patel (RP)", Y = 48260 },
-							new { Name = "LR Patel (LR)", Y = 268930 },
-							new { Name = "Bharat Gori", Y = 189536 },
-							new { Name = "Rajesh Shah", Y = 25780 }
-						}
-							
-					}
-				}
-			};
-			*/
+		}
+		private object Last12LoanInterestPaidChartData()
+		{
+			return _dashboardService.GetLoanInerestPaidChartData(Infrastructure.Web.SessionManager.CurrentLoggedInUser.ClientID);
+		}
+		private object Last24MonthsLoanChartData()
+		{
+			return _dashboardService.GetLoanChartData(Infrastructure.Web.SessionManager.CurrentLoggedInUser.ClientID);
 		}
 	}
 }

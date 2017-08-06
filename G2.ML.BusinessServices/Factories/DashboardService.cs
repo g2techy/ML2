@@ -142,6 +142,7 @@ namespace G2.ML.BusinessServices.Factories
 
 			return _chartData;
 		}
+
 		public BO.SaleSearchResultBO GetDuePayments(BO.SaleSearchBO saleSearch)
 		{
 			BO.SaleSearchResultBO _returnVal = null;
@@ -211,6 +212,135 @@ namespace G2.ML.BusinessServices.Factories
 			}
 
 			return _returnVal;
+		}
+
+		public BO.ChartDataBO GetLoanInerestPaidChartData(int clientID)
+		{
+			BO.ChartDataBO _chartData = null;
+
+			try
+			{
+				DatabaseAccess.OpenConnection();
+				using (DataSet _ds = DatabaseAccess.ExecuteProcedure("P_Loan_InerestPaidChartData", new List<DAL.DatabaseParameter>()
+				{
+					new DAL.DatabaseParameter("@ClientID",DAL.ParameterDirection.In,DAL.DataType.Int, clientID)
+				}))
+				{
+					if (_ds != null && _ds.Tables.Count > 0 && _ds.Tables[0].Rows.Count > 0)
+					{
+						_chartData = new BO.ChartDataBO();
+
+						DataTable _data = _ds.Tables[0];
+						DataTable _categoriesDT = _ds.Tables[0].DefaultView.ToTable(true, "PayMonth");
+						foreach (DataRow _dr in _categoriesDT.Rows)
+						{
+							_chartData.Categories.Add(Convert.ToString(_dr["PayMonth"]));
+						}
+
+						foreach (DataRow _dr in _ds.Tables[0].DefaultView.ToTable(true, "Borrower").Rows)
+						{
+							string _borrower = _dr["Borrower"].ToString();
+							var _series = new BO.ChartSeriesBO()
+							{
+								Name = _borrower,
+								Data = new List<object>()
+							};
+
+							foreach (DataRow _drCat in _categoriesDT.Rows)
+							{
+								string _payMonth = Convert.ToString(_drCat["PayMonth"]);
+								DataRow[] _borPayDR = _data.Select(string.Format("PayMonth='{0}' And Borrower='{1}'",_payMonth, _borrower));
+								if (_borPayDR.Length > 0)
+								{
+									_series.Data.Add(_borPayDR[0]["TotalPayAmount"]);
+								}
+								else
+								{
+									_series.Data.Add(null);
+								}
+							}
+							_chartData.Series.Add(_series);
+						}
+						
+					}
+				}
+			}
+			catch
+			{
+				throw;
+			}
+			finally
+			{
+				DatabaseAccess.CloseConnection();
+			}
+
+			return _chartData;
+		}
+
+		public BO.ChartDataBO GetLoanChartData(int clientID)
+		{
+			BO.ChartDataBO _chartData = null;
+
+			try
+			{
+				DatabaseAccess.OpenConnection();
+				using (DataSet _ds = DatabaseAccess.ExecuteProcedure("P_Loan_ChartData", new List<DAL.DatabaseParameter>()
+				{
+					new DAL.DatabaseParameter("@ClientID",DAL.ParameterDirection.In,DAL.DataType.Int, clientID)
+				}))
+				{
+					if (_ds != null && _ds.Tables.Count > 0 && _ds.Tables[0].Rows.Count > 0)
+					{
+						_chartData = new BO.ChartDataBO();
+
+						DataTable _data = _ds.Tables[0];
+						
+						var _paSerise = new BO.ChartSeriesBO()
+						{
+							Name = "Total Principal Amount",
+							Data = new List<object>()
+						};
+
+						var _pPaidSerise = new BO.ChartSeriesBO()
+						{
+							Name = "Total Principal Paid",
+							Data = new List<object>(),
+							Stack = "Paid"
+						};
+						var _iPaidSerise = new BO.ChartSeriesBO()
+						{
+							Name = "Total Interest Paid",
+							Data = new List<object>(),
+							Stack = "Paid"
+						};
+
+						foreach (DataRow _dr in _data.Rows)
+						{
+							_chartData.Categories.Add(Convert.ToString(_dr["Borrower"]));
+
+							_paSerise.Data.Add(_dr["TotalPrincipalAmount"]);
+							_pPaidSerise.Data.Add(_dr["TotalPrincipalPaid"]);
+							_iPaidSerise.Data.Add(_dr["TotalInterestPaid"]);
+
+						}
+
+						_chartData.Series.Add(_paSerise);
+						_chartData.Series.Add(_iPaidSerise);
+						_chartData.Series.Add(_pPaidSerise);
+
+					}
+				}
+			}
+			catch
+			{
+				throw;
+			}
+			finally
+			{
+				DatabaseAccess.CloseConnection();
+			}
+
+			return _chartData;
 		}
 	}
 }

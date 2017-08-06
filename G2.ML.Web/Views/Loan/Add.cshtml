@@ -1,0 +1,77 @@
+﻿@model G2.ML.Web.Models.LoanAddVM
+@{
+	ViewBag.Title = "Add";
+
+	var _isFirstReq = string.Empty;
+	if (ViewData["IsFirstRequest"] != null)
+	{
+		_isFirstReq = "1";
+	}
+}
+
+@section scripts{
+	<script type="text/javascript">
+		var _isFirstRequest = '@_isFirstReq';
+		var _loanSearchUrl = "@Url.Action("Index","Loan")";
+		$(document).ready(function () {
+			LoanAddInit();
+        });
+	</script>
+}
+
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			Loan Details
+		</h3>
+	</div>
+	<div class="panel-body">
+		@using (Html.BeginForm("Add", "Loan", FormMethod.Post, new { @class = "form-horizontal", @id = "frmAddLoan" }))
+		{
+			<div class="form-group">
+				@Html.LabelFor(model => model.StartDate, new { @class = "control-label col-md-1" })
+				<div class="col-md-3">
+					@Html.TextBoxFor(model => model.StartDate, new { @class = "form-control input-sm date-picker", @placeholder = "Start Date:", @id = "StartDate" })
+					@Html.ValidationMessageFor(model => model.StartDate)
+				</div>
+				@Html.LabelFor(model => model.EndDate, new { @class = "control-label col-md-1" })
+				<div class="col-md-3">
+					@Html.TextBoxFor(model => model.EndDate, new { @class = "form-control input-sm date-picker", @placeholder = "End Date:", @id = "EndDate" })
+					@Html.ValidationMessageFor(model => model.EndDate)
+				</div>
+				@Html.LabelFor(model => model.BorrowerID, new { @class = "control-label col-md-1" })
+				<div class="col-md-3">
+					@Html.DropDownListFor(model => model.BorrowerID, Model.BorrowerList, string.Empty, new { @class = "form-control input-sm" })
+					@Html.ValidationMessageFor(model => model.BorrowerID)
+				</div>
+			</div>
+			<div class="form-group">
+				@Html.LabelFor(model => model.PrincipalAmount, new { @class = "control-label col-md-1" })
+				<div class="col-md-3">
+					@Html.TextBoxFor(model => model.PrincipalAmount, new { @class = "form-control input-sm", @placeholder = "Principal Amount:", @id = "PrincipalAmount" })
+					@Html.ValidationMessageFor(model => model.PrincipalAmount)
+				</div>
+				@Html.LabelFor(model => model.MonthlyInterest, new { @class = "control-label col-md-1" })
+				<div class="col-md-3">
+					@Html.TextBoxFor(model => model.MonthlyInterest, new { @class = "form-control input-sm", @placeholder = "Monthly Interest Rate:", @id = "MonthlyInterest" })
+					@Html.ValidationMessageFor(model => model.MonthlyInterest)
+				</div>
+			</div>
+			<div class="form-group">
+				@Html.LabelFor(model => model.Comments, new { @class = "control-label col-md-1" })
+				<div class="col-md-7">
+					@Html.TextAreaFor(model => model.Comments, new { @class = "form-control input-sm", @placeholder = "Comments:", @id = "Comments" })
+					@Html.ValidationMessageFor(model => model.Comments)
+				</div>
+				<div class="col-md-3" style="text-align:center;">
+					<button id="btnSave" type="submit" class="btn btn-primary">
+						Save
+					</button>
+					<button id="btnSearch" type="button" class="btn btn-primary">
+						Search
+					</button>
+				</div>
+			</div>
+		}
+	</div>
+</div>

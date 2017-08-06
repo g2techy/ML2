@@ -65,7 +65,23 @@ namespace G2.ML.Web.Controllers
             }
         }
 
-        public ActionResult Sales()
+		public Models.LoanReportVM CurrentLoanReportVM
+		{
+			get
+			{
+				if (Session["CurrentLoanReportVM"] != null)
+				{
+					return Session["CurrentLoanReportVM"] as Models.LoanReportVM;
+				}
+				return null;
+			}
+			set
+			{
+				Session["CurrentLoanReportVM"] = value;
+			}
+		}
+
+		public ActionResult Sales()
         {
             Models.SalesReportVM _model = new Models.SalesReportVM();
             _model.SallerList = GetBuyerList(1);
@@ -143,7 +159,45 @@ namespace G2.ML.Web.Controllers
 			return new ExportResult(_dtData, "BrokerageReport.xlsx");
         }
 
-        private SelectList GetBuyerList(int buyerTypeID)
+
+		public ActionResult Loan()
+		{
+			Models.LoanReportVM _model = new Models.LoanReportVM();
+			_model.BorrowerList = GetBuyerList(4);
+			_model.StatusList = GetSaleStatusList();
+			return View(_model);
+		}
+
+		[HttpPost]
+		public ActionResult Loan(Models.LoanReportVM vm)
+		{
+			if (ModelState.IsValid)
+			{
+				vm.ClientID = ClientID;
+				DataTable _dtData = _reportService.GetLoanReport(Infrastructure.BOVMMapper.Map<Models.LoanReportVM, BO.LoanReportBO>(vm));
+				return PartialView("_DataList", _dtData);
+			}
+			return Json(new { ErrorCode = 1 });
+		}
+
+		[HttpPost]
+		public ActionResult ExportLoan(Models.LoanReportVM vm)
+		{
+			if (ModelState.IsValid)
+			{
+				vm.ClientID = ClientID;
+				CurrentLoanReportVM = vm;
+				return Json(new { ErrorCode = 0 });
+			}
+			return Json(new { ErrorCode = 1 });
+		}
+		public ActionResult DownloadLoanReport()
+		{
+			DataTable _dtData = _reportService.GetLoanReport(Infrastructure.BOVMMapper.Map<Models.LoanReportVM, BO.LoanReportBO>(CurrentLoanReportVM));
+			return new ExportResult(_dtData, "LoanReport.xlsx");
+		}
+
+		private SelectList GetBuyerList(int buyerTypeID)
         {
             SelectList _list = null;
             var _buyerList = _saleService.GetBuyerList(ClientID, buyerTypeID);

@@ -70,6 +70,7 @@
     <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.DebuggerVisualizers, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -79,6 +80,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -172,6 +174,7 @@
     <Compile Include="Controllers\BuyerController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoanController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Global.asax.cs">
@@ -196,6 +199,8 @@
     <Compile Include="Models\BrokerageReportVM.cs" />
     <Compile Include="Models\BuyerSearchVM.cs" />
     <Compile Include="Models\BuyerVM.cs" />
+    <Compile Include="Models\LoanReportVM.cs" />
+    <Compile Include="Models\LoanVM.cs" />
     <Compile Include="Models\PagerVM.cs" />
     <Compile Include="Models\SaleAddVM.cs" />
     <Compile Include="Models\SaleBrokerageVM.cs" />
@@ -285,6 +290,7 @@
     <Content Include="Images\orderedList7.png" />
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
+    <Content Include="Scripts\app.loan.js" />
     <Content Include="Scripts\bootstrap.confirmation.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -363,6 +369,14 @@
     <Content Include="Views\Dashboard\_DuePayments.cshtml" />
     <Content Include="Views\Shared\_HeaderMenu.cshtml" />
     <Content Include="Views\Sale\_BrokPayment.cshtml" />
+    <Content Include="Views\Loan\Index.cshtml" />
+    <Content Include="Views\Loan\_LoanList.cshtml" />
+    <Content Include="Views\Loan\Add.cshtml" />
+    <Content Include="Views\Loan\Update.cshtml" />
+    <Content Include="Views\Loan\_Payment.cshtml" />
+    <Content Include="Views\Loan\_PaymentGrid.cshtml" />
+    <Content Include="Views\Report\Loan.cshtml" />
+    <Content Include="Views\Loan\_CalcInt.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

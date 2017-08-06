@@ -839,3 +839,6 @@ div[data-chart] {
 .validation-summary-valid {
 	display: none;
 }
+.amt {
+	text-align:right;
+}

@@ -43,12 +43,16 @@ namespace G2.ML.Web.Infrastructure
 				.ForMember(d => d.StatusList, opt => opt.Ignore())
 				.ReverseMap();
 
-			//config.CreateMap<Areas.Admin.Models.PressVM, BO.Press>().ReverseMap();
-			//config.CreateMap<Areas.Admin.Models.ImageVM, BO.Image>()
-			//      .ForMember(d => d.IsDeleted, opt => opt.Ignore())
-			//      .ForMember(d => d.ImageType, opt => opt.Ignore())
-			//      .ReverseMap();
-
+			config.CreateMap<Models.LoanVM, BO.LoanBO>().ReverseMap();
+			config.CreateMap<Models.LoanAddVM, BO.LoanAddBO>().ReverseMap();
+			config.CreateMap<Models.LoanSearchVM, BO.LoanSearchBO>().ReverseMap();
+			config.CreateMap<Models.LoanSearchResultVM, BO.LoanSearchResultBO>().ReverseMap();
+			config.CreateMap<Models.LoanPayment, BO.LoanPaymentBO>().ReverseMap();
+			config.CreateMap<BO.LoanReportBO, Models.LoanReportVM>()
+				.ForMember(d => d.BorrowerList, opt => opt.Ignore())
+				.ForMember(d => d.StatusList, opt => opt.Ignore())
+				.ReverseMap();
+			config.CreateMap<Models.LoanCalcInterestVM, BO.LoanCalcInterestBO>().ReverseMap();
 		}
     }
 }

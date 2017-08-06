@@ -1,0 +1,38 @@
+﻿@model G2.ML.Web.Models.LoanPaymentVM
+
+@{
+	var _payTypeList = new List<SelectListItem>();
+	_payTypeList.Add(new SelectListItem() { Text = "Principal", Value = "1" });
+	_payTypeList.Add(new SelectListItem() { Text = "Interest", Value = "2" });
+}
+<div class="panel panel-success">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			Payment Details:
+		</h3>
+	</div>
+	<div class="panel-body">
+		@using (Html.BeginForm("Payment", "Loan", FormMethod.Post, new { @class = "form-inline", @id = "frmPayment" }))
+		{
+			@Html.HiddenFor(m => m.Payment.LoanID)
+			<div class="form-group input-group-sm">
+				@Html.TextBoxFor(m => m.Payment.PayDate, new { @class = "form-control date-picker", @id = "PayDate", @placeholder = "Pay Date:" })
+			</div>
+			<div class="form-group input-group-sm">
+				@Html.TextBoxFor(m => m.Payment.PayAmount, new { @class = "form-control", @id = "PayAmount", @placeholder = "Pay Amount:" })
+			</div>
+			<div class="form-group input-group-sm">
+				@Html.DropDownListFor(m => m.Payment.PayType, _payTypeList, "Payment Type:", new { @class = "form-control", @id = "PayType", @placeholder = "Pay Type:" })
+			</div>
+			<div class="form-group input-group-sm">
+				@Html.TextBoxFor(m => m.Payment.PayComments, new { @class = "form-control", @id = "PayComments", @placeholder = "Comments:" })
+			</div>
+			<button type="button" id="btnAddPayment" class="btn btn-success btn-xs">
+				Add
+			</button>
+		}
+		<div id="divPayGrid">
+			@Html.Partial("_PaymentGrid", Model)
+		</div>
+	</div>
+</div>

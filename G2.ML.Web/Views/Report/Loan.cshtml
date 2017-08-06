@@ -1,0 +1,108 @@
+﻿@model G2.ML.Web.Models.LoanReportVM
+@{
+	ViewBag.Title = "Index";
+}
+
+@section scripts {
+	@Scripts.Render("~/Scripts/jquery.fileDownload.js")
+	<script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnSearch").click(function () {
+                SearchLoan();
+            });
+            $("#btnDownload").click(function () {
+                ExportLoan();
+            });
+            $('#StartDate,#EndDate').val('');
+        });
+		function SearchLoan() {
+            if (!$('#frmLoanReport').valid()) {
+                return false;
+            }
+            var _data = $('#frmLoanReport').serialize();
+            $.ajax({
+                type: 'POST',
+                url: "/Report/Loan",
+                data: _data,
+                dataType: "text",
+                success: function (result) {
+                    $('#divSalesList').html(result);
+                },
+                error: function (data) {
+                    alert(data);
+                }
+            });
+        }
+        function ExportLoan() {
+            if (!$('#frmLoanReport').valid()) {
+                return false;
+            }
+			var _data = $('#frmLoanReport').serialize();
+            $.ajax({
+                type: 'POST',
+                url: "/Report/ExportLoan",
+                data: _data,
+                dataType: "json",
+                success: function (result) {
+                    OpenDownloadWin("/Report/DownloadLoanReport");
+                },
+                error: function (data) {
+                    alert(data);
+                }
+            });
+        }
+        function OpenDownloadWin(reportLink) {
+            $.fileDownload(reportLink, {
+                preparingMessageHtml: "We are preparing your report, please wait...",
+                failMessageHtml: "There was a problem generating your report, please try again."
+            });
+            return false;
+        }
+	</script>
+}
+
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			Search loan details
+		</h3>
+	</div>
+	<div class="panel-body">
+		@using (Html.BeginForm("Loan", "Report", FormMethod.Post, new { @class = "form-horizontal", @id = "frmLoanReport" }))
+		{
+			<div class="form-group">
+				@Html.LabelFor(model => model.StartDate, new { @class = "control-label col-md-2" })
+				<div class="col-md-4">
+					@Html.TextBoxFor(model => model.StartDate, new { @class = "form-control input-sm date-picker", @placeholder = "Start Date:", @id = "StartDate" })
+				</div>
+				@Html.LabelFor(model => model.EndDate, new { @class = "control-label col-md-2" })
+				<div class="col-md-4">
+					@Html.TextBoxFor(model => model.EndDate, new { @class = "form-control input-sm date-picker", @placeholder = "End Date:", @id = "EndDate" })
+				</div>
+			</div>
+			<div class="form-group">
+				@Html.LabelFor(model => model.BorrowerID, new { @class = "control-label col-md-2" })
+				<div class="col-md-4">
+					@Html.DropDownListFor(model => model.BorrowerID, Model.BorrowerList, string.Empty, new { @class = "form-control input-sm" })
+				</div>
+				@Html.LabelFor(model => model.Status, new { @class = "control-label col-md-2" })
+				<div class="col-md-4">
+					@Html.DropDownListFor(model => model.Status, Model.StatusList, string.Empty, new { @class = "form-control input-sm" })
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-md-12" style="text-align:center;">
+					<button id="btnSearch" type="button" class="btn btn-primary">
+						Search
+					</button>
+					<button id="btnDownload" type="button" class="btn btn-primary">
+						Download
+					</button>
+				</div>
+			</div>
+		}
+	</div>
+</div>
+<div id="divSalesList" style="overflow:auto;">
+	@Html.Partial("_DataList", new System.Data.DataTable())
+</div>

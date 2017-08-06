@@ -12,5 +12,6 @@ namespace G2.ML.BusinessServices.Contracts
         List<BO.SaleStatusBO> GetSaleStatusList();
         DataTable GetSalesReport(BO.SalesReportBO bo);
         DataTable GetBrokerageReport(BO.BrokerageReportBO bo);
-    }
+		DataTable GetLoanReport(BO.LoanReportBO bo);
+	}
 }

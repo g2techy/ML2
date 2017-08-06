@@ -32,4 +32,14 @@ namespace G2.ML.BusinessObjects
         public int? BuyerID { get; set; }
         public int? Status { get; set; }
     }
+
+	public class LoanReportBO : BaseBusinessObject
+	{
+		public int ClientID { get; set; }
+		public string StartDate { get; set; }
+		public string EndDate { get; set; }
+		public int? BorrowerID { get; set; }
+		public int? Status { get; set; }
+	}
+
 }

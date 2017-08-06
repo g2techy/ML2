@@ -1,0 +1,77 @@
+﻿@model G2.ML.Web.Models.LoanPaymentVM
+@{
+    float _princPaid = 0;
+	float _interPaid = 0;
+	float _princAmount = float.Parse(TempData.Peek("PrincipalAmount").ToString());
+}
+@if (Model.PaymentList != null && Model.PaymentList.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Pay Date
+                </th>
+                <th class="amt">
+                    Pay Amount
+                </th>
+                <th>
+                    Pay Type
+                </th>
+                <th>
+                    Comments
+                </th>
+				<th class="amt">
+					Outstanding Principal
+				</th>
+				<th class="amt">
+					Interest Paid
+				</th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var _item in Model.PaymentList)
+			{
+				if (_item.PayType == 1)
+				{
+					_princPaid += _item.PayAmount;
+				}
+				else if (_item.PayType == 2)
+				{
+					_interPaid += _item.PayAmount;
+				}
+
+                <tr>
+                    <td>@_item.PayDate.ToString("dd-MM-yyyy")
+                    </td>
+                    <td class="amt">@string.Format("{0:n2}", _item.PayAmount)
+                    </td>
+                    <td>@_item.PayTypeName
+                    </td>
+                    <td>@_item.PayComments
+                    </td>
+					<td class="amt">
+						@if (_item.PayType == 1)
+						{
+							_princAmount -= _item.PayAmount;
+						}
+						@string.Format("{0:n2}", _princAmount)
+					</td>
+					<td class="amt">
+						@string.Format("{0:n2}", _interPaid)
+					</td>
+                    <td>
+                        <button type="button" data-del="1" data-payID="@_item.LoanPayID" class="btn btn-danger btn-xs">
+                            X</button>
+                    </td>
+                </tr>
+			}
+        </tbody>
+    </table>	
+}
+<script type="text/javascript">
+	var _princPaid = parseFloat('@_princPaid');
+	var _interPaid = parseFloat('@_interPaid');
+</script>
