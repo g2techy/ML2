@@ -14,7 +14,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2017 11:27:56</publishTime>
     </File>
     <File Include="App_Code/HelperMethods.cshtml">
-      <publishTime>03/31/2017 15:16:55</publishTime>
+      <publishTime>07/15/2017 21:08:36</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>02/22/2013 08:43:40</publishTime>
@@ -41,13 +41,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/02/2017 18:04:57</publishTime>
     </File>
     <File Include="bin/G2.ML.BusinessObjects.dll">
-      <publishTime>07/09/2017 15:28:59</publishTime>
+      <publishTime>08/06/2017 17:10:47</publishTime>
     </File>
     <File Include="bin/G2.ML.BusinessServices.dll">
-      <publishTime>07/09/2017 15:28:59</publishTime>
+      <publishTime>08/06/2017 17:10:47</publishTime>
     </File>
     <File Include="bin/G2.ML.Web.dll">
-      <publishTime>07/09/2017 15:29:05</publishTime>
+      <publishTime>08/06/2017 17:10:52</publishTime>
     </File>
     <File Include="bin/log4net.dll">
       <publishTime>03/08/2017 19:26:22</publishTime>
@@ -90,6 +90,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/Microsoft.Practices.Unity.RegistrationByConvention.dll">
       <publishTime>10/05/2015 09:37:20</publishTime>
+    </File>
+    <File Include="bin/Microsoft.VisualStudio.DebuggerVisualizers.dll">
+      <publishTime>03/18/2017 13:49:00</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>01/05/2012 11:08:46</publishTime>
@@ -233,7 +236,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/05/2016 11:05:48</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>04/01/2017 15:11:15</publishTime>
+      <publishTime>07/16/2017 17:39:50</publishTime>
     </File>
     <File Include="Content/themes/base/images/ui-bg_flat_0_aaaaaa_40x100.png">
       <publishTime>03/13/2016 09:51:18</publishTime>
@@ -467,7 +470,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/29/2017 09:20:19</publishTime>
     </File>
     <File Include="Scripts/app.dashboard.js">
-      <publishTime>04/01/2017 11:40:23</publishTime>
+      <publishTime>07/23/2017 17:06:59</publishTime>
+    </File>
+    <File Include="Scripts/app.loan.js">
+      <publishTime>08/06/2017 13:44:42</publishTime>
     </File>
     <File Include="Scripts/app.sales.js">
       <publishTime>04/04/2017 09:56:27</publishTime>
@@ -557,7 +563,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/28/2017 19:50:26</publishTime>
     </File>
     <File Include="Views/Buyer/Add.cshtml">
-      <publishTime>07/09/2017 15:50:38</publishTime>
+      <publishTime>07/09/2017 16:24:05</publishTime>
     </File>
     <File Include="Views/Buyer/Index.cshtml">
       <publishTime>03/30/2017 17:38:29</publishTime>
@@ -566,7 +572,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/31/2017 14:32:45</publishTime>
     </File>
     <File Include="Views/Dashboard/Index.cshtml">
-      <publishTime>04/01/2017 07:52:34</publishTime>
+      <publishTime>07/23/2017 16:42:01</publishTime>
     </File>
     <File Include="Views/Dashboard/_DuePayments.cshtml">
       <publishTime>04/04/2017 10:04:34</publishTime>
@@ -578,10 +584,34 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/13/2016 09:51:14</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>05/07/2016 13:16:26</publishTime>
+      <publishTime>07/30/2017 19:04:47</publishTime>
+    </File>
+    <File Include="Views/Loan/Add.cshtml">
+      <publishTime>07/15/2017 19:30:58</publishTime>
+    </File>
+    <File Include="Views/Loan/Index.cshtml">
+      <publishTime>07/15/2017 21:17:57</publishTime>
+    </File>
+    <File Include="Views/Loan/Update.cshtml">
+      <publishTime>08/06/2017 13:52:07</publishTime>
+    </File>
+    <File Include="Views/Loan/_CalcInt.cshtml">
+      <publishTime>08/06/2017 13:51:32</publishTime>
+    </File>
+    <File Include="Views/Loan/_LoanList.cshtml">
+      <publishTime>07/16/2017 18:18:54</publishTime>
+    </File>
+    <File Include="Views/Loan/_Payment.cshtml">
+      <publishTime>07/16/2017 18:25:39</publishTime>
+    </File>
+    <File Include="Views/Loan/_PaymentGrid.cshtml">
+      <publishTime>07/16/2017 17:40:29</publishTime>
     </File>
     <File Include="Views/Report/Brokerage.cshtml">
       <publishTime>07/09/2017 15:56:03</publishTime>
+    </File>
+    <File Include="Views/Report/Loan.cshtml">
+      <publishTime>07/22/2017 18:34:22</publishTime>
     </File>
     <File Include="Views/Report/Sales.cshtml">
       <publishTime>07/09/2017 15:56:26</publishTime>
@@ -623,10 +653,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/28/2017 16:33:07</publishTime>
     </File>
     <File Include="Views/Shared/_HeaderMenu.cshtml">
-      <publishTime>04/01/2017 15:46:29</publishTime>
+      <publishTime>07/30/2017 19:05:16</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>03/31/2017 18:54:33</publishTime>
+      <publishTime>07/30/2017 19:05:49</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>03/21/2017 15:50:05</publishTime>
