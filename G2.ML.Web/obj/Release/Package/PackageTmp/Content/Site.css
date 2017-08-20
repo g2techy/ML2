@@ -778,7 +778,7 @@ div[data-chart] {
 	border-width:0px;
 }
 .navbar-nav > li > a {
-	padding: 0px 10px 0px 10px;
+	padding: 0px 0px 0px 10px;
 }
 .navbar-collapse, .navbar {
 	height: unset;
@@ -838,4 +838,10 @@ div[data-chart] {
 
 .validation-summary-valid {
 	display: none;
+}
+.amt {
+	text-align:right;
+}
+.fixedWidth {
+	width:120px;
 }

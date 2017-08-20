@@ -35,10 +35,11 @@
                     </td>
                     <td>@_item.CourierTo
                     </td>
-                    <td>
-                        <button type="button" data-del="1" data-payID="@_item.PayID" class="btn btn-danger btn-xs">
-                            X</button>
-                    </td>
+					<td class="amt">
+						<button type="button" data-del="1" data-payID="@_item.PayID" class="btn btn-danger btn-xs">
+							X
+						</button>
+					</td>
                 </tr>
                 _payAmount += _item.PayAmount;
             }

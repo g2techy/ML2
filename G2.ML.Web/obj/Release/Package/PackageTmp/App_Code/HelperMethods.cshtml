@@ -2,14 +2,14 @@
 
 @helper FormatDateTime(DateTime date)
 {
-if (date.Year != 1900)
+if (date.Year != 1900 && date.Year != 1)
 {
 		@date.ToString("dd-MM-yyyy")
 }
 }
 @helper FormatDateTime(DateTime date, string format)
 {
-if (date.Year != 1900)
+if (date.Year != 1900 && date.Year != 1)
 {
 		@date.ToString(format)
 }
@@ -31,3 +31,4 @@ if (date.Year != 1900)
 		<text>status-@status.Replace(" ", "-").ToLower() </text>;
 	}
 }
+

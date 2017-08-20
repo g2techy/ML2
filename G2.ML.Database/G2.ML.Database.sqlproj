@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>G2.ML.Database</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{2cc4af09-1c6d-4b36-a17d-86baeff96c2c}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>G2.ML.Database</RootNamespace>
+    <AssemblyName>G2.ML.Database</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Views" />
+    <Folder Include="Tables" />
+    <Folder Include="StoredProcedures" />
+    <Folder Include="Functions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="ML.Database.sql" />
+    <Build Include="Functions\dbo.F_Cols_To_Rows.sql" />
+    <Build Include="Functions\dbo.F_Loan_GenerateRefNo.sql" />
+    <Build Include="Functions\dbo.F_Sale_GenerateRefNo.sql" />
+    <Build Include="Functions\dbo.GetDateBeforeMonths.sql" />
+    <Build Include="StoredProcedures\dbo.P_Account_AddUser.sql" />
+    <Build Include="StoredProcedures\dbo.P_Account_ChangePwd.sql" />
+    <Build Include="StoredProcedures\dbo.P_Account_GetLoggedInUserDetails.sql" />
+    <Build Include="StoredProcedures\dbo.P_Account_SetPwdAttemptCnt.sql" />
+    <Build Include="StoredProcedures\dbo.P_Account_VerifyLoginCreds.sql" />
+    <Build Include="StoredProcedures\dbo.P_Buyer_AddUpdate.sql" />
+    <Build Include="StoredProcedures\dbo.P_Buyer_BuyerTypeList.sql" />
+    <Build Include="StoredProcedures\dbo.P_Buyer_Delete.sql" />
+    <Build Include="StoredProcedures\dbo.P_Buyer_GetBuyerList.sql" />
+    <Build Include="StoredProcedures\dbo.P_Buyer_GetDetails.sql" />
+    <Build Include="StoredProcedures\dbo.P_Loan_AddPayment.sql" />
+    <Build Include="StoredProcedures\dbo.P_Loan_AddUpdate.sql" />
+    <Build Include="StoredProcedures\dbo.P_Loan_ChartData.sql" />
+    <Build Include="StoredProcedures\dbo.P_Loan_Delete.sql" />
+    <Build Include="StoredProcedures\dbo.P_Loan_DeletePayment.sql" />
+    <Build Include="StoredProcedures\dbo.P_Loan_GetCalcInterest.sql" />
+    <Build Include="StoredProcedures\dbo.P_Loan_GetDetails.sql" />
+    <Build Include="StoredProcedures\dbo.P_Loan_GetLoanList.sql" />
+    <Build Include="StoredProcedures\dbo.P_Loan_GetPaymentList.sql" />
+    <Build Include="StoredProcedures\dbo.P_Loan_InerestPaidChartData.sql" />
+    <Build Include="StoredProcedures\dbo.P_Loan_UpdateStatus.sql" />
+    <Build Include="StoredProcedures\dbo.P_Report_GetBrokerageList.sql" />
+    <Build Include="StoredProcedures\dbo.P_Report_GetLoanList.sql" />
+    <Build Include="StoredProcedures\dbo.P_Report_GetSalesList.sql" />
+    <Build Include="StoredProcedures\dbo.P_Sale_AddBrokerage.sql" />
+    <Build Include="StoredProcedures\dbo.P_Sale_AddPayment.sql" />
+    <Build Include="StoredProcedures\dbo.P_Sale_AddUpdate.sql" />
+    <Build Include="StoredProcedures\dbo.P_Sale_BrokDistributionChartData.sql" />
+    <Build Include="StoredProcedures\dbo.P_Sale_BrokerageChartData.sql" />
+    <Build Include="StoredProcedures\dbo.P_Sale_BrokeragePayment.sql" />
+    <Build Include="StoredProcedures\dbo.P_Sale_Delete.sql" />
+    <Build Include="StoredProcedures\dbo.P_Sale_DeleteBrokerage.sql" />
+    <Build Include="StoredProcedures\dbo.P_Sale_DeletePayment.sql" />
+    <Build Include="StoredProcedures\dbo.P_Sale_DuePayments.sql" />
+    <Build Include="StoredProcedures\dbo.P_Sale_GetBrokerList.sql" />
+    <Build Include="StoredProcedures\dbo.P_Sale_GetBuyerList.sql" />
+    <Build Include="StoredProcedures\dbo.P_Sale_GetDetails.sql" />
+    <Build Include="StoredProcedures\dbo.P_Sale_GetPaymentList.sql" />
+    <Build Include="StoredProcedures\dbo.P_Sale_GetSalesList.sql" />
+    <Build Include="StoredProcedures\dbo.P_Sale_SaleChartData.sql" />
+    <Build Include="StoredProcedures\dbo.P_Sale_UpdateStatus.sql" />
+    <Build Include="Tables\dbo.BrokerageDetails.sql" />
+    <Build Include="Tables\dbo.BuyerDetails.sql" />
+    <Build Include="Tables\dbo.BuyerTypeDetails.sql" />
+    <Build Include="Tables\dbo.BuyerTypeMapping.sql" />
+    <Build Include="Tables\dbo.LoanDetails.sql" />
+    <Build Include="Tables\dbo.LoanPaymentDetails.sql" />
+    <Build Include="Tables\dbo.LoanStatusDetails.sql" />
+    <Build Include="Tables\dbo.PaymentDetails.sql" />
+    <Build Include="Tables\dbo.SalesDetails.sql" />
+    <Build Include="Tables\dbo.SalesStatusDetails.sql" />
+    <Build Include="Tables\dbo.UserDetails.sql" />
+    <Build Include="Tables\dbo.UserProfile.sql" />
+    <Build Include="Views\dbo.V_Buyer_BuyerList.sql" />
+    <Build Include="Views\dbo.V_Loan_LoanList.sql" />
+    <Build Include="Views\dbo.V_Loan_LoanList_Basic.sql" />
+    <Build Include="Views\dbo.V_Loan_Total_Payment.sql" />
+    <Build Include="Views\dbo.V_Sale_SaleList.sql" />
+    <Build Include="Views\dbo.V_Sale_SaleList_Basic.sql" />
+    <Build Include="Views\dbo.V_Sale_SaleList_With_Brokerage.sql" />
+    <Build Include="Views\dbo.V_Sale_Total_Brokerage.sql" />
+    <Build Include="Views\dbo.V_Sale_Total_Brokerage_All.sql" />
+    <Build Include="Views\dbo.V_Sale_Total_Payment.sql" />
+  </ItemGroup>
+</Project>

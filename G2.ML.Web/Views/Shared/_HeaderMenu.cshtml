@@ -11,7 +11,7 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li>@Html.ActionLink("Home", "Index", "Home")</li>
+				@*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
 				@if (G2.ML.Web.Infrastructure.Web.SessionManager.CurrentLoggedInUser != null)
 				{
 					<li>@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>

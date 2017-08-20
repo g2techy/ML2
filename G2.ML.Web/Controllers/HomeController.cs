@@ -11,9 +11,7 @@ namespace G2.ML.Web.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
-
-            return View();
+			return RedirectToAction("Index", "Dashboard");
         }
 
         public ActionResult About()

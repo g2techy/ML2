@@ -268,7 +268,7 @@ function SaleUpdateInit() {
 		}
 		function CheckSaleStatus() {
 			var _netAmount = parseFloat($('#NetSaleAmount').val());
-			if ((_totalPayAmount >= _netAmount) && _totalBrokerage > 0) {
+			if ((_totalPayAmount >= (_netAmount - 1)) && _totalBrokerage > 0) {
 				$('#btnClose').removeAttr("disabled");
 			} else {
 				$("#btnClose").attr("disabled", "disabled");

@@ -114,6 +114,9 @@ function LoanUpdateInit() {
 		$('#btnClose').click(function () {
 			CloseLoan();
 		});
+		$('#btnCalcInt').click(function () {
+			CalcInt($("#interestAsOn").val());
+		});
 		$('#btnSearch').click(function () {
 			window.location = _loanSearchUrl;
 		});
@@ -127,6 +130,10 @@ function LoanUpdateInit() {
 		function RebindJS() {
 			$('[data-del][data-payID]').click(function () {
 				DeletePayment($(this).attr('data-payID'));
+			});
+			$('.date-picker').datepicker({});
+			$('#btnCalcInt').click(function () {
+				CalcInt($("#interestAsOn").val());
 			});
 		}
 		RebindJS();
@@ -173,7 +180,7 @@ function LoanUpdateInit() {
 		}
 		function CheckLoanStatus() {
 			var _princAmt = parseFloat($('#PrincipalAmount').val());
-			if ((_princPaid >= _princAmt)) {
+			if ((_princPaid >= (_princAmt - 1))) {
 				$('#btnClose').removeAttr("disabled");
 			} else {
 				$("#btnClose").attr("disabled", "disabled");
@@ -201,14 +208,19 @@ function LoanUpdateInit() {
 				}
 			});
 		}
-		function CalcInt() {
+		function CalcInt(intAsOn) {
+			var _data = "loanID=" + $("#LoanID").val();
+			if (intAsOn != null && intAsOn != 'undefined') {
+				_data += "&intAsOn=" + intAsOn;
+			}
 			$.ajax({
 				type: 'GET',
 				url: _calcIntUrl,
-				data: "loanID=" + $("#LoanID").val(),
+				data: _data,
 				dataType: "text",
 				success: function (result) {
 					$('#divCalcInt').html(result);
+					RebindJS();
 				},
 				error: function (data) {
 					alert(data);

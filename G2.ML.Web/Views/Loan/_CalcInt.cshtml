@@ -9,12 +9,20 @@
 		_totalCalcInt = Model.Sum(m => m.CalcIntAmount);
 		_intToBePaid = _totalCalcInt - _totalIntPaid;
 	}
+
+	string _intAsOnDate = DateTime.Now.ToString("yyyy-MM-dd");
+	if (ViewBag.IntAsOnDate != null)
+	{
+		_intAsOnDate = ViewBag.IntAsOnDate.ToString("yyyy-MM-dd");
+	}
 }
 <div class="panel panel-info">
 	<div class="panel-heading">
 		<h3 class="panel-title">
 			Interest calculation: 
 			<em style="font-weight:bold;"> Outstanding (@string.Format("{0:n2}", _intToBePaid)) = Calculated (@string.Format("{0:n2}", _totalCalcInt)) - Paid (@string.Format("{0:n2}", _totalIntPaid)) </em>
+			&nbsp;&nbsp;&nbsp;As on : @Html.TextBox("interestAsOn", _intAsOnDate, new { @class = "form-inline input-sm date-picker fixedWidth" })
+			&nbsp; <button id="btnCalcInt" type="button" class="btn btn-info btn-xs">Calculate Interest</button>
 		</h3>
 	</div>
 	@if (Model != null && Model.Count > 0)

@@ -369,7 +369,7 @@ namespace G2.ML.BusinessServices.Factories
 			return _ID;
 		}
 
-		public List<BO.LoanCalcInterestBO> GetCalcInterest(int clientID, int loanID)
+		public List<BO.LoanCalcInterestBO> GetCalcInterest(int clientID, int loanID, DateTime intAsOn)
 		{
 			List<BO.LoanCalcInterestBO> _returnVal = null;
 
@@ -380,6 +380,7 @@ namespace G2.ML.BusinessServices.Factories
 				{
 					new DAL.DatabaseParameter("@ClientID",DAL.ParameterDirection.In, DAL.DataType.Int, clientID),
 					new DAL.DatabaseParameter("@LoanID",DAL.ParameterDirection.In, DAL.DataType.Int, loanID),
+					new DAL.DatabaseParameter("@IntAsOn",DAL.ParameterDirection.In, DAL.DataType.DateTime, intAsOn),
 				};
 
 				DataSet _ds = DatabaseAccess.ExecuteProcedure("P_Loan_GetCalcInterest", _paramList);

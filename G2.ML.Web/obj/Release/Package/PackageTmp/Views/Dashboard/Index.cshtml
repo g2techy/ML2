@@ -17,6 +17,7 @@
 			<li class="active"><a href="#sale" data-toggle="tab" data-fn="loadSaleTab">Sale</a></li>
 			<li><a href="#payments" data-toggle="tab" data-fn="loadPaymentsTab">Payments</a></li>
 			<li><a href="#brokerage" data-toggle="tab" data-fn="loadBrokerageTab">Brokerage</a></li>
+			<li><a href="#loan" data-toggle="tab" data-fn="loadLoanTab">Loan</a></li>
 		</ul>
 		<div class="tab-content">
 			<div id="sale" class="tab-pane fade in active">
@@ -57,6 +58,32 @@
 					</div>
 					<div class="panel-body">
 						<div id="divBrokPieChart" data-chart="1" data-loaded="0" data-ch-idx="3" data-ch-opt="_brokPieChartOptions">
+							Chart is loading...
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="loan" class="tab-pane fade">
+				<div class="panel panel-info" style="margin-top:5px;">
+					<div class="panel-heading" style="text-align: center;">
+						<h3 class="panel-title">
+							Interest details for last 12 months
+						</h3>
+					</div>
+					<div class="panel-body">
+						<div id="divIntPaidChart" data-chart="1" data-loaded="0" data-ch-idx="4" data-ch-opt="_intPaidChartOptions">
+							Chart is loading...
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-info" style="margin-top:5px;">
+					<div class="panel-heading" style="text-align: center;">
+						<h3 class="panel-title">
+							Loan given in last 24 months
+						</h3>
+					</div>
+					<div class="panel-body">
+						<div id="divLoanChart" data-chart="1" data-loaded="0" data-ch-idx="5" data-ch-opt="_loanChartOptions">
 							Chart is loading...
 						</div>
 					</div>

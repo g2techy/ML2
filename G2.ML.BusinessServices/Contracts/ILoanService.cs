@@ -18,6 +18,6 @@ namespace G2.ML.BusinessServices.Contracts
 		List<BO.LoanPaymentBO> GetPaymentList(int clientID, int loanID);
 		int AddPayment(BO.LoanPaymentBO payment);
 		int DeletePayment(int loanPayID);
-		List<BO.LoanCalcInterestBO> GetCalcInterest(int clientID, int loanID);
+		List<BO.LoanCalcInterestBO> GetCalcInterest(int clientID, int loanID, DateTime intAsOn);
 	}
 }

@@ -184,10 +184,23 @@ namespace G2.ML.Web.Controllers
 			return Json(new { ErrorCode = _returnVal });
 		}
 
-		public ActionResult CalcInt(int loanID)
+		public ActionResult CalcInt(int loanID, string intAsOn)
 		{
+			DateTime _intAsOn = DateTime.Now;
+			if (!string.IsNullOrEmpty(intAsOn))
+			{
+				try
+				{
+					if (DateTime.TryParse(intAsOn, out _intAsOn))
+					{
+						_intAsOn.AddDays(1);
+					}
+				}
+				catch { _intAsOn = DateTime.Now; }
+				ViewBag.IntAsOnDate = _intAsOn;
+			}
 			List<Models.LoanCalcInterestVM> _model = null;
-			List<BO.LoanCalcInterestBO> _bo = _loanService.GetCalcInterest(ClientID, loanID);
+			List<BO.LoanCalcInterestBO> _bo = _loanService.GetCalcInterest(ClientID, loanID, _intAsOn);
 			if (_bo != null)
 			{
 				_model = Infrastructure.BOVMMapper.Map<List<BO.LoanCalcInterestBO>, List<Models.LoanCalcInterestVM>>(_bo);
