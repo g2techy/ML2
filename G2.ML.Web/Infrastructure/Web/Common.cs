@@ -4,6 +4,7 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace G2.ML.Web.Infrastructure.Web
 {
@@ -20,6 +21,14 @@ namespace G2.ML.Web.Infrastructure.Web
 			}
 		}
 
+		public static string AppBaseUrl
+		{
+			get
+			{
+				var _request = HttpContext.Current.Request;
+				return string.Format("{0}://{1}", _request.Url.Scheme, _request.Url.Authority);
+			}
+		}
 		public static void RedirectToLoginPage()
         {
             HttpContext.Current.Response.Redirect(LoginPageUrl, true);

@@ -71,6 +71,9 @@
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.DebuggerVisualizers, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Select.Pdf">
+      <HintPath>C:\Users\Fenil\Downloads\SelectPdf-v17.1.0\SelectPdf-v17.1.0\Assemblies\net40\Select.Pdf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -191,6 +194,7 @@
     <Compile Include="Infrastructure\Filters\AuthenticationAttribute.cs" />
     <Compile Include="Infrastructure\Utilities\BOVMMapper.cs" />
     <Compile Include="Infrastructure\Utilities\EmailNotification.cs" />
+    <Compile Include="Infrastructure\Utilities\PDF.cs" />
     <Compile Include="Infrastructure\Web\Common.cs" />
     <Compile Include="Infrastructure\Web\ExtensionMethods.cs" />
     <Compile Include="Infrastructure\Web\SessionManager.cs" />
@@ -377,6 +381,9 @@
     <Content Include="Views\Loan\_PaymentGrid.cshtml" />
     <Content Include="Views\Report\Loan.cshtml" />
     <Content Include="Views\Loan\_CalcInt.cshtml" />
+    <Content Include="Views\Sale\_Print.cshtml" />
+    <Content Include="Views\Shared\_PrintLayout.cshtml" />
+    <Content Include="Views\Sale\_Print_iTextSharp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -27,8 +27,12 @@ namespace G2.ML.Web
             GlobalFilters.Filters.Add(new DFME.ErrorHandlerAttribute());
             DFL.DefaultLogManagerFactory.LogManager.Debug("Error handler attribute has been set...");
 
-            /*Register AutoMapper settings...*/
-            DFL.DefaultLogManagerFactory.LogManager.Debug("AutoMapper settings started...");
+			/* Set PDF export component...*/
+			Infrastructure.Utilities.PDF.CurrentPDFExportComponent = Infrastructure.Utilities.PDFExportComponent.SelectPDF;
+			DFL.DefaultLogManagerFactory.LogManager.Debug(string.Format("PDF export component '{0}' has been set...", Infrastructure.Utilities.PDF.CurrentPDFExportComponent));
+
+			/*Register AutoMapper settings...*/
+			DFL.DefaultLogManagerFactory.LogManager.Debug("AutoMapper settings started...");
             AutoMapper.Mapper.Initialize(cfg =>
             {
                 Infrastructure.AutoMapperConfiguration.Configure(cfg);

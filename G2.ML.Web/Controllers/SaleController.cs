@@ -184,10 +184,10 @@ namespace G2.ML.Web.Controllers
 			return Json(new { ErrorCode = _returnVal });
 		}
 
-		private List<Models.SalePayment> GetPaymentList(int saleID)
+		private List<Models.SalePayment> GetPaymentList(int saleID, int clientID = 0)
 		{
 			List<Models.SalePayment> _payList = new List<Models.SalePayment>();
-			List<BO.SalePaymentBO> _bo = _saleService.GetPaymentList(ClientID, saleID);
+			List<BO.SalePaymentBO> _bo = _saleService.GetPaymentList(clientID > 0 ? clientID : ClientID, saleID);
 			if (_bo != null && _bo.Count > 0)
 			{
 				_payList = Infrastructure.BOVMMapper.Map<List<BO.SalePaymentBO>, List<Models.SalePayment>>(_bo);
@@ -216,11 +216,11 @@ namespace G2.ML.Web.Controllers
 			return PartialView("_Brokerage", _model);
 		}
 
-		private List<Models.SaleBrokerage> GetBrokerageList(int saleID)
+		private List<Models.SaleBrokerage> GetBrokerageList(int saleID, int clientID = 0)
 		{
 			List<Models.SaleBrokerage> _list = new List<Models.SaleBrokerage>();
 
-			List<BO.SaleBrokerageBO> _bo = _saleService.GetBrokerageList(ClientID, saleID);
+			List<BO.SaleBrokerageBO> _bo = _saleService.GetBrokerageList(clientID > 0 ? clientID : ClientID, saleID);
 			if (_bo != null && _bo.Count > 0)
 			{
 				_list = Infrastructure.BOVMMapper.Map<List<BO.SaleBrokerageBO>, List<Models.SaleBrokerage>>(_bo);
@@ -284,6 +284,35 @@ namespace G2.ML.Web.Controllers
 				return BrokerageGrid(_saleID);
 			}
 			return Json(new { ErrorCode = 1 });
+		}
+
+		public ActionResult Print(int saleID, int isPdf = 1)
+		{
+			if (isPdf == 1)
+			{
+				return DownloadPdf(string.Format("{0}/Sale/PrintPDF/?saleID={1}&clientID={2}", Infrastructure.Web.Common.AppBaseUrl, saleID, ClientID));
+			}
+			return PrintPDF(saleID, ClientID);
+		}
+
+		[AllowAnonymous]
+		public ActionResult PrintPDF(int saleID, int clientID)
+		{
+			var _model = new Models.SalePrintVM();
+			_model.SaleDetails = Infrastructure.BOVMMapper.Map<BO.SaleAddBO, Models.SaleAddVM>(_saleService.GetSaleDetails(clientID, saleID));
+			if (_model.SaleDetails != null)
+			{
+				_model.PaymentList = GetPaymentList(saleID, clientID);
+				_model.BrokerageList = GetBrokerageList(saleID, clientID);
+
+				_model.SaleDetails.SelectionWeight = _model.SaleDetails.TotalWeight - _model.SaleDetails.RejectionWeight;
+				_model.SaleDetails.NetSaleAmount = (_model.SaleDetails.SelectionWeight * _model.SaleDetails.UnitPrice) - ((_model.SaleDetails.SelectionWeight * _model.SaleDetails.UnitPrice) * _model.SaleDetails.LessPer / 100);
+
+				ViewBag.BuyerName = _saleService.GetBuyerList(clientID, 2).Where(bo => bo.BuyerID == _model.SaleDetails.BuyerID).FirstOrDefault().BuyerName;
+				ViewBag.SallerName = _saleService.GetBuyerList(clientID, 1).Where(bo => bo.BuyerID == _model.SaleDetails.SallerID).FirstOrDefault().BuyerName;
+
+			}
+			return View("_Print", _model);
 		}
 
 		private void SetDefaultModel(ref Models.SaleAddVM saleAdd)

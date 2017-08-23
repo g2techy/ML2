@@ -47,8 +47,10 @@ G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.Practices.Unity.Configuration.dll
 G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.Practices.Unity.dll
 G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.Practices.Unity.Mvc.dll
 G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.Practices.Unity.RegistrationByConvention.dll
+G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.VisualStudio.DebuggerVisualizers.dll
 G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.Web.Infrastructure.dll
 G:\G2\Projects\ML2\G2.ML.Web\bin\Newtonsoft.Json.dll
+G:\G2\Projects\ML2\G2.ML.Web\bin\Select.Pdf.dll
 G:\G2\Projects\ML2\G2.ML.Web\bin\System.Web.Helpers.dll
 G:\G2\Projects\ML2\G2.ML.Web\bin\System.Web.Mvc.dll
 G:\G2\Projects\ML2\G2.ML.Web\bin\System.Web.Optimization.dll
@@ -73,6 +75,7 @@ G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.Practices.Unity.xml
 G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.Practices.Unity.Configuration.xml
 G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.Practices.Unity.Mvc.xml
 G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.Practices.Unity.RegistrationByConvention.xml
+G:\G2\Projects\ML2\G2.ML.Web\bin\Select.Pdf.xml
 G:\G2\Projects\ML2\G2.ML.Web\bin\System.Web.Helpers.xml
 G:\G2\Projects\ML2\G2.ML.Web\bin\System.Web.Mvc.xml
 G:\G2\Projects\ML2\G2.ML.Web\bin\System.Web.Optimization.xml
@@ -89,8 +92,9 @@ G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.AI.WindowsServer.xml
 G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.AI.Web.xml
 G:\G2\Projects\ML2\G2.ML.Web\bin\log4net.xml
 G:\G2\Projects\ML2\G2.ML.Web\bin\G2.DAL.pdb
+G:\G2\Projects\ML2\G2.ML.Web\bin\DocumentFormat.OpenXml.xml
+G:\G2\Projects\ML2\G2.ML.Web\bin\Select.Html.dep
+G:\G2\Projects\ML2\G2.ML.Web\bin\Select.Tools.dep
 G:\G2\Projects\ML2\G2.ML.Web\obj\Debug\G2.ML.Web.csprojResolveAssemblyReference.cache
 G:\G2\Projects\ML2\G2.ML.Web\obj\Debug\G2.ML.Web.dll
 G:\G2\Projects\ML2\G2.ML.Web\obj\Debug\G2.ML.Web.pdb
-G:\G2\Projects\ML2\G2.ML.Web\bin\DocumentFormat.OpenXml.xml
-G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.VisualStudio.DebuggerVisualizers.dll

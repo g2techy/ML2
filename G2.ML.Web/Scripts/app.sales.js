@@ -145,6 +145,9 @@ function SaleUpdateInit() {
 		$('#btnSearch').click(function () {
 			window.location = _salesSearchUrl;
 		});
+		$('#btnPrint').click(function () {
+			PrintSale();
+		});
 		$('#btnUpdate').click(function () {
 			if (!$('#frmUpdSale').valid()) {
 				return false;
@@ -275,7 +278,7 @@ function SaleUpdateInit() {
 			}
 			var _status = $('#Status').val();
 			if (_status == '4') {
-				$("button, input, select").not("#btnSearch").attr("disabled", "disabled");
+				$("button, input, select").not("#btnSearch, #btnPrint").attr("disabled", "disabled");
 			}
 			$("#spnNetSaleAmt").html(_netAmount.toFixed(2));
 			$("#spnTotalPayment").html(_totalPayAmount.toFixed(2));
@@ -295,6 +298,11 @@ function SaleUpdateInit() {
 				}
 			});
 		}
+
+		function PrintSale() {
+			window.open("/Sale/Print/?saleID=" + $("#SaleID").val(), "_blank");
+		}
+
 		function ShowBrokPayModel(bdid) {
 			ClearBrokPayFields();
 			var _model = $("#modelBrokPayment");

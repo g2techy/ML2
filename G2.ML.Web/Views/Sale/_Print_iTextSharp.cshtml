@@ -1,0 +1,168 @@
+﻿@model G2.ML.Web.Models.SalePrintVM
+
+@{
+	Layout = "~/Views/Shared/_PrintLayout.cshtml";
+
+	float _osPayment = 0;
+	float _totalPayment = 0;
+	if (Model.PaymentList != null)
+	{
+		_totalPayment = Model.PaymentList.Sum(p => p.PayAmount);
+	}
+	_osPayment = Model.SaleDetails.NetSaleAmount - _totalPayment;
+
+}
+
+<table style="width:100%;background-color:gray;" cellpadding="1" cellspacing="1">
+	<tr>
+		<th style="text-align:center;color:white;">
+			Sales Details
+		</th>
+	</tr>
+	<tr>
+		<td>
+			<table style="width:100%">
+				<tr>
+					<td style="background-color:white;">@Html.LabelFor(model => model.SaleDetails.SaleDate, new { }) :</td>
+					<td style="background-color:white;">@HelperMethods.FormatDateTime(Convert.ToDateTime(Model.SaleDetails.SaleDate))</td>
+					<td style="background-color:white;">@Html.LabelFor(model => model.SaleDetails.SallerID, new { }) :</td>
+					<td style="background-color:white;">@ViewBag.SallerName</td>
+					<td style="background-color:white;">@Html.LabelFor(model => model.SaleDetails.BuyerID, new { }) :</td>
+					<td style="background-color:white;">@ViewBag.BuyerName</td>
+				</tr>
+				<tr>
+					<td style="background-color:white;">@Html.LabelFor(model => model.SaleDetails.TotalWeight, new { }) :</td>
+					<td style="background-color:white;">@string.Format("{0:n2}", Model.SaleDetails.TotalWeight)</td>
+					<td style="background-color:white;">@Html.LabelFor(model => model.SaleDetails.RejectionWeight, new { }) :</td>
+					<td style="background-color:white;">@string.Format("{0:n2}", Model.SaleDetails.RejectionWeight)</td>
+					<td style="background-color:white;">@Html.LabelFor(model => model.SaleDetails.SelectionWeight, new { }) :</td>
+					<td style="background-color:white;">@string.Format("{0:n2}", Model.SaleDetails.SelectionWeight)</td>
+				</tr>
+				<tr>
+					<td style="background-color:white;">@Html.LabelFor(model => model.SaleDetails.UnitPrice, new { }) :</td>
+					<td style="background-color:white;">@string.Format("{0:n2}", Model.SaleDetails.UnitPrice)</td>
+					<td style="background-color:white;">@Html.LabelFor(model => model.SaleDetails.LessPer, new { }) :</td>
+					<td style="background-color:white;">@string.Format("{0:n2}", Model.SaleDetails.LessPer)</td>
+					<td style="background-color:white;">@Html.LabelFor(model => model.SaleDetails.NetSaleAmount, new { }) :</td>
+					<td style="background-color:white;">@string.Format("{0:n2}", Model.SaleDetails.NetSaleAmount)</td>
+				</tr>
+				<tr>
+					<td style="background-color:white;">
+						@Html.LabelFor(model => model.SaleDetails.DueDays, new { }) :
+					</td>
+					<td style="background-color:white;">
+						@Model.SaleDetails.DueDays
+					</td>
+					<td style="background-color:white;" colspan="4">&nbsp;</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<th>
+			Payment Details :
+			Outstanding payment => <em> @string.Format("{0:n2}", _osPayment) = @string.Format("{0:n2}", Model.SaleDetails.NetSaleAmount)  - @string.Format("{0:n2}", _totalPayment)</em>
+		</th>
+	</tr>
+	<tr>
+		<td>
+			@if (Model.PaymentList != null && Model.PaymentList.Count > 0)
+			{
+				<table style="width:100%">
+					<thead>
+						<tr>
+							<th>
+								Pay Date
+							</th>
+							<th class="amt">
+								Pay Amount
+							</th>
+							<th>
+								Courier From
+							</th>
+							<th>
+								Courier To
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var _item in Model.PaymentList)
+						{
+						<tr>
+							<td style="background-color:white;">
+								@HelperMethods.FormatDateTime(_item.PayDate)
+							</td>
+							<td style="background-color:white;">
+								@string.Format("{0:n2}", _item.PayAmount)
+							</td>
+							<td style="background-color:white;">
+								@_item.CourierFrom
+							</td>
+							<td style="background-color:white;">
+								@_item.CourierTo
+							</td>
+						</tr>
+
+						}
+					</tbody>
+				</table>
+			}
+		</td>
+	</tr>
+	<tr>
+		<th>
+			Brokerage Details
+		</th>
+	</tr>
+	<tr>
+		<td>
+			@if (Model.BrokerageList != null && Model.BrokerageList.Count > 0)
+			{
+				<table style="width:100%">
+					<thead>
+						<tr>
+							<th>
+								Broker
+							</th>
+							<th class="amt">
+								Brokerage (%)
+							</th>
+							<th class="amt">
+								Brokerage Amount
+							</th>
+							<th>
+								Payment Date
+							</th>
+							<th>
+								Comments
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var _item in Model.BrokerageList)
+						{
+							<tr>
+								<td style="background-color:white;">
+									@_item.BrokerName
+								</td>
+								<td style="background-color:white;">
+									@string.Format("{0:n2}", _item.Brokerage)
+								</td>
+								<td style="background-color:white;">
+									@string.Format("{0:n2}", _item.BrokerageAmount)
+								</td>
+								<td style="background-color:white;">
+									@HelperMethods.FormatDateTime(_item.PayDate)
+								</td>
+								<td style="background-color:white;">
+									@_item.PayComments
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			}
+		</td>
+	</tr>
+</table>
+

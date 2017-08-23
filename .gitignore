@@ -2,35 +2,23 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/G2.DAL/bin/Debug
-/G2.DAL/obj/Debug
-/G2.Frameworks/bin/Debug
-/G2.Frameworks/obj/Debug
-/G2.Frameworks.MVC/bin/Debug
-/G2.Frameworks.MVC/obj/Debug
-/G2.ML.BusinessObjects/bin/Debug
-/G2.ML.BusinessObjects/obj/Debug
-/G2.ML.BusinessServices/bin/Debug
-/G2.ML.BusinessServices/obj/Debug
-/ML.BusinessObjects/bin/Debug/netstandard1.4
-/ML.BusinessObjects/obj
-/ML.BusinessObjects - Copy/bin/Debug/netstandard1.4
-/ML.BusinessObjects - Copy/obj
-/ML.BusinessObjects - Copy
-/ML.BusinessServices1
-/ML.Web/bin
-/ML.Web/logs
-/ML.Web/obj/Debug
+/G2.DAL/bin
+/G2.DAL/obj
+/G2.Frameworks/bin
+/G2.Frameworks/obj
+/G2.Frameworks.MVC/bin
+/G2.Frameworks.MVC/obj
+/G2.ML.BusinessObjects/bin
+/G2.ML.BusinessObjects/obj
+/G2.ML.BusinessServices/bin
+/G2.ML.BusinessServices/obj
+/G2.ML.BusinessObjects/bin
+/G2.ML.BusinessObjects/obj
+/G2.ML.BusinessServices/bin
+/G2.ML.BusinessServices/obj
 /G2.ML.Web/bin
-/G2.ML.Web/logs/2017-03-31.log
 /G2.ML.Web/logs
-/G2.DAL
-/G2.Frameworks
-/G2.Frameworks.MVC
-/G2.ML.BusinessObjects/bin/Release
-/G2.ML.BusinessObjects/obj/Release
-/G2.ML.BusinessServices/bin/Release
-/G2.ML.BusinessServices/obj/Release
-/G2.ML.Web/obj/Release/Package/PackageTmp
+/G2.ML.Web/obj
+/G2.ML.Web/obj/Debug
 *.dbmdl
 *.jfm

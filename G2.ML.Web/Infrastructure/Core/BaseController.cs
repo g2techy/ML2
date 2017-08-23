@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
@@ -70,5 +72,21 @@ namespace G2.ML.Web.Infrastructure.Core
 		{
 			return new JsonCamelCaseResult(data, jsonRequestBehavior);
 		}
+
+		protected ActionResult DownloadPdf(object model)
+		{
+			return DownloadPdf(string.Empty, model);
+		}
+
+		protected ActionResult DownloadPdf(string viewName, object model)
+		{
+			return Infrastructure.Utilities.PDF.ExportToPdf(viewName, model);
+		}
+
+		protected ActionResult DownloadPdf(string url)
+		{
+			return Infrastructure.Utilities.PDF.ExportToPdf(url);
+		}
+
 	}
 }

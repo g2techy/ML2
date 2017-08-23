@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width" />
+	@Styles.Render("~/Content/css")
+	@Styles.Render("~/Content/themes/base/css")
+	@Scripts.Render("~/bundles/modernizr")
+	<style type="text/css">
+		.noTitleStuff .ui-dialog-titlebar {
+			display: none
+		}
+
+		.site-title {
+			font-size: 1em
+		}
+	</style>
+</head>
+<body>
+	<header></header>
+	<section class="container main-content content-wrapper clear-fix">
+		<div class="row">
+			<div class="col-md-12 padoff-lr">
+				@RenderBody()
+			</div>
+		</div>
+	</section>
+	<div style="margin-top:30px;"></div>
+	<footer>
+		<div class="container footer-container">
+			<p>&copy; @DateTime.Now.Year - Manish Lakhani</p>
+		</div>
+	</footer>
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/jqueryui")
+	@Scripts.Render("~/bundles/jqueryval")
+	@Scripts.Render("~/bundles/bootstrap")
+	@Scripts.Render("~/bundles/app")
+	@RenderSection("scripts", required: false)
+</body>
+</html>

@@ -67,5 +67,13 @@ namespace G2.ML.Web.Models
         public int Status { get; set; }
 		        
     }
-        
+
+	public class SalePrintVM : BaseViewModel
+	{
+		public SaleAddVM SaleDetails { get; set; }
+
+		public List<SalePayment> PaymentList { get; set; }
+
+		public List<SaleBrokerage> BrokerageList { get; set; }
+	}
 }
