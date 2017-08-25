@@ -15,10 +15,18 @@
 			font-size: 1em
 		}
 	</style>
+
+	@{
+		string _mainAddCss = string.Empty;
+		if (G2.ML.Web.Infrastructure.Utilities.PDF.CurrentPDFExportComponent != G2.ML.Web.Infrastructure.Utilities.PDFExportComponent.WkHtmltoPdf)
+		{
+			_mainAddCss = "main-content";
+		}
+	}
 </head>
 <body>
 	<header></header>
-	<section class="container main-content content-wrapper clear-fix">
+	<section class="container @_mainAddCss content-wrapper clear-fix">
 		<div class="row">
 			<div class="col-md-12 padoff-lr">
 				@RenderBody()

@@ -28,8 +28,17 @@ namespace G2.ML.Web
             DFL.DefaultLogManagerFactory.LogManager.Debug("Error handler attribute has been set...");
 
 			/* Set PDF export component...*/
-			Infrastructure.Utilities.PDF.CurrentPDFExportComponent = Infrastructure.Utilities.PDFExportComponent.SelectPDF;
-			DFL.DefaultLogManagerFactory.LogManager.Debug(string.Format("PDF export component '{0}' has been set...", Infrastructure.Utilities.PDF.CurrentPDFExportComponent));
+			string _pdfComponent = Infrastructure.Web.Common.GetWebAppSettingParam("PDF:ExportComponent");
+			Infrastructure.Utilities.PDFExportComponent _pdfExpoComponent = Infrastructure.Utilities.PDFExportComponent.iTextSharp;
+			if (Enum.TryParse<Infrastructure.Utilities.PDFExportComponent>(_pdfComponent, out _pdfExpoComponent))
+			{
+				Infrastructure.Utilities.PDF.CurrentPDFExportComponent = _pdfExpoComponent;
+				DFL.DefaultLogManagerFactory.LogManager.Debug(string.Format("PDF export component '{0}' has been set...", Infrastructure.Utilities.PDF.CurrentPDFExportComponent));
+			}
+			else
+			{
+				DFL.DefaultLogManagerFactory.LogManager.Debug(string.Format("PDF export component '{0}' is not found...", _pdfComponent));
+			}
 
 			/*Register AutoMapper settings...*/
 			DFL.DefaultLogManagerFactory.LogManager.Debug("AutoMapper settings started...");

@@ -9,6 +9,7 @@ namespace G2.ML.Web.Infrastructure.Utilities
 	public enum PDFExportComponent
 	{
 		SelectPDF,
+		WkHtmltoPdf,
 		iTextSharp
 	}
 
@@ -27,6 +28,10 @@ namespace G2.ML.Web.Infrastructure.Utilities
 			{
 				_pdfResult = new Frameworks.MVC.PDF.SelectPDFActionResult(url);
 			}
+			else if (CurrentPDFExportComponent.Value == PDFExportComponent.WkHtmltoPdf)
+			{
+				_pdfResult = new Frameworks.MVC.PDF.WkHtmltoPdfActionResult(url);
+			}
 			return _pdfResult;
 		}
 
@@ -40,6 +45,10 @@ namespace G2.ML.Web.Infrastructure.Utilities
 			if (CurrentPDFExportComponent.Value == PDFExportComponent.SelectPDF)
 			{
 				_pdfResult = new Frameworks.MVC.PDF.SelectPDFActionResult(viewName, model);
+			}
+			else if (CurrentPDFExportComponent.Value == PDFExportComponent.WkHtmltoPdf)
+			{
+				_pdfResult = new Frameworks.MVC.PDF.WkHtmltoPdfActionResult(viewName, model);
 			}
 			return _pdfResult;
 		}
