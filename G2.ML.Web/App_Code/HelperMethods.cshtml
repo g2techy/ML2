@@ -2,17 +2,18 @@
 
 @helper FormatDateTime(DateTime date)
 {
-if (date.Year != 1900 && date.Year != 1)
-{
-		@date.ToString("dd-MM-yyyy")
+	if (date.Year != 1900 && date.Year != 1)
+	{
+		@date.ToString(Common.DefaultDateFormat)
+	}
 }
-}
+
 @helper FormatDateTime(DateTime date, string format)
 {
-if (date.Year != 1900 && date.Year != 1)
-{
+	if (date.Year != 1900 && date.Year != 1)
+	{
 		@date.ToString(format)
-}
+	}
 }
 
 @helper FormatBoolean(bool isTrue)
@@ -32,3 +33,7 @@ if (date.Year != 1900 && date.Year != 1)
 	}
 }
 
+@helper FormatCurrency(float amount, int decimalPlace = 2){
+	System.Globalization.CultureInfo _indCulture = new System.Globalization.CultureInfo("hi-IN");
+	<text>@string.Format(_indCulture, "{0:n" + decimalPlace.ToString() + "}", amount)</text>
+}

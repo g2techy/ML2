@@ -89,13 +89,13 @@ if (recordCount <= pageSize)
 								@_item.Borrower
 							</td>
 							<td class="amt">
-								@string.Format("{0:n2}", _item.PrincipalAmount)
+								@HelperMethods.FormatCurrency(_item.PrincipalAmount)
 							</td>
 							<td class="amt">
-								@string.Format("{0:n2}", _item.MonthlyInterest)
+								@HelperMethods.FormatCurrency(_item.MonthlyInterest)
 							</td>
 							<td class="amt">
-								@string.Format("{0:n2}", _item.TotalPayAmount)
+								@HelperMethods.FormatCurrency(_item.TotalPayAmount)
 							</td>
 							<td>
 								@HelperMethods.FormatDateTime(_item.PayDate)

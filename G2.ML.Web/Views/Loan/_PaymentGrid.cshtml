@@ -44,9 +44,9 @@
 				}
 
                 <tr>
-                    <td>@_item.PayDate.ToString("dd-MM-yyyy")
+                    <td>@HelperMethods.FormatDateTime(_item.PayDate)
                     </td>
-                    <td class="amt">@string.Format("{0:n2}", _item.PayAmount)
+                    <td class="amt">@HelperMethods.FormatCurrency(_item.PayAmount)
                     </td>
                     <td>@_item.PayTypeName
                     </td>
@@ -57,10 +57,10 @@
 						{
 							_princAmount -= _item.PayAmount;
 						}
-						@string.Format("{0:n2}", _princAmount)
+						@HelperMethods.FormatCurrency(_princAmount)
 					</td>
 					<td class="amt">
-						@string.Format("{0:n2}", _interPaid)
+						@HelperMethods.FormatCurrency(_interPaid)
 					</td>
 					<td class="amt">
 						<button type="button" data-del="1" data-payID="@_item.LoanPayID" class="btn btn-danger btn-xs">

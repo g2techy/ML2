@@ -186,32 +186,14 @@ namespace G2.ML.Web.Controllers
 
 		public ActionResult CalcInt(int loanID, string intAsOn)
 		{
-			DateTime _intAsOn = DateTime.Now;
-			if (!string.IsNullOrEmpty(intAsOn))
-			{
-				try
-				{
-					if (DateTime.TryParse(intAsOn, out _intAsOn))
-					{
-						_intAsOn.AddDays(1);
-					}
-				}
-				catch { _intAsOn = DateTime.Now; }
-				ViewBag.IntAsOnDate = _intAsOn;
-			}
-			List<Models.LoanCalcInterestVM> _model = null;
-			List<BO.LoanCalcInterestBO> _bo = _loanService.GetCalcInterest(ClientID, loanID, _intAsOn);
-			if (_bo != null)
-			{
-				_model = Infrastructure.BOVMMapper.Map<List<BO.LoanCalcInterestBO>, List<Models.LoanCalcInterestVM>>(_bo);
-			}
+			List<Models.LoanCalcInterestVM> _model = GetInterestList(loanID, intAsOn);
 			return PartialView("_CalcInt", _model);
 		}
 
-		private List<Models.LoanPayment> GetPaymentList(int loanID)
+		private List<Models.LoanPayment> GetPaymentList(int loanID, int clientID = 0)
 		{
 			List<Models.LoanPayment> _payList = new List<Models.LoanPayment>();
-			List<BO.LoanPaymentBO> _bo = _loanService.GetPaymentList(ClientID, loanID);
+			List<BO.LoanPaymentBO> _bo = _loanService.GetPaymentList((clientID > 0 ? clientID : ClientID), loanID);
 			if (_bo != null && _bo.Count > 0)
 			{
 				_payList = Infrastructure.BOVMMapper.Map<List<BO.LoanPaymentBO>, List<Models.LoanPayment>>(_bo);
@@ -227,6 +209,29 @@ namespace G2.ML.Web.Controllers
 				return PaymentGrid(_loanID);
 			}
 			return Json(new { ErrorCode = 1 });
+		}
+
+		public ActionResult Print(int loanID, string intAsOn, int isPdf = 1)
+		{
+			if (isPdf == 1)
+			{
+				return DownloadPdf(string.Format("{0}/Loan/PrintPDF/?loanID={1}&intAsOn={2}&clientID={3}", Infrastructure.Web.Common.AppBaseUrl, loanID, intAsOn, ClientID));
+			}
+			return PrintPDF(loanID, intAsOn, ClientID);
+		}
+
+		[AllowAnonymous]
+		public ActionResult PrintPDF(int loanID, string intAsOn, int clientID)
+		{
+			var _model = new Models.LoanPrintVM();
+			_model.LoanDetails = Infrastructure.BOVMMapper.Map<BO.LoanAddBO, Models.LoanAddVM>(_loanService.GetLoanDetails(clientID, loanID));
+			if (_model.LoanDetails != null)
+			{
+				_model.PaymentList = GetPaymentList(loanID, clientID);
+				_model.InterestList = GetInterestList(loanID, intAsOn, clientID);
+				ViewBag.BorrowerName = _loanService.GetBorrowerList(clientID, 4).Where(bo => bo.BuyerID == _model.LoanDetails.BorrowerID).FirstOrDefault().BuyerName;
+			}
+			return View("_Print", _model);
 		}
 
 		#region Private methods 
@@ -245,6 +250,28 @@ namespace G2.ML.Web.Controllers
 			return _list;
 		}
 
+		private List<Models.LoanCalcInterestVM> GetInterestList(int loanID, string intAsOn, int clientID = 0)
+		{
+			DateTime _intAsOn = DateTime.Now;
+			if (!string.IsNullOrEmpty(intAsOn))
+			{
+				try
+				{
+					if (DateTime.TryParse(intAsOn, out _intAsOn))
+					{
+						_intAsOn.AddDays(1);
+					}
+				}
+				catch { _intAsOn = DateTime.Now; }
+				ViewBag.IntAsOnDate = _intAsOn;
+			}
+			List<BO.LoanCalcInterestBO> _bo = _loanService.GetCalcInterest(clientID > 0 ? clientID : ClientID, loanID, _intAsOn);
+			if (_bo != null)
+			{
+				return Infrastructure.BOVMMapper.Map<List<BO.LoanCalcInterestBO>, List<Models.LoanCalcInterestVM>>(_bo);
+			}
+			return null;
+		}
 		#endregion
 
 	}

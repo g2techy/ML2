@@ -383,7 +383,7 @@
     <Content Include="Views\Loan\_CalcInt.cshtml" />
     <Content Include="Views\Sale\_Print.cshtml" />
     <Content Include="Views\Shared\_PrintLayout.cshtml" />
-    <Content Include="Views\Sale\_Print_iTextSharp.cshtml" />
+    <Content Include="Views\Loan\_Print.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

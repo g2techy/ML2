@@ -126,7 +126,9 @@ function LoanUpdateInit() {
 			}
 			return true;
 		});
-		
+		$('#btnPrint').click(function () {
+			PrintLoan();
+		});
 		function RebindJS() {
 			$('[data-del][data-payID]').click(function () {
 				DeletePayment($(this).attr('data-payID'));
@@ -178,6 +180,9 @@ function LoanUpdateInit() {
 		function ClearPayFields() {
 			$('#frmPayment input, #frmPayment select').not('[type=hidden]').val('');
 		}
+		function PrintLoan() {
+			window.open("/Loan/Print/?loanID=" + $("#LoanID").val() + "&intAsOn=" + $("#interestAsOn").val(), "_blank");
+		}
 		function CheckLoanStatus() {
 			var _princAmt = parseFloat($('#PrincipalAmount').val());
 			if ((_princPaid >= (_princAmt - 1))) {
@@ -187,7 +192,7 @@ function LoanUpdateInit() {
 			}
 			var _status = $('#Status').val();
 			if (_status == '4') {
-				$("button, input, select").not("#btnSearch").attr("disabled", "disabled");
+				$("button, input, select").not("#btnSearch, #btnPrint").attr("disabled", "disabled");
 			}
 			if (!_isFirstLoad) {
 				CalcInt();

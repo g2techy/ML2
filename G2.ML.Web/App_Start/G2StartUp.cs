@@ -40,6 +40,11 @@ namespace G2.ML.Web
 				DFL.DefaultLogManagerFactory.LogManager.Debug(string.Format("PDF export component '{0}' is not found...", _pdfComponent));
 			}
 
+			/*Set date format...*/
+			Infrastructure.Web.Common.SetDefaultDateFormat();
+			G2.ML.BusinessServices.BaseService.DefaultDateFormat = Infrastructure.Web.Common.DefaultDateFormat;
+			DFL.DefaultLogManagerFactory.LogManager.Debug(string.Format("Date format : '{0}' has been set...", G2.ML.BusinessServices.BaseService.DefaultDateFormat));
+
 			/*Register AutoMapper settings...*/
 			DFL.DefaultLogManagerFactory.LogManager.Debug("AutoMapper settings started...");
             AutoMapper.Mapper.Initialize(cfg =>

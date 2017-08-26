@@ -27,9 +27,9 @@
             @foreach (var _item in Model.PaymentList)
             {
                 <tr>
-                    <td>@_item.PayDate.ToString("dd-MM-yyyy")
+                    <td>@HelperMethods.FormatDateTime(_item.PayDate)
                     </td>
-                    <td>@string.Format("{0:n2}", _item.PayAmount)
+                    <td>@HelperMethods.FormatCurrency(_item.PayAmount)
                     </td>
                     <td>@_item.CourierFrom
                     </td>

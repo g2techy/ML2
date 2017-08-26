@@ -1,48 +1,68 @@
 ﻿@model System.Data.DataTable
+
+@helper DisplayColumnValue(object val)
+{
+	string _value = string.Empty;
+	if (val is DateTime)
+	{
+		_value = HelperMethods.FormatDateTime(Convert.ToDateTime(val)).ToHtmlString();
+	}
+	else if (val is float || val is decimal)
+	{
+		_value = HelperMethods.FormatCurrency(float.Parse(val.ToString())).ToHtmlString();
+	}
+	else
+	{
+		_value = val.ToString();
+	}
+	<text>@_value</text>
+}
+
 @if (Model != null && Model.Columns.Count > 0)
 {
-    <div class="panel panel-info">
-        <div class="panel-body">
-            @if (Model.Columns.Count > 0)
-            {
-                <table class="table table-bordred table-striped">
-                    <thead>
-                        <tr>
-                            @foreach (System.Data.DataColumn _column in Model.Columns)
-                            {
-                                <th>@_column.ColumnName
-                                </th>
-                            }
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (System.Data.DataRow _dr in Model.Rows)
-                        {
-                            <tr>
-                                @foreach (var _item in _dr.ItemArray)
-                                {
-                                    if (_item != null && _item != System.DBNull.Value)
-                                    {
-                                    <td>@_item.ToString()
-                                    </td>
-                                    }
-                                    else
-                                    {
-                                    <td>
-                                    </td>
-                                    }
-                                }
-                            </tr>
-                        }
-                        @if (Model.Rows.Count == 0)
-                        {
-                            <td colspan="@Model.Columns.Count" style="text-align:center;color:Red;font-weight:bold;">
-                                No record found!
-                            </td>   
-                        }
-                    </tbody>
-                </table>
-            }
-        </div>
-    </div>
+	<div class="panel panel-info">
+		<div class="panel-body">
+			@if (Model.Columns.Count > 0)
+			{
+				<table class="table table-bordred table-striped">
+					<thead>
+						<tr>
+							@foreach (System.Data.DataColumn _column in Model.Columns)
+							{
+								<th>
+									@_column.ColumnName
+							</th>
+							}
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (System.Data.DataRow _dr in Model.Rows)
+						{
+							<tr>
+								@foreach (var _item in _dr.ItemArray)
+								{
+									if (_item != null && _item != System.DBNull.Value)
+									{
+										<td>
+											@DisplayColumnValue(_item)
+										</td>
+									}
+									else
+									{
+										<td></td>
+									}
+								}
+							</tr>
+						}
+						@if (Model.Rows.Count == 0)
+						{
+						<td colspan="@Model.Columns.Count" style="text-align:center;color:Red;font-weight:bold;">
+							No record found!
+						</td>
+						}
+						</tbody>
+					</table>
+			}
+		</div>
+	</div>
 }

@@ -36,7 +36,7 @@
 	<div style="margin-top:30px;"></div>
 	<footer>
 		<div class="container footer-container">
-			<p>&copy; @DateTime.Now.Year - Manish Lakhani</p>
+			<p>&copy; @DateTime.Now.Year - Manish Lakhani - <em>Printed on : @HelperMethods.FormatDateTime(DateTime.Now, "dd-MMM-yyyy HH:mm")</em> </p>
 		</div>
 	</footer>
 	@Scripts.Render("~/bundles/jquery")

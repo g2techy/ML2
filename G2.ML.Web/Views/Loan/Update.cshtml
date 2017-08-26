@@ -62,7 +62,7 @@
 					@Html.TextAreaFor(model => model.Comments, new { @class = "form-control input-sm", @placeholder = "Comments:", @id = "Comments" })
 					@Html.ValidationMessageFor(model => model.Comments)
 				</div>
-				<div class="col-md-3" style="text-align:center;">
+				<div class="col-md-4" style="text-align:center;">
 					<button id="btnUpdate" type="submit" class="btn btn-primary">
 						Update
 					</button>
@@ -71,6 +71,9 @@
 					</button>
 					<button id="btnSearch" type="button" class="btn btn-primary">
 						Search
+					</button>
+					<button id="btnPrint" type="button" class="btn btn-primary">
+						Print
 					</button>
 				</div>
 			</div>

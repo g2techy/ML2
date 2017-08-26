@@ -1,0 +1,234 @@
+﻿@model G2.ML.Web.Models.LoanPrintVM
+
+@{
+	Layout = "~/Views/Shared/_PrintLayout.cshtml";
+
+	float _osPayment = 0;
+	float _totalPayment = 0;
+	if (Model.PaymentList != null)
+	{
+		_totalPayment = Model.PaymentList.Sum(p => p.PayAmount);
+	}
+	_osPayment = Model.LoanDetails.PrincipalAmount - _totalPayment;
+
+	float _princPaid = 0;
+	float _interPaid = 0;
+	float _princAmount = Model.LoanDetails.PrincipalAmount;
+
+	float _totalIntPaid = 0;
+	float _totalCalcInt = 0;
+	float _intToBePaid = 0;
+	if (Model.InterestList != null && Model.InterestList.Count > 0)
+	{
+		_totalIntPaid = Model.InterestList[0].TotalIntPaid;
+		_totalCalcInt = Model.InterestList.Sum(m => m.CalcIntAmount);
+		_intToBePaid = _totalCalcInt - _totalIntPaid;
+	}
+
+	string _intAsOnDate = HelperMethods.FormatDateTime(DateTime.Now).ToHtmlString();
+	if (ViewBag.IntAsOnDate != null)
+	{
+		_intAsOnDate = HelperMethods.FormatDateTime(ViewBag.IntAsOnDate).ToHtmlString();
+	}
+}
+<style type="text/css">
+	#divPrintContainer label {
+		display: inline;
+		font-weight: 600;
+	}
+
+	.lbl-row {
+		margin-bottom: 5px;
+	}
+
+	.table {
+		margin-bottom: 0px;
+	}
+</style>
+
+<div class="panel panel-primary" id="divPrintContainer">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			Loan Details
+		</h3>
+	</div>
+	<div class="panel-body">
+		<div class="col-xs-12 lbl-row">
+			<div class="col-xs-3">@Html.LabelFor(model => model.LoanDetails.StartDate, new { }) :</div>
+			<div class="col-xs-3">@HelperMethods.FormatDateTime(Convert.ToDateTime(Model.LoanDetails.StartDate))</div>
+			<div class="col-xs-3">@Html.LabelFor(model => model.LoanDetails.EndDate, new { }) :</div>
+			<div class="col-xs-3">@HelperMethods.FormatDateTime(Convert.ToDateTime(Model.LoanDetails.EndDate))</div>
+		</div>
+		<div class="col-xs-12 lbl-row">
+			<div class="col-xs-3">@Html.LabelFor(model => model.LoanDetails.PrincipalAmount, new { }) :</div>
+			<div class="col-xs-3">@HelperMethods.FormatCurrency(Model.LoanDetails.PrincipalAmount)</div>
+			<div class="col-xs-3">@Html.LabelFor(model => model.LoanDetails.MonthlyInterest, new { }) :</div>
+			<div class="col-xs-3">@HelperMethods.FormatCurrency(Model.LoanDetails.MonthlyInterest)</div>
+		</div>
+		<div class="col-xs-12 lbl-row">
+			<div class="col-xs-3">@Html.LabelFor(model => model.LoanDetails.BorrowerID, new { }) :</div>
+			<div class="col-xs-9">@ViewBag.BorrowerName</div>
+		</div>
+		<div class="col-xs-12 lbl-row">
+			<div class="col-xs-3">@Html.LabelFor(model => model.LoanDetails.Comments, new { }) :</div>
+			<div class="col-xs-9">@Model.LoanDetails.Comments</div>
+		</div>
+		<div class="col-xs-12">
+			<div class="panel panel-success" id="divPaymentContainer">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Payment Details :
+						Outstanding payment => <em> @HelperMethods.FormatCurrency(_osPayment) = @HelperMethods.FormatCurrency(Model.LoanDetails.PrincipalAmount)  - @HelperMethods.FormatCurrency(_totalPayment)</em>
+					</h3>
+				</div>
+				<div class="panel-body">
+					@if (Model.PaymentList != null && Model.PaymentList.Count > 0)
+					{
+					<table class="table">
+						<thead>
+							<tr>
+								<th>
+									Pay Date
+								</th>
+								<th class="amt">
+									Pay Amount
+								</th>
+								<th>
+									Pay Type
+								</th>
+								<th>
+									Comments
+								</th>
+								<th class="amt">
+									Outstanding Principal
+								</th>
+								<th class="amt">
+									Interest Paid
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var _item in Model.PaymentList)
+								{
+									if (_item.PayType == 1)
+									{
+										_princPaid += _item.PayAmount;
+									}
+									else if (_item.PayType == 2)
+									{
+										_interPaid += _item.PayAmount;
+									}
+
+								<tr>
+									<td>
+										@HelperMethods.FormatDateTime(_item.PayDate)
+									</td>
+									<td class="amt">
+										@HelperMethods.FormatCurrency(_item.PayAmount)
+									</td>
+									<td>
+										@_item.PayTypeName
+									</td>
+									<td>
+										@_item.PayComments
+									</td>
+									<td class="amt">
+										@if (_item.PayType == 1)
+											{
+												_princAmount -= _item.PayAmount;
+											}
+										@HelperMethods.FormatCurrency(_princAmount)
+									</td>
+									<td class="amt">
+										@HelperMethods.FormatCurrency(_interPaid)
+									</td>
+								</tr>
+								}
+						</tbody>
+					</table>
+					}
+					else
+					{
+					<div style="color:red;text-align:center;"> No payment found.</div>
+					}
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12">
+			<div class="panel panel-info" id="pnlBrokerage">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Interest calculation:
+						<em> Outstanding (@HelperMethods.FormatCurrency(_intToBePaid)) = Calculated (@HelperMethods.FormatCurrency(_totalCalcInt)) - Paid (@HelperMethods.FormatCurrency(_totalIntPaid)) </em>
+						<br />
+						Calculated as on : <em>@_intAsOnDate</em>
+					</h3>
+				</div>
+				<div class="panel-body">
+					@if (Model.InterestList != null && Model.InterestList.Count > 0)
+					{
+						<table class="table">
+							<thead>
+								<tr>
+									<th>
+										Pay Date
+									</th>
+									<th class="amt">
+										Pay Amount
+									</th>
+									<th class="amt">
+										Daily Int Rate
+									</th>
+									<th class="amt">
+										Int For Days
+									</th>
+									<th class="amt">
+										Int On Amount
+									</th>
+									<th class="amt">
+										Calculated Interest
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var _item in Model.InterestList)
+								{
+									<tr>
+										<td>
+											@if (_item.PayDate.HasValue)
+											{
+												<text>@HelperMethods.FormatDateTime(_item.PayDate.Value)</text>
+											}
+										</td>
+										<td class="amt">
+											@if (_item.PayAmount.HasValue)
+											{
+												<text>@HelperMethods.FormatCurrency(_item.PayAmount.Value)</text>
+											}
+										</td>
+										<td class="amt">
+											@HelperMethods.FormatCurrency(_item.DailyRate, 4)
+										</td>
+										<td class="amt">
+											@_item.IntForDays
+										</td>
+										<td class="amt">
+											@HelperMethods.FormatCurrency(_item.IntOnAmount)
+										</td>
+										<td class="amt">
+											@HelperMethods.FormatCurrency(_item.CalcIntAmount)
+										</td>
+									</tr>
+							}
+							</tbody>
+						</table>
+					}
+					else
+					{
+						<div style="color:red;text-align:center;"> No interest found.</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

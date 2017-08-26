@@ -48,32 +48,32 @@
 		</div>
 		<div class="col-xs-12 lbl-row">
 			<div class="col-xs-3">@Html.LabelFor(model => model.SaleDetails.TotalWeight, new { }) :</div>
-			<div class="col-xs-3">@string.Format("{0:n2}", Model.SaleDetails.TotalWeight)</div>
+			<div class="col-xs-3">@HelperMethods.FormatCurrency(Model.SaleDetails.TotalWeight)</div>
 			<div class="col-xs-3">@Html.LabelFor(model => model.SaleDetails.RejectionWeight, new { }) :</div>
-			<div class="col-xs-3">@string.Format("{0:n2}", Model.SaleDetails.RejectionWeight)</div>
+			<div class="col-xs-3">@HelperMethods.FormatCurrency(Model.SaleDetails.RejectionWeight)</div>
 		</div>
 		<div class="col-xs-12 lbl-row">
 			<div class="col-xs-3">@Html.LabelFor(model => model.SaleDetails.SelectionWeight, new { }) :</div>
-			<div class="col-xs-3">@string.Format("{0:n2}", Model.SaleDetails.SelectionWeight)</div>
+			<div class="col-xs-3">@HelperMethods.FormatCurrency(Model.SaleDetails.SelectionWeight)</div>
 			<div class="col-xs-3">@Html.LabelFor(model => model.SaleDetails.UnitPrice, new { }) :</div>
-			<div class="col-xs-3">@string.Format("{0:n2}", Model.SaleDetails.UnitPrice)</div>
+			<div class="col-xs-3">@HelperMethods.FormatCurrency(Model.SaleDetails.UnitPrice)</div>
 		</div>
 		<div class="col-xs-12 lbl-row">
 			<div class="col-xs-3">@Html.LabelFor(model => model.SaleDetails.LessPer, new { }) :</div>
-			<div class="col-xs-3">@string.Format("{0:n2}", Model.SaleDetails.LessPer)</div>
+			<div class="col-xs-3">@HelperMethods.FormatCurrency(Model.SaleDetails.LessPer)</div>
 			<div class="col-xs-3">@Html.LabelFor(model => model.SaleDetails.NetSaleAmount, new { }) :</div>
-			<div class="col-xs-3">@string.Format("{0:n2}", Model.SaleDetails.NetSaleAmount)</div>
+			<div class="col-xs-3">@HelperMethods.FormatCurrency(Model.SaleDetails.NetSaleAmount)</div>
 		</div>
 		<div class="col-xs-12">
 			<div class="panel panel-success" id="divPaymentContainer">
 				<div class="panel-heading">
 					<h3 class="panel-title">
 						Payment Details :
-						Outstanding payment => <em> @string.Format("{0:n2}", _osPayment) = @string.Format("{0:n2}", Model.SaleDetails.NetSaleAmount)  - @string.Format("{0:n2}", _totalPayment)</em>
+						Outstanding payment => <em> @HelperMethods.FormatCurrency(_osPayment) = @HelperMethods.FormatCurrency(Model.SaleDetails.NetSaleAmount)  - @HelperMethods.FormatCurrency(_totalPayment)</em>
 					</h3>
 				</div>
 				<div class="panel-body">
-					@if (Model.BrokerageList != null && Model.BrokerageList.Count > 0)
+					@if (Model.PaymentList != null && Model.PaymentList.Count > 0)
 					{
 						<table class="table">
 							<thead>
@@ -100,7 +100,7 @@
 											@HelperMethods.FormatDateTime(_item.PayDate)
 										</td>
 										<td class="amt">
-											@string.Format("{0:n2}", _item.PayAmount)
+											@HelperMethods.FormatCurrency(_item.PayAmount)
 										</td>
 										<td>
 											@_item.CourierFrom
@@ -158,10 +158,10 @@
 											@_item.BrokerName
 										</td>
 										<td class="amt">
-											@string.Format("{0:n2}", _item.Brokerage)
+											@HelperMethods.FormatCurrency(_item.Brokerage)
 										</td>
 										<td class="amt">
-											@string.Format("{0:n2}", _item.BrokerageAmount)
+											@HelperMethods.FormatCurrency(_item.BrokerageAmount)
 										</td>
 										<td>
 											@HelperMethods.FormatDateTime(_item.PayDate)

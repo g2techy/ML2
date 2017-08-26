@@ -4,7 +4,7 @@
     <div class="panel-heading">
         <h3 class="panel-title">
             Payment Details : 
-			Outstanding payment => <em><span id="spnOutPayment"></span> = <span id="spnNetSaleAmt"></span> - <span id="spnTotalPayment">@string.Format("{0:n2}", Model.PaymentList.Sum(p => p.PayAmount))</span></em>
+			Outstanding payment => <em><span id="spnOutPayment"></span> = <span id="spnNetSaleAmt"></span> - <span id="spnTotalPayment">@HelperMethods.FormatCurrency(Model.PaymentList.Sum(p => p.PayAmount))</span></em>
 		</h3>
     </div>
     <div class="panel-body">

@@ -96,7 +96,7 @@
 								<a href="javascript:void(0);" data-edit="1" data-saleID="@_item.SaleID">@_item.RefNo</a>
 							</td>
 							<td>
-								@_item.SaleDate.ToString("dd-MM-yyyy")
+								@HelperMethods.FormatDateTime(_item.SaleDate)
 							</td>
 							<td>
 								@_item.Saller
@@ -105,33 +105,33 @@
 								@_item.Buyer
 							</td>
 							<td>
-								@string.Format("{0:n2}", _item.TotalWeight)
+								@HelperMethods.FormatCurrency(_item.TotalWeight)
 							</td>
 							<td>
-								@string.Format("{0:n2}", _item.RejectionWt)
+								@HelperMethods.FormatCurrency(_item.RejectionWt)
 							</td>
 							<td>
-								@string.Format("{0:n2}", _item.SelectionWt)
+								@HelperMethods.FormatCurrency(_item.SelectionWt)
 							</td>
 							<td>
-								@string.Format("{0:n2}", _item.UnitPrice)
+								@HelperMethods.FormatCurrency(_item.UnitPrice)
 							</td>
 							<td>
-								@string.Format("{0:n2}", _item.LessPer)
+								@HelperMethods.FormatCurrency(_item.LessPer)
 							</td>
 							<td>
-								@string.Format("{0:n2}", _item.NetSaleAmount)
+								@HelperMethods.FormatCurrency(_item.NetSaleAmount)
 							</td>
 							<td>
-								@_item.DueDate.ToString("dd-MM-yyyy")
+								@HelperMethods.FormatDateTime(_item.DueDate)
 							</td>
 							<td>
 								<a href="#" data-toggle="popover">...</a>
 								<div id="divOtherContent_@_item.SaleID" style="display:none">
 									<b>Due Days :</b> @_item.DueDays <br />
 									<b>Total Brokerage :</b> @_item.TotalBrokerage <br />
-									<b>Total Payment :</b> @string.Format("{0:n2}", _item.TotalPayAmount) <br />
-									<b>Payment Date :</b> @(_item.PayDate.Year > 2000 ? _item.PayDate.ToString("dd-MM-yyyy") : "") <br />
+									<b>Total Payment :</b> @HelperMethods.FormatCurrency(_item.TotalPayAmount) <br />
+									<b>Payment Date :</b> @HelperMethods.FormatDateTime(_item.PayDate) <br />
 									<b>Status:</b> @_item.Status
 								</div>
 							</td>

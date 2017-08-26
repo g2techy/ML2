@@ -11,11 +11,9 @@ namespace G2.ML.Web.Models
 	{
 		public int ClientID { get; set; }
 
-		[Required]
 		[Display(Name = "Start Date")]
 		public string StartDate { get; set; }
 
-		[Required]
 		[Display(Name = "End Date")]
 		public string EndDate { get; set; }
 

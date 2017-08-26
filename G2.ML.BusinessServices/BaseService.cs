@@ -8,6 +8,8 @@ namespace G2.ML.BusinessServices
 {
     public abstract class BaseService : IService
     {
+		public static string DefaultDateFormat = "yyyy-MM-dd";
+
         private DAL.IDatabaseAccess _dbAccess = null;
         
         public DAL.IDatabaseAccess DatabaseAccess
@@ -43,7 +45,7 @@ namespace G2.ML.BusinessServices
 			{
 				if (_dt.Year != 0001)
 				{
-					_returnVal = _dt.ToString("yyyy-MM-dd");
+					_returnVal = _dt.ToString(BaseService.DefaultDateFormat);
 				}
 			}
 			return _returnVal;

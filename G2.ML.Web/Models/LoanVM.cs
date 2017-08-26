@@ -110,7 +110,6 @@ namespace G2.ML.Web.Models
 		}
 	}
 
-
 	public class LoanPayment : Infrastructure.Core.BaseVM
 	{
 		public int LoanID { get; set; }
@@ -147,5 +146,12 @@ namespace G2.ML.Web.Models
 		public float IntOnAmount { get; set; }
 		public float CalcIntAmount { get; set; }
 		public float TotalIntPaid { get; set; }
+	}
+
+	public class LoanPrintVM : Infrastructure.Core.BaseVM
+	{
+		public LoanAddVM LoanDetails { get; set; }
+		public List<LoanPayment> PaymentList { get; set; }
+		public List<LoanCalcInterestVM> InterestList { get; set; }
 	}
 }

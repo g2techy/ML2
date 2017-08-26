@@ -62,7 +62,7 @@ function InitLayout() {
 			}
 		});
 		$.datepicker.setDefaults({
-			dateFormat: 'yy-mm-dd',
+			dateFormat: 'dd-M-yy',
 			"changeMonth": true,
 			"changeYear": true
 		});

@@ -92,7 +92,7 @@ namespace G2.ML.BusinessServices.Factories
 						var _row = _ds.Tables[0].Rows[0];
 						_saleAdd = new BO.SaleAddBO()
 						{
-							SaleDate = Convert.ToDateTime(_row["SaleDate"]).ToString("yyyy-MM-dd"),
+							SaleDate = Convert.ToDateTime(_row["SaleDate"]).ToString(BaseService.DefaultDateFormat),
 							SallerID = Convert.ToInt32(_row["SallerID"]),
 							BuyerID = Convert.ToInt32(_row["BuyerID"]),
 							DueDays = Convert.ToInt32(_row["DueDays"]),

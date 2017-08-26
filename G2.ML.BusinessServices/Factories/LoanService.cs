@@ -129,7 +129,7 @@ namespace G2.ML.BusinessServices.Factories
 						var _row = _ds.Tables[0].Rows[0];
 						_loanAddBO = new BO.LoanAddBO()
 						{
-							StartDate = Convert.ToDateTime(_row["StartDate"]).ToString("yyyy-MM-dd"),
+							StartDate = Convert.ToDateTime(_row["StartDate"]).ToString(BaseService.DefaultDateFormat),
 							BorrowerID = Convert.ToInt32(_row["BorrowerID"]),
 							PrincipalAmount = float.Parse(_row["PrincipalAmount"].ToString()),
 							MonthlyInterest = float.Parse(_row["MonthlyInterest"].ToString()),
@@ -138,7 +138,7 @@ namespace G2.ML.BusinessServices.Factories
 						};
 						if (_row["EndDate"] != System.DBNull.Value)
 						{
-							_loanAddBO.EndDate = Convert.ToDateTime(_row["EndDate"]).ToString("yyyy-MM-dd");
+							_loanAddBO.EndDate = Convert.ToDateTime(_row["EndDate"]).ToString(BaseService.DefaultDateFormat);
 						}
 						if (_row["Comments"] != System.DBNull.Value)
 						{

@@ -117,12 +117,24 @@ namespace G2.Frameworks.MVC.ExceptionHandling
                                                string.Format("~/Views/Error/{0}.cshtml", m_strErrorGeneralView),
                                                _statusCodeName,
                                                "Error");
+				ActionResult _result = null;
+				if (filterContext.IsChildAction)
+				{
+					_result = new PartialViewResult
+					{
+						ViewName = _viewName,
+						ViewData = new ViewDataDictionary<HandleErrorModel>(_errorData),
+					};
+				}
+				else
+				{
 
-                var _result = new ViewResult
-                {
-                    ViewName = _viewName,
-                    ViewData = new ViewDataDictionary<HandleErrorModel>(_errorData),
-                };
+					_result = new ViewResult
+					{
+						ViewName = _viewName,
+						ViewData = new ViewDataDictionary<HandleErrorModel>(_errorData),
+					};
+				}
                 return _result;
             }
             else

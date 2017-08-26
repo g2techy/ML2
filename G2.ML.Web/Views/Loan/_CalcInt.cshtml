@@ -10,17 +10,17 @@
 		_intToBePaid = _totalCalcInt - _totalIntPaid;
 	}
 
-	string _intAsOnDate = DateTime.Now.ToString("yyyy-MM-dd");
+	string _intAsOnDate = HelperMethods.FormatDateTime(DateTime.Now).ToHtmlString();
 	if (ViewBag.IntAsOnDate != null)
 	{
-		_intAsOnDate = ViewBag.IntAsOnDate.ToString("yyyy-MM-dd");
+		_intAsOnDate = HelperMethods.FormatDateTime(ViewBag.IntAsOnDate).ToHtmlString();
 	}
 }
 <div class="panel panel-info">
 	<div class="panel-heading">
 		<h3 class="panel-title">
 			Interest calculation: 
-			<em style="font-weight:bold;"> Outstanding (@string.Format("{0:n2}", _intToBePaid)) = Calculated (@string.Format("{0:n2}", _totalCalcInt)) - Paid (@string.Format("{0:n2}", _totalIntPaid)) </em>
+			<em style="font-weight:bold;"> Outstanding (@HelperMethods.FormatCurrency(_intToBePaid)) = Calculated (@HelperMethods.FormatCurrency(_totalCalcInt)) - Paid (@HelperMethods.FormatCurrency(_totalIntPaid)) </em>
 			&nbsp;&nbsp;&nbsp;As on : @Html.TextBox("interestAsOn", _intAsOnDate, new { @class = "form-inline input-sm date-picker fixedWidth" })
 			&nbsp; <button id="btnCalcInt" type="button" class="btn btn-info btn-xs">Calculate Interest</button>
 		</h3>
@@ -57,26 +57,26 @@
 						<td>
 							@if (_item.PayDate.HasValue)
 							{
-								<text>@_item.PayDate.Value.ToString("dd-MM-yyyy")</text>
+								<text>@HelperMethods.FormatDateTime(_item.PayDate.Value)</text>
 							}
 						</td>
 						<td class="amt">
 							@if (_item.PayAmount.HasValue)
 							{
-								<text>@string.Format("{0:n2}", _item.PayAmount.Value)</text>
+								<text>@HelperMethods.FormatCurrency(_item.PayAmount.Value)</text>
 							}
 						</td>
 						<td class="amt">
-							@string.Format("{0:n4}", _item.DailyRate)
+							@HelperMethods.FormatCurrency(_item.DailyRate, 4)
 						</td>
 						<td class="amt">
 							@_item.IntForDays
 						</td>
 						<td class="amt">
-							@string.Format("{0:n2}", _item.IntOnAmount)
+							@HelperMethods.FormatCurrency(_item.IntOnAmount)
 						</td>
 						<td class="amt">
-							@string.Format("{0:n2}", _item.CalcIntAmount)
+							@HelperMethods.FormatCurrency(_item.CalcIntAmount)
 						</td>
 					</tr>
 				}

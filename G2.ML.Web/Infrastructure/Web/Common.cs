@@ -12,7 +12,7 @@ namespace G2.ML.Web.Infrastructure.Web
     {
         public const string LoginPageUrl = "~/Account/Login";
 		public const string DashboardUrl = "~/Dashboard/Index";
-
+		public static string DefaultDateFormat = string.Empty;
 		public static bool IsDebuggingEnabled
 		{
 			get
@@ -44,6 +44,11 @@ namespace G2.ML.Web.Infrastructure.Web
             return ConfigurationManager.AppSettings[paramName];
         }
         
+		public static void SetDefaultDateFormat()
+		{
+			DefaultDateFormat =	GetWebAppSettingParam("DateFormat");
+		}
+
     }
     
 }
