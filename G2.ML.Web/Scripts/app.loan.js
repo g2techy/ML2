@@ -129,17 +129,35 @@ function LoanUpdateInit() {
 		$('#btnPrint').click(function () {
 			PrintLoan();
 		});
+		$('#btnClearPayment').click(function () {
+			ClearPayFields();
+		});
 		function RebindJS() {
-			$('[data-del][data-payID]').click(function () {
+			$('[data-del][data-payID]').off('click').on('click', function () {
 				DeletePayment($(this).attr('data-payID'));
 			});
 			$('.date-picker').datepicker({});
 			$('#btnCalcInt').click(function () {
 				CalcInt($("#interestAsOn").val());
 			});
+			$('[data-edit][data-payID]').off('click').on('click', function () {
+				SetPaymentDetails($(this).attr('data-payID'));
+			});
 		}
 		RebindJS();
 
+		function SetPaymentDetails(payID) {						
+			var _selPayDetails = _paymentDetails.find(pd => pd.LoanPayID == payID);
+			if (_selPayDetails) {
+				$('#LoanPayID').val(_selPayDetails.LoanPayID);
+				$("#PayDate").datepicker("setDate", $.datepicker.parseDate("mm/dd/yy", _selPayDetails.PayDate));
+				$('#PayAmount').val(_selPayDetails.PayAmount);
+				$('#PayType').val(_selPayDetails.PayType);
+				$('#PayComments').val(_selPayDetails.PayComments);
+				$('#btnAddPayment').text('Update');
+			}
+		}
+				
 		function DeletePayment(payID) {
 			$.ajax({
 				type: 'GET',
@@ -178,7 +196,9 @@ function LoanUpdateInit() {
 			});
 		}
 		function ClearPayFields() {
-			$('#frmPayment input, #frmPayment select').not('[type=hidden]').val('');
+			$('#frmPayment input, #frmPayment select').not('[data-not-clear]').val('');
+			$('#LoanPayID').val('0');
+			$('#btnAddPayment').text('Add');
 		}
 		function PrintLoan() {
 			window.open("/Loan/Print/?loanID=" + $("#LoanID").val() + "&intAsOn=" + $("#interestAsOn").val(), "_blank");
