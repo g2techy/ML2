@@ -20,5 +20,12 @@
 /G2.ML.Web/logs
 /G2.ML.Web/obj
 /G2.ML.Web/obj/Debug
+/G2.ML.Web/obj/Release
 *.dbmdl
 *.jfm
+
+/Backups
+/Releases
+
+ML2_changes.txt
+
