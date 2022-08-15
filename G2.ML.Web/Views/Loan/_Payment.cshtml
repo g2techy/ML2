@@ -14,7 +14,8 @@
 	<div class="panel-body">
 		@using (Html.BeginForm("Payment", "Loan", FormMethod.Post, new { @class = "form-inline", @id = "frmPayment" }))
 		{
-			@Html.HiddenFor(m => m.Payment.LoanID)
+			@Html.HiddenFor(m => m.Payment.LoanID, new { @data_not_clear = "1" })
+			@Html.HiddenFor(m => m.Payment.LoanPayID, new { @id = "LoanPayID" })
 			<div class="form-group input-group-sm">
 				@Html.TextBoxFor(m => m.Payment.PayDate, new { @class = "form-control date-picker", @id = "PayDate", @placeholder = "Pay Date:" })
 			</div>
@@ -29,6 +30,9 @@
 			</div>
 			<button type="button" id="btnAddPayment" class="btn btn-success btn-xs">
 				Add
+			</button>
+			<button type="button" id="btnClearPayment" class="btn btn-info btn-xs">
+				Clear
 			</button>
 		}
 		<div id="divPayGrid">

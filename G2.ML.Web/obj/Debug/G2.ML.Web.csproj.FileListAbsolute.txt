@@ -17,7 +17,6 @@ G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.Practices.Unity.Configuration.dll
 G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.Practices.Unity.dll
 G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.Practices.Unity.Mvc.dll
 G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.Practices.Unity.RegistrationByConvention.dll
-G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.VisualStudio.DebuggerVisualizers.dll
 G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.Web.Infrastructure.dll
 G:\G2\Projects\ML2\G2.ML.Web\bin\Newtonsoft.Json.dll
 G:\G2\Projects\ML2\G2.ML.Web\bin\System.Web.Helpers.dll
@@ -61,9 +60,6 @@ G:\G2\Projects\ML2\G2.ML.Web\bin\Microsoft.AI.Web.xml
 G:\G2\Projects\ML2\G2.ML.Web\bin\log4net.xml
 G:\G2\Projects\ML2\G2.ML.Web\bin\G2.DAL.pdb
 G:\G2\Projects\ML2\G2.ML.Web\bin\DocumentFormat.OpenXml.xml
-G:\G2\Projects\ML2\G2.ML.Web\bin\Select.Html.dep
-G:\G2\Projects\ML2\G2.ML.Web\bin\Select.Tools.dep
-G:\G2\Projects\ML2\G2.ML.Web\obj\Debug\G2.ML.Web.csprojResolveAssemblyReference.cache
 G:\G2\Projects\ML2\G2.ML.Web\obj\Debug\G2.ML.Web.dll
 G:\G2\Projects\ML2\G2.ML.Web\obj\Debug\G2.ML.Web.pdb
 G:\G2\Projects\ML2\G2.ML.Web\bin\ApplicationInsights.config
@@ -96,3 +92,6 @@ G:\G2\Projects\ML2\G2.ML.Web\bin\roslyn\VBCSCompiler.exe.config
 G:\G2\Projects\ML2\G2.ML.Web\bin\G2.ML.Web.dll.config
 G:\G2\Projects\ML2\G2.ML.Web\bin\G2.ML.Web.dll
 G:\G2\Projects\ML2\G2.ML.Web\bin\G2.ML.Web.pdb
+G:\G2\Projects\ML2\G2.ML.Web\obj\Debug\G2.ML.Web.csproj.AssemblyReference.cache
+G:\G2\Projects\ML2\G2.ML.Web\obj\Debug\G2.ML.Web.csproj.CoreCompileInputs.cache
+G:\G2\Projects\ML2\G2.ML.Web\obj\Debug\G2.ML.Web.csproj.CopyComplete

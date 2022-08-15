@@ -4,6 +4,10 @@
 	float _interPaid = 0;
 	float _princAmount = float.Parse(TempData.Peek("PrincipalAmount").ToString());
 }
+
+<script type="text/javascript">
+	var _paymentDetails = [];	
+</script>
 @if (Model.PaymentList != null && Model.PaymentList.Count > 0)
 {
     <table class="table">
@@ -44,14 +48,10 @@
 				}
 
                 <tr>
-                    <td>@HelperMethods.FormatDateTime(_item.PayDate)
-                    </td>
-                    <td class="amt">@HelperMethods.FormatCurrency(_item.PayAmount)
-                    </td>
-                    <td>@_item.PayTypeName
-                    </td>
-                    <td>@_item.PayComments
-                    </td>
+                    <td>@HelperMethods.FormatDateTime(_item.PayDate)</td>
+                    <td class="amt">@HelperMethods.FormatCurrency(_item.PayAmount)</td>
+                    <td>@_item.PayTypeName</td>
+					<td>@_item.PayComments</td>
 					<td class="amt">
 						@if (_item.PayType == 1)
 						{
@@ -63,11 +63,17 @@
 						@HelperMethods.FormatCurrency(_interPaid)
 					</td>
 					<td class="amt">
+						<button type="button" data-edit="1" data-payID="@_item.LoanPayID" class="btn btn-primary btn-xs">
+							Edit
+						</button>
 						<button type="button" data-del="1" data-payID="@_item.LoanPayID" class="btn btn-danger btn-xs">
 							X
 						</button>
 					</td>
                 </tr>
+				<script type="text/javascript">
+					_paymentDetails.push({ LoanPayID: @_item.LoanPayID, PayDate: '@_item.PayDate', PayType: '@_item.PayType', PayComments: '@_item.PayComments', PayAmount: '@_item.PayAmount' });
+				</script>
 			}
         </tbody>
     </table>	
