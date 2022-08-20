@@ -1,0 +1,30 @@
+﻿
+@{
+	ViewBag.Title = "Accounts -> Database Baclkup";
+}
+
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			Take database backup
+		</h3>
+	</div>
+	<div class="panel-body">
+		@using (Html.BeginForm("DatabaseBackupPost", "Account"))
+		{
+			<div class="row col-md-12">
+				<button id="btnDbBackup" type="submit" class="btn btn-primary">
+					Database Backup
+				</button>
+			</div>
+		}
+	</div>
+</div>
+
+@if (TempData["BackupFilePath"] != null)
+{
+	<div class="alert alert-success alert-dismissible">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		Database backup taken successfully. Backup file path: <strong>@TempData.Peek("BackupFilePath")</strong>
+	</div>
+}

@@ -113,6 +113,33 @@ namespace G2.ML.BusinessServices.Factories
 			return _isSuccess;
 		}
 
+		public bool DatabaseBackUp(BO.DatabaseBackupBO databaseBackupBO)
+		{
+			bool _isSuccess = false;
+
+			try
+			{
+				DatabaseAccess.OpenConnection();
+				var _ourParams = DatabaseAccess.ExecuteProcedureDML("P_Account_DB_Backup", new List<DAL.DatabaseParameter>()
+				{
+					new DAL.DatabaseParameter("@DatabaseName", DAL.ParameterDirection.In, DAL.DataType.String, databaseBackupBO.DatabaseName, 50),
+					new DAL.DatabaseParameter("@BackUpFilePath", DAL.ParameterDirection.In, DAL.DataType.String, databaseBackupBO.BackupFilePath, 500)			
+				});				
+				_ourParams = null;
+				_isSuccess = true;
+			}
+			catch
+			{
+				throw;
+			}
+			finally
+			{
+				//DatabaseAccess.CloseConnection();
+			}
+
+			return _isSuccess;
+		}
+
 		#endregion
 
 		private string Encrypt(string password)

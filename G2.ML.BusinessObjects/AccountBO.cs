@@ -36,4 +36,11 @@ namespace G2.ML.BusinessObjects
 		public string Password { get; set; }
 		public bool RememberMe { get; set; }
 	}
+
+	public class DatabaseBackupBO : BaseBusinessObject
+	{
+		public string DatabaseName { get; set; }
+		public string BackupFilePath { get; set; }
+	}
+
 }

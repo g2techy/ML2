@@ -11,5 +11,6 @@ namespace G2.ML.BusinessServices.Contracts
         int RegisterUser(BO.RegisterBO bo);
 		BO.UserLoginResultBO VerifyLoginCreds(BO.LoginBO loginBO);
 		bool ChangePassword(BO.ChangePwdBO changePwd);
+		bool DatabaseBackUp(BO.DatabaseBackupBO databaseBackupBO);
     }
 }
