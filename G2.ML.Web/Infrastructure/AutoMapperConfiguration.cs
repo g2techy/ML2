@@ -53,6 +53,8 @@ namespace G2.ML.Web.Infrastructure
 				.ForMember(d => d.StatusList, opt => opt.Ignore())
 				.ReverseMap();
 			config.CreateMap<Models.LoanCalcInterestVM, BO.LoanCalcInterestBO>().ReverseMap();
+
+			config.CreateMap<Models.DatabaseBackupVM, BO.DatabaseBackupBO>().ReverseMap();
 		}
     }
 }

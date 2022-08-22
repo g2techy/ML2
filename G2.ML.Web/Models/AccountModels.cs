@@ -120,4 +120,20 @@ namespace G2.ML.Web.Models
         [Display(Name = "Mobile No")]
         public string MobileNo { get; set; }
     }
+
+    public class DatabaseBackupVM : Infrastructure.Core.BaseVM
+    {
+
+        [Required]
+        [Display(Name = "Database Name")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
+        public string DatabaseName { get; set; }
+
+        [Required]
+        [Display(Name = "Backup File Path")]
+        [StringLength(500, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
+        public string BackupFilePath { get; set; }
+
+    }
+
 }
