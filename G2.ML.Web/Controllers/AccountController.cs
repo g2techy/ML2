@@ -145,7 +145,7 @@ namespace G2.ML.Web.Controllers
 		public ActionResult DatabaseBackupPost()
 		{
 			String databaseName = Infrastructure.Web.Common.GetWebAppSettingParam("DatabaseName");
-			String backupFilePath = String.Format(Infrastructure.Web.Common.GetWebAppSettingParam("DatabaseBackupPath"), databaseName + "_" + DateTime.Today.ToString("dd-MMM-yyyy-HH-mm-ss"));
+			String backupFilePath = String.Format(Infrastructure.Web.Common.GetWebAppSettingParam("DatabaseBackupPath"), databaseName + "_" + DateTime.Now.ToString("dd-MMM-yyyy-HH-mm-ss"));
 
 			Models.DatabaseBackupVM model = new Models.DatabaseBackupVM()
 			{
@@ -156,8 +156,7 @@ namespace G2.ML.Web.Controllers
 			bool isSuccess = _accountService.DatabaseBackUp(Infrastructure.BOVMMapper.Map<Models.DatabaseBackupVM, BO.DatabaseBackupBO>(model));
 			if (isSuccess)
 			{
-				TempData["BackupFilePath"] = model.BackupFilePath;
-				ViewBag.BackupFilePath = model.BackupFilePath;
+				TempData["BackupFilePath"] = model.BackupFilePath;				
 			}
 			return RedirectToAction("DatabaseBackup");
 		}
